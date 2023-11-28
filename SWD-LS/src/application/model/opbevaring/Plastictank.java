@@ -1,11 +1,11 @@
-package model.opbevaring;
+package application.model.opbevaring;
 
 import model.Opbevaring;
 import model.Status;
 
 import java.time.LocalDate;
 
-public class Plastictank extends Opbevaring implements Status.Plastictank {
+public class Plastictank extends Opbevaring {
 
     private String navn;
 
@@ -24,15 +24,5 @@ public class Plastictank extends Opbevaring implements Status.Plastictank {
 
     public String toString() {
         return "Plastictank: " + navn;
-    }
-
-    @Override
-    public LocalDate erTom() {
-        return null;
-    }
-
-    @Override
-    public LocalDate erFuld() {
-        return null;
     }
 }
