@@ -1,6 +1,5 @@
 package application.model;
 
-import application.model.*;
 import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
 

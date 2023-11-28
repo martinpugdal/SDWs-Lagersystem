@@ -1,6 +1,6 @@
 package application.model.opbevaring;
 
-import model.Opbevaring;
+import application.model.Opbevaring;
 
 public class Fad extends Opbevaring {
 

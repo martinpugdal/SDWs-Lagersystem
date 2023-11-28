@@ -1,6 +1,6 @@
 package storage;
 
-import model.Lager;
+import application.model.Lager;
 
 import java.util.ArrayList;
 

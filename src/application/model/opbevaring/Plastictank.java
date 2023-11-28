@@ -1,9 +1,6 @@
 package application.model.opbevaring;
 
-import model.Opbevaring;
-import model.Status;
-
-import java.time.LocalDate;
+import application.model.Opbevaring;
 
 public class Plastictank extends Opbevaring {
 
