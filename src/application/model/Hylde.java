@@ -5,11 +5,17 @@ public class Hylde implements Status {
     private final int nummer;
     private int antalBeholdere;
     private boolean erOptaget;
+    private final Reol reol;
 
-    public Hylde(int nummer, int antalBeholdere) {
+    public Hylde(Reol reol, int nummer, int antalBeholdere) {
+        this.reol = reol;
         this.antalBeholdere = antalBeholdere;
         this.erOptaget = false;
         this.nummer = nummer;
+    }
+
+    public Reol getReol() {
+        return reol;
     }
 
     public int getAntalBeholdere() {

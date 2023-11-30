@@ -1,5 +1,8 @@
 package application.model;
 
+import application.model.opbevaring.Fad;
+import application.model.opbevaring.Plastictank;
+
 public abstract class Opbevaring {
 
     private final int nr;
@@ -42,9 +45,11 @@ public abstract class Opbevaring {
         return nr;
     }
 
-    /*
-     * Ide: Erstatning for størrelse som er et String.
-     * Dermed gør det muligt at ændre størrelse på en opbevaring nemmere.
+    /**
+     * Størrelse klasse til at holde styr på højde og diameter
+     * @see Opbevaring
+     * @see Fad
+     * @see Plastictank
      */
     private class Størrelse {
 

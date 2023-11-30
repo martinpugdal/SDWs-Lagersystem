@@ -6,12 +6,18 @@ public class Lager {
 
     private final String adresse;
     private final double størrelse;
-    private ArrayList<Afdeling> afdelinger;
+    private final ArrayList<Afdeling> afdelinger;
 
     public Lager(String adresse, double størrelse) {
         this.adresse = adresse;
         this.størrelse = størrelse;
         this.afdelinger = new ArrayList<>();
+    }
+
+    public Afdeling createAfdeling(Drikkelse drikkelse, int nummer) {
+        Afdeling afdeling = new Afdeling(this, drikkelse, nummer);
+        addAfdeling(afdeling);
+        return afdeling;
     }
 
     public void addAfdeling(Afdeling afdeling) {

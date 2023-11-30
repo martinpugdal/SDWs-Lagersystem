@@ -1,15 +1,30 @@
 package application.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Afdeling {
 
+    private final ArrayList<Reol> reoler;
+    private final int nummer;
+    private final Lager lager;
     private Drikkelse drikkelse;
-    private Reol[] reoler;
-    private int nummer;
 
-    public Afdeling(Drikkelse drikkelse, int antalReoler, int nummer) {
+    public Afdeling(Lager lager, Drikkelse drikkelse, int nummer) {
+        this.lager = lager;
         this.drikkelse = drikkelse;
-        this.reoler = new Reol[antalReoler];
+        this.reoler = new ArrayList<>();
         this.nummer = nummer;
+    }
+
+    public Reol createReol(int antalHylder, int nummer) {
+        Reol reol = new Reol(this, antalHylder, nummer);
+        reoler.add(reol);
+        return reol;
+    }
+
+    public void flytReol(Reol reol, Afdeling afdeling) {
+        reol.skiftAfdeling(afdeling);
     }
 
     public Drikkelse getDrikkelse() {
@@ -20,11 +35,15 @@ public class Afdeling {
         this.drikkelse = drikkelse;
     }
 
-    public Reol[] getReoler() {
+    public List<Reol> getReoler() {
         return reoler;
     }
 
     public int getNummer() {
         return nummer;
+    }
+
+    public Lager getLager() {
+        return lager;
     }
 }
