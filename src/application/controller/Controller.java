@@ -14,6 +14,7 @@ public class Controller {
 
     /**
      * returner kun en instance af denne klasse.
+     *
      * @return Controller instance
      */
     public static Controller getController() {
@@ -24,7 +25,6 @@ public class Controller {
     }
 
     /**
-     *
      * @param adresse
      * @param størrelse
      * @return
@@ -39,7 +39,6 @@ public class Controller {
     }
 
     /**
-     *
      * @param lager
      * @param drikkelse
      * @param nummer
@@ -54,16 +53,37 @@ public class Controller {
         return afdeling;
     }
 
+    /**
+     * @param afdeling
+     * @param reolType
+     * @param nummer
+     * @return
+     */
     public Reol createReol(Afdeling afdeling, ReolType reolType, int nummer) {
         return afdeling.createReol(reolType.getAntalHylder(), nummer);
     }
 
+    /**
+     * @param afdeling
+     * @param antalHylder
+     * @param nummer
+     * @return
+     */
     public Reol createReol(Afdeling afdeling, int antalHylder, int nummer) {
         return afdeling.createReol(antalHylder, nummer);
     }
 
     /**
-     *
+     * @param reol
+     * @param nummer
+     * @param antalBeholdere
+     * @return
+     */
+    public Hylde createHylde(Reol reol, int nummer, int antalBeholdere) {
+        return reol.createHylde(nummer, antalBeholdere);
+    }
+
+    /**
      * @param adresse
      * @return
      */
@@ -77,7 +97,6 @@ public class Controller {
     }
 
     /**
-     *
      * @param lager
      * @param nummer
      * @return
