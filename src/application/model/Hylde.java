@@ -1,6 +1,8 @@
 package application.model;
 
-public class Hylde implements Status {
+public class Hylde {
+
+    static final int ANTAL_BEHOLDER_I_ALT = 4;
 
     private final int nummer;
     private int antalBeholdere;

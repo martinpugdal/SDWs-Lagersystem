@@ -30,7 +30,7 @@ public class Controller {
      * @return
      */
     public Lager createLager(String adresse, double størrelse) {
-        if (checkLagerFindes(adresse)) {
+        if (checkLagerExists(adresse)) {
             throw new IllegalArgumentException("Lageret findes allerede");
         }
         Lager lager = new Lager(adresse, størrelse);
@@ -45,7 +45,7 @@ public class Controller {
      * @return
      */
     public Afdeling createAfdeling(Lager lager, Drikkelse drikkelse, int nummer) {
-        if (checkAfdelingFindes(lager, nummer)) {
+        if (checkAfdelingExists(lager, nummer)) {
             throw new IllegalArgumentException("Afdelingen findes allerede med dette nummer");
         }
         Afdeling afdeling = new Afdeling(lager, drikkelse, nummer);
@@ -87,9 +87,11 @@ public class Controller {
      * @param adresse
      * @return
      */
-    private boolean checkLagerFindes(String adresse) {
+    private boolean checkLagerExists(String adresse) {
+        System.out.println(storage.getLagere().size());
         for (Lager lager : storage.getLagere()) {
             if (lager.getAdresse().equals(adresse)) {
+                System.out.println(lager.getAdresse() + "=" + adresse);
                 return true;
             }
         }
@@ -101,7 +103,7 @@ public class Controller {
      * @param nummer
      * @return
      */
-    private boolean checkAfdelingFindes(Lager lager, int nummer) {
+    private boolean checkAfdelingExists(Lager lager, int nummer) {
         for (Afdeling afdeling : lager.getAfdelinger()) {
             if (afdeling.getNummer() == nummer) {
                 return true;
@@ -113,13 +115,15 @@ public class Controller {
     public void initStorage() {
 
         // tilføj nogle lagere
-        createLager("Lager 1", 1000);
-        createLager("Lager 2", 2000);
-        createLager("Lager 3", 3000);
+        createLager("Lager_1", 1000);
+        createLager("Lager_2", 2000);
+        createLager("Lager_3", 3000);
 
         // tilføj nogle afdelinger
-        createAfdeling(storage.getLagere().get(0), Drikkelse.GIN, 1);
-        createAfdeling(storage.getLagere().get(0), Drikkelse.WHISKY, 2);
+        Afdeling afdeling1 = createAfdeling(storage.getLagere().get(0), Drikkelse.GIN, 1);
+        Afdeling afdeling2 = createAfdeling(storage.getLagere().get(0), Drikkelse.WHISKY, 2);
+
+        createReol(storage.getLagere().get(0).getAfdelinger().get(0), ReolType.MELLEM, 1);
 
         //TODO: create objects here by controller methods
     }

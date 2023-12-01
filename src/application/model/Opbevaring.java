@@ -1,36 +1,40 @@
 package application.model;
 
-import application.model.opbevaring.Fad;
-import application.model.opbevaring.Plastictank;
+import java.time.LocalDate;
 
 public abstract class Opbevaring {
 
     private final int nr;
-    private boolean erInakt;
-    private String størrelse;
+    private boolean intakt;
     private double volumen;
+    private boolean tom = false;
+    private LocalDate PåfyldningsDato;
 
-    public Opbevaring(boolean erInakt, String størrelse, double volumen, int nr) {
-        this.erInakt = erInakt;
-        this.størrelse = størrelse;
+    public Opbevaring(boolean intakt, double volumen, int nr) {
+        this.intakt = intakt;
         this.volumen = volumen;
         this.nr = nr;
     }
 
-    public boolean erInakt() {
-        return erInakt;
+    public Opbevaring(boolean intakt, double volumen, int nr, boolean tom) {
+        this(intakt, volumen, nr);
+        this.tom = tom;
     }
 
-    public void setInakt(boolean erInakt) {
-        this.erInakt = erInakt;
+    public boolean isIntakt() {
+        return intakt;
     }
 
-    public String getStørrelse() {
-        return størrelse;
+    public void setIntakt(boolean intakt) {
+        this.intakt = intakt;
     }
 
-    public void setStørrelse(String størrelse) {
-        this.størrelse = størrelse;
+    public boolean isTom() {
+        return tom;
+    }
+
+    public void setTom(boolean tom) {
+        this.tom = tom;
     }
 
     public double getVolumen() {
@@ -45,44 +49,5 @@ public abstract class Opbevaring {
         return nr;
     }
 
-    /**
-     * Størrelse klasse til at holde styr på højde og diameter
-     * @see Opbevaring
-     * @see Fad
-     * @see Plastictank
-     */
-    private class Størrelse {
-
-        private double højde;
-        private double diameter;
-
-        Størrelse(double højde, double diameter) {
-            this.højde = højde;
-            this.diameter = diameter;
-        }
-
-        public double getHøjde() {
-            return højde;
-        }
-
-        public void setHøjde(double højde) {
-            this.højde = højde;
-        }
-
-        public double getDiameter() {
-            return diameter;
-        }
-
-        public void setDiameter(double diameter) {
-            this.diameter = diameter;
-        }
-
-        public double getVolumen() {
-            return Math.PI * Math.pow(diameter / 2, 2) * højde;
-        }
-
-        public String toString() {
-            return "H: " + højde + ", D: " + diameter;
-        }
-    }
+    public abstract int getPladsmængde();
 }

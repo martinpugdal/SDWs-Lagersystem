@@ -39,4 +39,9 @@ public class Lager {
     public double getStørrelse() {
         return størrelse;
     }
+
+    @Override
+    public String toString() {
+        return adresse;
+    }
 }

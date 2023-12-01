@@ -1,22 +1,35 @@
 package gui;
 
 import application.controller.Controller;
-import gui.window.StartsideWindow;
+import gui.scene.ForsideScene;
+import gui.window.ForsideWindow;
 import javafx.application.Application;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Gui extends Application {
 
-    private final StartsideWindow startsideWindow = new StartsideWindow();
-    private final Controller controller = Controller.getController();
+    private final ForsideWindow forsideWindow = new ForsideWindow();
+    private Controller controller;
 
     @Override
     public void init() {
-        controller.initStorage();
+        controller = Controller.getController();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        startsideWindow.show();
+        forsideWindow.show();
+        forsideWindow.setFullScreen(true);
+        forsideWindow.setScene(new ForsideScene(this, new VBox()));
+    }
+
+    public double getScreenWidth() {
+        return Screen.getPrimary().getBounds().getWidth() * 0.85;
+    }
+
+    public double getScreenHeight() {
+        return Screen.getPrimary().getBounds().getHeight() * 0.85;
     }
 }
