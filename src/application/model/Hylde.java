@@ -1,19 +1,22 @@
 package application.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hylde {
 
     static final int ANTAL_BEHOLDER_I_ALT = 4;
 
     private final int nummer;
-    private int antalBeholdere;
-    private boolean erOptaget;
     private final Reol reol;
+    private final List<Opbevaring> opbevaringer;
+    private int antalBeholdere = 0;
+    private boolean erOptaget = false;
 
-    public Hylde(Reol reol, int nummer, int antalBeholdere) {
+    public Hylde(Reol reol, int nummer) {
         this.reol = reol;
-        this.antalBeholdere = antalBeholdere;
-        this.erOptaget = false;
         this.nummer = nummer;
+        this.opbevaringer = new ArrayList<>();
     }
 
     public Reol getReol() {
@@ -36,8 +39,20 @@ public class Hylde {
         this.erOptaget = erOptaget;
     }
 
-
     public boolean erOptaget() {
         return erOptaget;
+    }
+
+    public List<Opbevaring> getOpbevaringer() {
+        return opbevaringer;
+    }
+
+    public void addOpbevaring(Opbevaring opbevaring) {
+        if (antalBeholdere + opbevaring.getPladsmængde() <= ANTAL_BEHOLDER_I_ALT) {
+            opbevaringer.add(opbevaring);
+            antalBeholdere += opbevaring.getPladsmængde();
+        } else {
+            System.out.println("Hylde er fuld. Kan ikke tilføje mere.");
+        }
     }
 }

@@ -19,14 +19,14 @@ public class Reol {
         this(afdeling, reolType.getAntalHylder(), nummer);
     }
 
-    public Hylde createHylde(int nummer, int antalBeholdere) {
+    public Hylde createHylde(int nummer) {
         if (antalHylderOprettet >= antalHylder) {
             throw new IllegalStateException("Der er ikke flere hylder tilbage i reolen!");
         }
         if (hylder[nummer] != null) {
             throw new IllegalArgumentException("Hylde med nummer " + nummer + " findes allerede!");
         }
-        Hylde hylde = new Hylde(this, nummer, antalBeholdere);
+        Hylde hylde = new Hylde(this, nummer);
         hylder[nummer] = hylde;
         antalHylderOprettet++;
         return hylde;

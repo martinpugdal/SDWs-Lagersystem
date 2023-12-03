@@ -8,16 +8,17 @@ public abstract class Opbevaring {
     private boolean intakt;
     private double volumen;
     private boolean tom = false;
-    private LocalDate PåfyldningsDato;
+    private LocalDate påfyldningsDato;
 
-    public Opbevaring(boolean intakt, double volumen, int nr) {
+    public Opbevaring(boolean intakt, double volumen, int nr, LocalDate påfyldningsDato) {
         this.intakt = intakt;
         this.volumen = volumen;
         this.nr = nr;
+        this.påfyldningsDato = påfyldningsDato;
     }
 
-    public Opbevaring(boolean intakt, double volumen, int nr, boolean tom) {
-        this(intakt, volumen, nr);
+    public Opbevaring(boolean intakt, double volumen, int nr, boolean tom, LocalDate påfyldningsDato) {
+        this(intakt, volumen, nr, påfyldningsDato);
         this.tom = tom;
     }
 
@@ -50,4 +51,22 @@ public abstract class Opbevaring {
     }
 
     public abstract int getPladsmængde();
+
+    public LocalDate getPåfyldningsDato() {
+        return påfyldningsDato;
+    }
+
+    public void setPåfyldningsDato(LocalDate påfyldningsDato) {
+        this.påfyldningsDato = påfyldningsDato;
+    }
+
+    public void tømmes() {
+        tom = true;
+        påfyldningsDato = null;
+    }
+
+    public void påfyldes() {
+        tom = false;
+        påfyldningsDato = LocalDate.now();
+    }
 }

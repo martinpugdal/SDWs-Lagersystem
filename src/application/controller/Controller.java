@@ -6,10 +6,10 @@ import storage.Storage;
 public class Controller {
 
     private static Controller controller;
-    private final Storage storage = new Storage();
+    private final Storage storage;
 
     private Controller() {
-        initStorage();
+        storage = new Storage();
     }
 
     /**
@@ -79,8 +79,8 @@ public class Controller {
      * @param antalBeholdere
      * @return
      */
-    public Hylde createHylde(Reol reol, int nummer, int antalBeholdere) {
-        return reol.createHylde(nummer, antalBeholdere);
+    public Hylde createHylde(Reol reol, int nummer) {
+        return reol.createHylde(nummer);
     }
 
     /**
@@ -88,10 +88,8 @@ public class Controller {
      * @return
      */
     private boolean checkLagerExists(String adresse) {
-        System.out.println(storage.getLagere().size());
         for (Lager lager : storage.getLagere()) {
             if (lager.getAdresse().equals(adresse)) {
-                System.out.println(lager.getAdresse() + "=" + adresse);
                 return true;
             }
         }
@@ -115,15 +113,22 @@ public class Controller {
     public void initStorage() {
 
         // tilføj nogle lagere
-        createLager("Lager_1", 1000);
-        createLager("Lager_2", 2000);
-        createLager("Lager_3", 3000);
+        Lager lager1 = createLager("Lager 1", 1000);
+        Lager lager2 = createLager("Lager 2", 2000);
+        Lager lager3 = createLager("Lager 3", 3000);
+
 
         // tilføj nogle afdelinger
         Afdeling afdeling1 = createAfdeling(storage.getLagere().get(0), Drikkelse.GIN, 1);
         Afdeling afdeling2 = createAfdeling(storage.getLagere().get(0), Drikkelse.WHISKY, 2);
+        Afdeling afdeling3 = createAfdeling(storage.getLagere().get(1), Drikkelse.GIN, 1);
 
-        createReol(storage.getLagere().get(0).getAfdelinger().get(0), ReolType.MELLEM, 1);
+        // tilføj nogle reoler
+        createReol(afdeling1, ReolType.MELLEM, 1);
+        createReol(afdeling1, ReolType.STOR, 2);
+
+        createReol(afdeling2, ReolType.MELLEM, 1);
+        createReol(afdeling2, ReolType.STOR, 2);
 
         //TODO: create objects here by controller methods
     }
