@@ -31,7 +31,7 @@ public class Plastictank extends Opbevaring {
     }
 
     public String toString() {
-        return "Plastictank: " + navn;
+        return "PlastictankScene: " + navn;
     }
 
     @Override

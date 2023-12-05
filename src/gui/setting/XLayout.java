@@ -10,10 +10,4 @@ public class XLayout extends VBox {
         setAlignment(Pos.CENTER);
         setStyle(XStyle.PRIMARY_COLOR_STYLE);
     }
-
-    public XLayout(Pos pos, String style) {
-        super();
-        setAlignment(pos);
-        setStyle(style);
-    }
 }

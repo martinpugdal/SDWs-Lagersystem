@@ -1,9 +1,9 @@
-package gui.scene;
+package gui.scene.scenes;
 
 import gui.GUI;
 import gui.setting.XIcon;
-import gui.setting.XLayout;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,31 +11,26 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class DestilleringScene extends XScene {
 
     public DestilleringScene(GUI gui) {
-        super(new XLayout(), gui);
-        initLayout();
+        super(gui);
     }
 
-    private XLayout getLayout() {
-        return (XLayout) getRoot();
-    }
-
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         //Skærmbillede 2: Destillering
         Label label9 = new Label("Destillering");
         label9.setTranslateX(0);
         label9.setTranslateY(150);
-        label9.setFont(new Font("Calibri", 24));
+        label9.setFont(XStyle.XL_FONT);
         label9.setTextFill(Color.BLACK);
 
         Label label10 = new Label("Her kan der oprettes væsker som så kan fordeles på fade, tanke samt flasker");
         label10.setTranslateX(0);
         label10.setTranslateY(150);
-        label10.setFont(new Font("Calibri", 12));
+        label10.setFont(XStyle.L_FONT);
         label10.setTextFill(Color.BLACK);
 
         ListView listView1 = new ListView<>();
@@ -55,7 +50,7 @@ public class DestilleringScene extends XScene {
         button8.setTranslateY(-280);
         button8.setPrefSize(100, 100);
         button8.setOnAction(e -> getGUI().gåTilForside());
-        button8.setFont(new Font("Calibri", 12));
+        button8.setFont(XStyle.L_FONT);
         button8.setCursor(Cursor.HAND);
         Tooltip tooltip8 = new Tooltip("Tryk her for at oprette destilleringsvæske");
         button8.setTooltip(tooltip8);
@@ -65,7 +60,7 @@ public class DestilleringScene extends XScene {
         button9.setTranslateY(-280);
         button9.setPrefSize(100, 100);
         button9.setOnAction(e -> getGUI().gåTilForside());
-        button9.setFont(new Font("Calibri", 12));
+        button9.setFont(XStyle.L_FONT);
         button9.setCursor(Cursor.HAND);
         Tooltip tooltip9 = new Tooltip("Tryk her for at redigere destilleringsvæske");
         button9.setTooltip(tooltip9);
@@ -74,7 +69,7 @@ public class DestilleringScene extends XScene {
         button10.setTranslateX(-150);
         button10.setTranslateY(-280);
         button10.setPrefSize(100, 100);
-        button10.setFont(new Font("Calibri", 12));
+        button10.setFont(XStyle.L_FONT);
         button10.setCursor(Cursor.HAND);
         Tooltip tooltip10 = new Tooltip("Tryk her for at slette destilleringsvæsken fra systemet");
         button10.setTooltip(tooltip10);
@@ -84,7 +79,7 @@ public class DestilleringScene extends XScene {
         button11.setTranslateY(-280);
         button11.setPrefSize(100, 100);
         button11.setOnAction(e -> getGUI().gåTilForside());
-        button11.setFont(new Font("Calibri", 12));
+        button11.setFont(XStyle.L_FONT);
         button11.setCursor(Cursor.HAND);
         Tooltip tooltip11 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad");
         button11.setTooltip(tooltip11);
@@ -94,7 +89,7 @@ public class DestilleringScene extends XScene {
         button12.setTranslateY(-280);
         button12.setPrefSize(100, 100);
         button12.setOnAction(e -> getGUI().gåTilForside());
-        button12.setFont(new Font("Calibri", 12));
+        button12.setFont(XStyle.L_FONT);
         button12.setCursor(Cursor.HAND);
         Tooltip tooltip12 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra en plastictank");
         button12.setTooltip(tooltip12);
@@ -104,7 +99,7 @@ public class DestilleringScene extends XScene {
         button13.setTranslateY(-280);
         button13.setPrefSize(100, 100);
         button13.setOnAction(e -> getGUI().gåTilForside());
-        button13.setFont(new Font("Calibri", 12));
+        button13.setFont(XStyle.L_FONT);
         button13.setCursor(Cursor.HAND);
         Tooltip tooltip13 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra flasker");
         button13.setTooltip(tooltip13);
@@ -114,11 +109,9 @@ public class DestilleringScene extends XScene {
         button14.setTranslateY(-280);
         button14.setMaxSize(100, 100);
         button14.setOnAction(e -> getGUI().gåTilForside());
-        button14.setFont(new Font("Calibri", 12));
+        button14.setFont(XStyle.L_FONT);
         ImageView view14 = XIcon.TILBAGE.getImageView();
-        view14.setFitHeight(100);
-        view14.setFitWidth(100);
-        view14.setPreserveRatio(true);
+        XStyle.resize(view14, 100);
         button14.setGraphic(view14);
         button14.setCursor(Cursor.HAND);
         Tooltip tooltip14 = new Tooltip("Tryk her for at gå tilbage til forsiden");

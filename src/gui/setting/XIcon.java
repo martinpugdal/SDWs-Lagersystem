@@ -14,7 +14,8 @@ public enum XIcon {
     GINFLASKE("Ginflaske.png"),
     KORIANDERFRØ("Korianderfrø.png"),
     LAGER("Lager.png"),
-    PLASTIK_TANK("Plastic tank.png"),
+    PLASTIKTANK("Plastic tank.png"),
+    SALLWHISKY("SWD.png"),
     TILBAGE("Back.png"),
     WHISKYFLASKE("Whiskyflaske.png");
 

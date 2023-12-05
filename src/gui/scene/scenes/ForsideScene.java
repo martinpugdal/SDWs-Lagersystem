@@ -1,8 +1,8 @@
-package gui.scene;
+package gui.scene.scenes;
 
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
-import gui.setting.XLayout;
 import gui.setting.XScene;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -14,18 +14,12 @@ import javafx.scene.text.Font;
 
 public class ForsideScene extends XScene {
 
-    private final DestilleringScene destilleringScene = new DestilleringScene(getGUI());
-
     public ForsideScene(GUI gui) {
-        super(new XLayout(), gui);
-        initLayout();
+        super(gui);
     }
 
-    private XLayout getLayout() {
-        return (XLayout) getRoot();
-    }
-
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         //Skærmbillede 1: Forside
         Label label1 = new Label("Sall Whisky Distillery - Lagersystem");
         label1.setTranslateX(0);
@@ -85,7 +79,7 @@ public class ForsideScene extends XScene {
         button1.setTranslateY(25);
         button1.setPrefSize(100, 100);
         button1.setGraphic(view1);
-        button1.setOnAction(e -> getGUI().switchScene(destilleringScene));
+        button1.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERING));
         button1.setFont(new Font("Calibri", 12));
         button1.setCursor(Cursor.HAND);
         Tooltip tooltip1 = new Tooltip("Tryk her for at administrere destillinger");
@@ -101,7 +95,7 @@ public class ForsideScene extends XScene {
         button2.setTranslateY(25);
         button2.setPrefSize(100, 100);
         button2.setGraphic(view2);
-        button2.setOnAction(e -> getGUI().switchScene(this));
+        button2.setOnAction(e -> getGUI().switchScene(SceneType.RÅVARE));
         button2.setFont(new Font("Calibri", 12));
         button2.setCursor(Cursor.HAND);
         Tooltip tooltip2 = new Tooltip("Tryk her for at administrere råvarer");
@@ -117,13 +111,13 @@ public class ForsideScene extends XScene {
         button3.setTranslateY(25);
         button3.setPrefSize(100, 100);
         button3.setGraphic(view3);
-        button3.setOnAction(e -> getGUI().switchScene(this));
+        button3.setOnAction(e -> getGUI().switchScene(SceneType.FAD));
         button3.setFont(new Font("Calibri", 12));
         button3.setCursor(Cursor.HAND);
         Tooltip tooltip3 = new Tooltip("Tryk her for at administrere fade");
         button3.setTooltip(tooltip3);
 
-        ImageView view4 = XIcon.PLASTIK_TANK.getImageView();
+        ImageView view4 = XIcon.PLASTIKTANK.getImageView();
         view4.setFitHeight(100);
         view4.setFitWidth(100);
         view4.setPreserveRatio(true);
@@ -133,7 +127,7 @@ public class ForsideScene extends XScene {
         button4.setTranslateY(25);
         button4.setPrefSize(100, 100);
         button4.setGraphic(view4);
-        button4.setOnAction(e -> getGUI().switchScene(this));
+        button4.setOnAction(e -> getGUI().switchScene(SceneType.PLASTICTANK));
         button4.setFont(new Font("Calibri", 12));
         button4.setCursor(Cursor.HAND);
         Tooltip tooltip4 = new Tooltip("Tryk her for at administrere plastictanke");
@@ -149,7 +143,7 @@ public class ForsideScene extends XScene {
         button5.setTranslateY(25);
         button5.setPrefSize(100, 100);
         button5.setGraphic(view5);
-        button5.setOnAction(e -> getGUI().switchScene(this));
+        button5.setOnAction(e -> getGUI().switchScene(SceneType.LAGER));
         button5.setFont(new Font("Calibri", 12));
         button5.setCursor(Cursor.HAND);
         Tooltip tooltip5 = new Tooltip("Tryk her for at administrere lagre");
@@ -165,7 +159,7 @@ public class ForsideScene extends XScene {
         button6.setTranslateY(-280);
         button6.setPrefSize(100, 100);
         button6.setGraphic(view6);
-        button6.setOnAction(e -> getGUI().switchScene(this));
+        button6.setOnAction(e -> getGUI().switchScene(SceneType.WHISKYFLASKE));
         button6.setFont(new Font("Calibri", 12));
         button6.setCursor(Cursor.HAND);
         Tooltip tooltip6 = new Tooltip("Tryk her for at administrere whiskyflasker");
@@ -182,7 +176,7 @@ public class ForsideScene extends XScene {
         button7.setTranslateY(-280);
         button7.setPrefSize(100, 100);
         button7.setGraphic(view7);
-        button7.setOnAction(e -> getGUI().switchScene(this));
+        button7.setOnAction(e -> getGUI().switchScene(SceneType.GINFLASKE));
         button7.setFont(new Font("Calibri", 12));
         button7.setCursor(Cursor.HAND);
         Tooltip tooltip7 = new Tooltip("Tryk her for at administrere ginflasker");
@@ -198,6 +192,6 @@ public class ForsideScene extends XScene {
 
     @Override
     public XIcon getIcon() {
-        return XIcon.LAGER;
+        return XIcon.SALLWHISKY;
     }
 }

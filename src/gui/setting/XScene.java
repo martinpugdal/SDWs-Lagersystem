@@ -1,16 +1,22 @@
 package gui.setting;
 
 import gui.GUI;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public abstract class XScene extends Scene {
 
     private final GUI gui;
 
-    public XScene(Parent parent, GUI gui) {
-        super(parent);
+    public XScene(GUI gui) {
+        super(new XLayout());
         this.gui = gui;
+        initLayout();
+    }
+
+    public abstract void initLayout();
+
+    public XLayout getLayout() {
+        return (XLayout) getRoot();
     }
 
     public GUI getGUI() {
