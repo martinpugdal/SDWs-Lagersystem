@@ -15,7 +15,7 @@ class LagerTest {
     void createAfdeling() {
         //Arrange
         //Vi opretter nyt lager, da vi ikke kan oprette en afdeling uden et lager
-        Lager lager = new Lager("Testvej 1", 100);
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
         //Vi vælger hvad der skal opbevares i afdelingen og giver afdelingen et nummer
         Drikkelse drikkelse = Drikkelse.WHISKY;
@@ -40,7 +40,7 @@ class LagerTest {
     void addAfdeling() {
         //Arrange
         //Vi opretter nyt lager, da vi ikke kan oprette en afdeling uden et lager
-        Lager lager = new Lager("Testvej 1", 100);
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
         //Vi opretter en ny afdeling indholdende whisky og med nummeret 1. Vi opretter også en ny liste hvor vores testafdeling kan være i
         Afdeling testafdeling = new Afdeling(lager, Drikkelse.WHISKY, 1);
@@ -61,12 +61,10 @@ class LagerTest {
     void removeAfdeling() {
         //Arrange
         //Vi opretter nyt lager, da vi ikke kan oprette en afdeling uden et lager
-        Lager lager = new Lager("Testvej 1", 100);
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
-        //Vi opretter en ny afdeling indholdende whisky og med nummeret 1. Vi opretter også en ny liste hvor vores testafdeling kan være i
-        //Vi opretter en ny afdeling, da vi ellers ikke kan slette den.
+        //Vi opretter en ny afdeling indholdende whisky og med nummeret 1.
         Afdeling afdeling = new Afdeling(lager, Drikkelse.WHISKY, 1);
-//        ArrayList<Afdeling> testafdelinger = new ArrayList<>();
 
         //Act
         //Vi tilføjer afdelingen til listen, da vi ellers ikke kan slette afdelingen
@@ -77,7 +75,7 @@ class LagerTest {
 
         //Assert
         //Vi tjekker om afdelingen er slettet
-        assertEquals(1, lager.getAfdelinger().size());
+        assertEquals(0, lager.getAntalAfdelinger());
 
     }
 
@@ -86,11 +84,10 @@ class LagerTest {
     void getAfdelinger() {
         //Arrange
         //Vi opretter nyt lager, da vi ikke kan oprette en liste over afdelinger uden et lager
-        Lager lager = new Lager("Testvej 1", 100);
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
         //Vi opretter en ny liste hvor vores testafdelinger kan være i og sætter den forventning, at listen indholder afdelingerne
-        ArrayList<Afdeling> testafdelinger = new ArrayList<>();
-        ArrayList<Afdeling> forventet = testafdelinger;
+        ArrayList<Afdeling> forventet = new ArrayList<>();
 
         //Act
         //Vi finder den faktiske liste over afdelinger
@@ -108,8 +105,8 @@ class LagerTest {
         //Arrange
         //Vi opretter nyt lager, da vi ikke kan teste et lagers adresse uden et lager
         //Vi forventer at den adresse vi indtaster rent faktisk også er den der bliver gemt
-        Lager lager = new Lager("Testvej 1", 100);
-        String forventet = "Testvej 1";
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
+        String forventet = "Lagervej 1, 1234, Viby J";
 
         //Act
         //Vi finder den faktiske adresse
@@ -118,8 +115,6 @@ class LagerTest {
         //Assert
         //Vi tjekker om den forventede adresse og den faktiske adresse er ens
         assertEquals(forventet, faktisk);
-
-
     }
 
     @Test
@@ -129,7 +124,7 @@ class LagerTest {
         //Vi opretter nyt lager, da vi ikke kan teste et lagers størrelse uden et lager
         //Vi forventer at lagerets størrelse er 100
 
-        Lager lager = new Lager("Testvej 1", 100);
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
         double forventet = 100;
 
         //Act
@@ -147,9 +142,9 @@ class LagerTest {
     void testToString() {
         //Arrange
         //Vi opretter nyt lager, da vi ellers ikke kan teste om adressen og størrelsen på lageret bliver vist som en streng
-        //Vi forventer at der står "Testvej 1" i strengen
-        Lager lager = new Lager("Testvej 1", 100);
-        String forventet = "Testvej 1";
+        //Vi forventer at der står "Lagervej 1, 1234, Viby J" i strengen
+        Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
+        String forventet = "Lagervej 1, 1234, Viby J";
 
         //Act
         //Vi finder ud af hvad der rent faktisk står i strengen

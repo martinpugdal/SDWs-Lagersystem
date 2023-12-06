@@ -16,6 +16,7 @@ import gui.scene.scenes.råvare.RedigerRåvareScene;
 import gui.scene.scenes.whiskyflaske.OpretWhiskyflaskeScene;
 import gui.scene.scenes.whiskyflaske.RedigerWhiskyflaskeScene;
 import gui.setting.XScene;
+import javafx.scene.control.Alert;
 
 public class SceneManager {
 
@@ -125,5 +126,13 @@ public class SceneManager {
             case OPRETPLASTICTANK -> opretPlastictankScene;
             case REDIGERPLASTICTANK -> redigerPlastictankScene;
         };
+    }
+
+    public Alert alert(String title, String headerText, String contentText, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        return alert;
     }
 }

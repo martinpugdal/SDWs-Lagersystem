@@ -1,20 +1,26 @@
 package gui.scene.scenes.lager;
 
+import application.model.Lager;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class RedigerLagerScene extends XScene {
+
+    private Lager selectedLager;
+
     public RedigerLagerScene(GUI gui) {
         super(gui);
+    }
+
+    public void setSelectedLager(Lager lager) {
+        selectedLager = lager;
     }
 
     @Override
@@ -32,12 +38,6 @@ public class RedigerLagerScene extends XScene {
         label117.setTranslateY(150);
         label117.setFont(new Font("Arial",16));
         label117.setTextFill(Color.BLACK);
-
-        Label label118 = new Label("Navn");
-        label118.setTranslateX(0);
-        label118.setTranslateY(150);
-        label118.setFont(new Font("Arial",16));
-        label118.setTextFill(Color.BLACK);
 
         Label label119 = new Label("Adresse");
         label119.setTranslateX(0);
@@ -70,35 +70,28 @@ public class RedigerLagerScene extends XScene {
         textField74.setTooltip(tooltip140);
         textField74.setCursor(Cursor.TEXT);
 
-        TextField textField75 = new TextField();
-        textField75.setMaxWidth(100);
-        Tooltip tooltip141 = new Tooltip();
-        tooltip141.setText("Indtast navnet på lageret her");
-        textField75.setTooltip(tooltip141);
-        textField75.setCursor(Cursor.TEXT);
-
-        TextField textField76 = new TextField();
+        TextField textField76 = new TextField(selectedLager != null ? selectedLager.getAdresse().split(",")[0].trim() : "");
         textField76.setMaxWidth(100);
         Tooltip tooltip142 = new Tooltip();
         tooltip142.setText("Indtast adressen på lageret her");
         textField76.setTooltip(tooltip142);
         textField76.setCursor(Cursor.TEXT);
 
-        TextField textField77 = new TextField();
+        TextField textField77 = new TextField(selectedLager != null ? selectedLager.getAdresse().split(",")[1].trim() : "");
         textField77.setMaxWidth(100);
         Tooltip tooltip143 = new Tooltip();
         tooltip143.setText("Indtast postnummeret for lageret her");
         textField77.setTooltip(tooltip143);
         textField77.setCursor(Cursor.TEXT);
 
-        TextField textField78 = new TextField();
+        TextField textField78 = new TextField(selectedLager != null ? selectedLager.getAdresse().split(",")[2].trim() : "");
         textField78.setMaxWidth(100);
         Tooltip tooltip144 = new Tooltip();
         tooltip144.setText("Indtast by her");
         textField78.setTooltip(tooltip144);
         textField78.setCursor(Cursor.TEXT);
 
-        TextField textField79 = new TextField();
+        TextField textField79 = new TextField(selectedLager != null ? String.valueOf(selectedLager.getStørrelse()) : "");
         textField79.setMaxWidth(100);
         Tooltip tooltip145 = new Tooltip();
         tooltip145.setText("Indtast størrelsen på lageret i kvadratmeter her");
@@ -116,7 +109,7 @@ public class RedigerLagerScene extends XScene {
         button67.setTranslateX(-150);
         button67.setTranslateY(-280);
         button67.setPrefSize(250,45);
-        button67.setOnAction(e -> getGUI().switchScene(this));
+        button67.setOnAction(e -> redigerLager(textField74.getText(), textField76.getText(), textField77.getText(), textField78.getText(), textField79.getText()));
         button67.setFont(new Font("Arial",16));
         button67.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button67.setCursor(Cursor.HAND);
@@ -127,7 +120,7 @@ public class RedigerLagerScene extends XScene {
         button68.setTranslateX(-150);
         button68.setTranslateY(-280);
         button68.setPrefSize(250,45);
-        button68.setOnAction(e -> getGUI().switchScene(this));
+        button68.setOnAction(e -> getGUI().switchScene(SceneType.LAGER));
         button68.setFont(new Font("Arial",16));
         button68.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button68.setCursor(Cursor.HAND);
@@ -145,7 +138,39 @@ public class RedigerLagerScene extends XScene {
         Tooltip tooltip148 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button69.setTooltip(tooltip148);
 
-        getLayout().getChildren().addAll(label116, label117, label118, label119, label120, label121, label122, textField74, textField75, textField76, textField77, textField78, textField79, button67, button68, button69);
+        getLayout().getChildren().addAll(label116, label117, label119, label120, label121, label122, textField74, textField76, textField77, textField78, textField79, button67, button68, button69);
+    }
+
+    private void redigerLager(String nummer, String adresse, String postnummer, String by, String kvadratmeter) {
+        if (nummer.isEmpty() || adresse.isEmpty() || postnummer.isEmpty() || by.isEmpty() || kvadratmeter.isEmpty()) {
+            Alert alert = getGUI().alert("Fejl", "Alle felter skal udfyldes", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        int nummerInt;
+        try {
+            nummerInt = Integer.parseInt(nummer);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Nummer skal være et tal", "Nummer skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        double kvadratmeterDouble;
+        try {
+            kvadratmeterDouble = Double.parseDouble(kvadratmeter);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Kvadratmeter skal være et tal", "Kvadratmeter skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        String adresseFormat = adresse + ", " + postnummer + " " + by;
+        if (getGUI().getController().checkLagerExists(adresseFormat) || getGUI().getController().checkLagerExists(nummerInt)) {
+            Alert alert = getGUI().alert("Fejl", "Lageret findes allerede", "Lageret findes allerede", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        getGUI().getController().updateLager(selectedLager, nummerInt, adresseFormat, kvadratmeterDouble);
+        getGUI().switchScene(SceneType.LAGER);
     }
 
     @Override

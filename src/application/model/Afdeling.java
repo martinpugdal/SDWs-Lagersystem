@@ -46,4 +46,9 @@ public class Afdeling {
     public Lager getLager() {
         return lager;
     }
+
+    @Override
+    public String toString() {
+        return "A" + nummer;
+    }
 }

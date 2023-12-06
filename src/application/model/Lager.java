@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Lager {
 
-    private final String adresse;
-    private final double størrelse;
     private final ArrayList<Afdeling> afdelinger;
+    private int nummer;
+    private double størrelse;
+    private String adresse;
 
-    public Lager(String adresse, double størrelse) {
+    public Lager(int nummer, String adresse, double størrelse) {
+        this.nummer = nummer;
         this.adresse = adresse;
         this.størrelse = størrelse;
         this.afdelinger = new ArrayList<>();
@@ -32,12 +34,32 @@ public class Lager {
         return afdelinger;
     }
 
+    public int getAntalAfdelinger() {
+        return afdelinger.size();
+    }
+
     public String getAdresse() {
         return adresse;
     }
 
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
     public double getStørrelse() {
         return størrelse;
+    }
+
+    public void setStørrelse(double størrelse) {
+        this.størrelse = størrelse;
+    }
+
+    public int getNummer() {
+        return nummer;
+    }
+
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
     }
 
     @Override

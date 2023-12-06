@@ -1,7 +1,12 @@
 package application.controller;
 
 import application.model.*;
+import application.model.opbevaring.Fad;
+import application.model.opbevaring.Plastictank;
 import storage.Storage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
@@ -24,18 +29,79 @@ public class Controller {
         return controller;
     }
 
+    public List<Lager> getLagere() {
+        return storage.getLagere();
+    }
+
+    public List<Opbevaring> getOpbevaringer() {
+        return storage.getOpbevaringer();
+    }
+
+    public List<Fad> getFade() {
+        List<Fad> fade = new ArrayList<>();
+        for (Opbevaring opbevaring : getOpbevaringer()) {
+            if (opbevaring instanceof Fad) {
+                fade.add((Fad) opbevaring);
+            }
+        }
+        return fade;
+    }
+
+    public List<Plastictank> getPlastictanke() {
+        List<Plastictank> plastictanke = new ArrayList<>();
+        for (Opbevaring opbevaring : getOpbevaringer()) {
+            if (opbevaring instanceof Plastictank) {
+                plastictanke.add((Plastictank) opbevaring);
+            }
+        }
+        return plastictanke;
+    }
+
+    public List<Destillering> getDestilleringer() {
+        return storage.getDestilleringer();
+    }
+
+    public List<Flaske> getFlasker() {
+        return storage.getFlasker();
+    }
+
+    public List<Råvare> getRåvarer() {
+        return storage.getRåvarer();
+    }
+
     /**
      * @param adresse
      * @param størrelse
      * @return
      */
-    public Lager createLager(String adresse, double størrelse) {
-        if (checkLagerExists(adresse)) {
+    public Lager createLager(int nummer, String adresse, double størrelse) {
+        if (checkLagerExists(adresse) || checkLagerExists(nummer)) {
             throw new IllegalArgumentException("Lageret findes allerede");
         }
-        Lager lager = new Lager(adresse, størrelse);
+        Lager lager = new Lager(nummer, adresse, størrelse);
         storage.addLager(lager);
         return lager;
+    }
+
+    /**
+     * @param selectedLager
+     * @param adresse
+     * @param kvadratmeter
+     */
+    public void updateLager(Lager selectedLager, int nummer, String adresse, double kvadratmeter) {
+        if (checkLagerExists(adresse) && checkLagerExists(nummer)) {
+            throw new IllegalArgumentException("Lageret findes allerede");
+        }
+        selectedLager.setNummer(nummer);
+        selectedLager.setAdresse(adresse);
+        selectedLager.setStørrelse(kvadratmeter);
+    }
+
+    /**
+     * @param lager
+     */
+    public void deleteLager(Lager lager) {
+        storage.removeLager(lager);
     }
 
     /**
@@ -76,7 +142,6 @@ public class Controller {
     /**
      * @param reol
      * @param nummer
-     * @param antalBeholdere
      * @return
      */
     public Hylde createHylde(Reol reol, int nummer) {
@@ -87,9 +152,22 @@ public class Controller {
      * @param adresse
      * @return
      */
-    private boolean checkLagerExists(String adresse) {
+    public boolean checkLagerExists(String adresse) {
         for (Lager lager : storage.getLagere()) {
             if (lager.getAdresse().equals(adresse)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param nummer
+     * @return
+     */
+    public boolean checkLagerExists(int nummer) {
+        for (Lager lager : storage.getLagere()) {
+            if (lager.getNummer() == nummer) {
                 return true;
             }
         }
@@ -113,15 +191,14 @@ public class Controller {
     public void initStorage() {
 
         // tilføj nogle lagere
-        Lager lager1 = createLager("Lager 1", 1000);
-        Lager lager2 = createLager("Lager 2", 2000);
-        Lager lager3 = createLager("Lager 3", 3000);
-
+        Lager lager1 = createLager(1, "Lagervej 1, 1234, By 1", 44);
+        Lager lager2 = createLager(2, "Lagervej 3, 2223, By 2", 145);
+        Lager lager3 = createLager(3, "Lagervej 5, 4332, By 3", 664);
 
         // tilføj nogle afdelinger
-        Afdeling afdeling1 = createAfdeling(storage.getLagere().get(0), Drikkelse.GIN, 1);
-        Afdeling afdeling2 = createAfdeling(storage.getLagere().get(0), Drikkelse.WHISKY, 2);
-        Afdeling afdeling3 = createAfdeling(storage.getLagere().get(1), Drikkelse.GIN, 1);
+        Afdeling afdeling1 = createAfdeling(lager1, Drikkelse.GIN, 1);
+        Afdeling afdeling2 = createAfdeling(lager1, Drikkelse.WHISKY, 2);
+        Afdeling afdeling3 = createAfdeling(lager2, Drikkelse.GIN, 1);
 
         // tilføj nogle reoler
         createReol(afdeling1, ReolType.MELLEM, 1);
@@ -129,6 +206,9 @@ public class Controller {
 
         createReol(afdeling2, ReolType.MELLEM, 1);
         createReol(afdeling2, ReolType.STOR, 2);
+
+        createReol(afdeling3, ReolType.MELLEM, 1);
+        createReol(afdeling3, ReolType.STOR, 2);
 
         //TODO: create objects here by controller methods
     }

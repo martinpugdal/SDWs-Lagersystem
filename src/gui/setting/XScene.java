@@ -19,6 +19,8 @@ public abstract class XScene extends Scene {
         return (XLayout) getRoot();
     }
 
+    public void update() {}
+
     public GUI getGUI() {
         return gui;
     }
