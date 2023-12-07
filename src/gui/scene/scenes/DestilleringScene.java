@@ -63,10 +63,10 @@ public class DestilleringScene extends XScene {
         imageView1.setTranslateY(-10);
         getLayout().getChildren().add(imageView1);*/
 
-        Button button8 = new Button();
+        Button button8 = new Button("Opret destillering");
         button8.setTranslateX(-150);
         button8.setTranslateY(-280);
-        button8.setPrefSize(100, 100);
+        button8.setPrefSize(250, 45);
         button8.setOnAction(e -> getGUI().gåTilForside());
         button8.setFont(XStyle.L_FONT);
         button8.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
@@ -74,10 +74,10 @@ public class DestilleringScene extends XScene {
         Tooltip tooltip8 = new Tooltip("Tryk her for at oprette destilleringsvæske");
         button8.setTooltip(tooltip8);
 
-        Button button9 = new Button();
+        Button button9 = new Button("Rediger destillering");
         button9.setTranslateX(-150);
         button9.setTranslateY(-280);
-        button9.setPrefSize(100, 100);
+        button9.setPrefSize(250, 45);
         button9.setOnAction(e -> getGUI().gåTilForside());
         button9.setFont(XStyle.L_FONT);
         button9.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
@@ -85,20 +85,20 @@ public class DestilleringScene extends XScene {
         Tooltip tooltip9 = new Tooltip("Tryk her for at redigere destilleringsvæske");
         button9.setTooltip(tooltip9);
 
-        Button button10 = new Button();
+        Button button10 = new Button("Slet destillering");
         button10.setTranslateX(-150);
         button10.setTranslateY(-280);
-        button10.setPrefSize(100, 100);
+        button10.setPrefSize(250, 45);
         button10.setFont(XStyle.L_FONT);
         button10.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button10.setCursor(Cursor.HAND);
         Tooltip tooltip10 = new Tooltip("Tryk her for at slette destilleringsvæsken fra systemet");
         button10.setTooltip(tooltip10);
 
-        Button button11 = new Button();
+        Button button11 = new Button("Overfør destillering (fad)");
         button11.setTranslateX(-150);
         button11.setTranslateY(-280);
-        button11.setPrefSize(100, 100);
+        button11.setPrefSize(250, 45);
         button11.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGFAD));
         button11.setFont(XStyle.L_FONT);
         button11.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
@@ -106,10 +106,10 @@ public class DestilleringScene extends XScene {
         Tooltip tooltip11 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad");
         button11.setTooltip(tooltip11);
 
-        Button button12 = new Button();
+        Button button12 = new Button("Overfør destillering (tank)");
         button12.setTranslateX(-150);
         button12.setTranslateY(-280);
-        button12.setPrefSize(100, 100);
+        button12.setPrefSize(250, 45);
         button12.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGTANK));
         button12.setFont(XStyle.L_FONT);
         button12.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
@@ -117,7 +117,7 @@ public class DestilleringScene extends XScene {
         Tooltip tooltip12 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra en plastictank");
         button12.setTooltip(tooltip12);
 
-        Button button13 = new Button();
+/*        Button button13 = new Button("Overfør destillering (flaske)");
         button13.setTranslateX(-150);
         button13.setTranslateY(-280);
         button13.setPrefSize(100, 100);
@@ -126,12 +126,12 @@ public class DestilleringScene extends XScene {
         button13.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button13.setCursor(Cursor.HAND);
         Tooltip tooltip13 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra flasker");
-        button13.setTooltip(tooltip13);
+        button13.setTooltip(tooltip13);*/
 
-        Button button14 = new Button();
+        Button button14 = new Button("Gå tilbage til forside");
         button14.setTranslateX(-150);
         button14.setTranslateY(-280);
-        button14.setMaxSize(100, 100);
+        button14.setPrefSize(250, 45);
         button14.setOnAction(e -> getGUI().gåTilForside());
         button14.setFont(XStyle.L_FONT);
         button14.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
@@ -139,7 +139,7 @@ public class DestilleringScene extends XScene {
         Tooltip tooltip14 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button14.setTooltip(tooltip14);
 
-        getLayout().getChildren().addAll(label9, label10, destilleringTableView, button8, button9, button10, button11, button12, button13, button14);
+        getLayout().getChildren().addAll(label9, label10, destilleringTableView, button8, button9, button10, button11, button12, button14);
     }
 
     @Override
