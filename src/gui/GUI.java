@@ -6,6 +6,7 @@ import gui.scene.SceneManager;
 import gui.scene.SceneType;
 import gui.setting.XScene;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Screen;
 import javafx.stage.Stage;

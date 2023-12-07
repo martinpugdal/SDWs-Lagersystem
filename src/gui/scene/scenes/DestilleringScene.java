@@ -1,18 +1,20 @@
 package gui.scene.scenes;
 
+import application.model.Destillering;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
 public class DestilleringScene extends XScene {
+
+    private TableView<Destillering> destilleringTableView;
 
     public DestilleringScene(GUI gui) {
         super(gui);
@@ -33,17 +35,33 @@ public class DestilleringScene extends XScene {
         label10.setFont(XStyle.L_FONT);
         label10.setTextFill(Color.BLACK);
 
-        ListView listView1 = new ListView<>();
-        listView1.setTranslateX(20);
-        listView1.setTranslateY(20);
-        listView1.setPrefSize(200, 200);
+        destilleringTableView = new TableView<>();
+        destilleringTableView.setEditable(false);
+        TableColumn<Destillering, Integer> destilleringNummerColumn = new TableColumn<>("Nummer");
+        destilleringNummerColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
+        destilleringTableView.getColumns().add(destilleringNummerColumn);
+        TableColumn<Destillering, String> destilleringNavnColumn = new TableColumn<>("Navn");
+        destilleringNavnColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNavn()));
+        destilleringTableView.getColumns().add(destilleringNavnColumn);
+        TableColumn<Destillering, Double> destilleringLiterColumn = new TableColumn<>("Antal liter");
+        destilleringLiterColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getLiter()));
+        destilleringTableView.getColumns().add(destilleringLiterColumn);
+        TableColumn<Destillering, Double> destilleringAlkoholProcent = new TableColumn<>("Alkoholprocent");
+        destilleringAlkoholProcent.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAlkoholprocent()));
+        destilleringTableView.getColumns().add(destilleringAlkoholProcent);
+        destilleringTableView.setPlaceholder(new Label("Der er ingen destilleringer"));
+        destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
+        destilleringTableView.setTranslateX(20);
+        destilleringTableView.setTranslateY(20);
+        destilleringTableView.setPrefSize(200, 200);
+        destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
 
-        ImageView imageView1 = XIcon.DESTILLERING.getImageView();
+/*        ImageView imageView1 = XIcon.DESTILLERING.getImageView();
         imageView1.setFitHeight(100);
         imageView1.setFitWidth(600);
         imageView1.setTranslateX(10);
         imageView1.setTranslateY(-10);
-        getLayout().getChildren().add(imageView1);
+        getLayout().getChildren().add(imageView1);*/
 
         Button button8 = new Button();
         button8.setTranslateX(-150);
@@ -51,6 +69,7 @@ public class DestilleringScene extends XScene {
         button8.setPrefSize(100, 100);
         button8.setOnAction(e -> getGUI().gåTilForside());
         button8.setFont(XStyle.L_FONT);
+        button8.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button8.setCursor(Cursor.HAND);
         Tooltip tooltip8 = new Tooltip("Tryk her for at oprette destilleringsvæske");
         button8.setTooltip(tooltip8);
@@ -61,6 +80,7 @@ public class DestilleringScene extends XScene {
         button9.setPrefSize(100, 100);
         button9.setOnAction(e -> getGUI().gåTilForside());
         button9.setFont(XStyle.L_FONT);
+        button9.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button9.setCursor(Cursor.HAND);
         Tooltip tooltip9 = new Tooltip("Tryk her for at redigere destilleringsvæske");
         button9.setTooltip(tooltip9);
@@ -70,6 +90,7 @@ public class DestilleringScene extends XScene {
         button10.setTranslateY(-280);
         button10.setPrefSize(100, 100);
         button10.setFont(XStyle.L_FONT);
+        button10.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button10.setCursor(Cursor.HAND);
         Tooltip tooltip10 = new Tooltip("Tryk her for at slette destilleringsvæsken fra systemet");
         button10.setTooltip(tooltip10);
@@ -78,8 +99,9 @@ public class DestilleringScene extends XScene {
         button11.setTranslateX(-150);
         button11.setTranslateY(-280);
         button11.setPrefSize(100, 100);
-        button11.setOnAction(e -> getGUI().gåTilForside());
+        button11.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGFAD));
         button11.setFont(XStyle.L_FONT);
+        button11.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button11.setCursor(Cursor.HAND);
         Tooltip tooltip11 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad");
         button11.setTooltip(tooltip11);
@@ -88,8 +110,9 @@ public class DestilleringScene extends XScene {
         button12.setTranslateX(-150);
         button12.setTranslateY(-280);
         button12.setPrefSize(100, 100);
-        button12.setOnAction(e -> getGUI().gåTilForside());
+        button12.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGTANK));
         button12.setFont(XStyle.L_FONT);
+        button12.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button12.setCursor(Cursor.HAND);
         Tooltip tooltip12 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra en plastictank");
         button12.setTooltip(tooltip12);
@@ -98,8 +121,9 @@ public class DestilleringScene extends XScene {
         button13.setTranslateX(-150);
         button13.setTranslateY(-280);
         button13.setPrefSize(100, 100);
-        button13.setOnAction(e -> getGUI().gåTilForside());
+        button13.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGFLASKE));
         button13.setFont(XStyle.L_FONT);
+        button13.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button13.setCursor(Cursor.HAND);
         Tooltip tooltip13 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra flasker");
         button13.setTooltip(tooltip13);
@@ -110,14 +134,18 @@ public class DestilleringScene extends XScene {
         button14.setMaxSize(100, 100);
         button14.setOnAction(e -> getGUI().gåTilForside());
         button14.setFont(XStyle.L_FONT);
-        ImageView view14 = XIcon.TILBAGE.getImageView();
-        XStyle.resize(view14, 100);
-        button14.setGraphic(view14);
+        button14.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button14.setCursor(Cursor.HAND);
         Tooltip tooltip14 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button14.setTooltip(tooltip14);
 
-        getLayout().getChildren().addAll(label9, label10, listView1, button8, button9, button10, button11, button12, button13, button14);
+        getLayout().getChildren().addAll(label9, label10, destilleringTableView, button8, button9, button10, button11, button12, button13, button14);
+    }
+
+    @Override
+    public void update() {
+        destilleringTableView.getItems().clear();
+        destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
     }
 
     @Override

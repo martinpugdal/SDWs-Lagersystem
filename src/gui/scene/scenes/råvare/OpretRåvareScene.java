@@ -1,8 +1,10 @@
 package gui.scene.scenes.råvare;
 
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,37 +28,37 @@ public class OpretRåvareScene extends XScene {
         Label label41 = new Label("Opret råvare");
         label41.setTranslateX(0);
         label41.setTranslateY(150);
-        label41.setFont(new Font("Arial",36));
+        label41.setFont(new Font("Arial", 36));
         label41.setTextFill(Color.BLACK);
 
         Label label42 = new Label("Navn");
         label42.setTranslateX(0);
         label42.setTranslateY(150);
-        label42.setFont(new Font("Arial",16));
+        label42.setFont(new Font("Arial", 16));
         label42.setTextFill(Color.BLACK);
 
         Label label43 = new Label("Antal");
         label43.setTranslateX(0);
         label43.setTranslateY(150);
-        label43.setFont(new Font("Arial",16));
+        label43.setFont(new Font("Arial", 16));
         label43.setTextFill(Color.BLACK);
 
         Label label44 = new Label("Liter");
         label44.setTranslateX(0);
         label44.setTranslateY(150);
-        label44.setFont(new Font("Arial",16));
+        label44.setFont(new Font("Arial", 16));
         label44.setTextFill(Color.BLACK);
 
         Label label45 = new Label("Kilogram");
         label45.setTranslateX(0);
         label45.setTranslateY(150);
-        label45.setFont(new Font("Arial",16));
+        label45.setFont(new Font("Arial", 16));
         label45.setTextFill(Color.BLACK);
 
         Label label46 = new Label("Bruges til");
         label46.setTranslateX(0);
         label46.setTranslateY(150);
-        label46.setFont(new Font("Arial",16));
+        label46.setFont(new Font("Arial", 16));
         label46.setTextFill(Color.BLACK);
 
         TextField textField12 = new TextField();
@@ -104,10 +106,10 @@ public class OpretRåvareScene extends XScene {
         Button button34 = new Button("Opret råvare");
         button34.setTranslateX(-150);
         button34.setTranslateY(-280);
-        button34.setPrefSize(250,45);
-        button34.setOnAction(e -> getGUI().switchScene(this));
-        button34.setFont(new Font("Arial",16));
-        button34.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button34.setPrefSize(250, 45);
+        button34.setOnAction(e -> opretRåvare());
+        button34.setFont(new Font("Arial", 16));
+        button34.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button34.setCursor(Cursor.HAND);
         Tooltip tooltip50 = new Tooltip("Tryk her for at oprette råvaren");
         button34.setTooltip(tooltip50);
@@ -115,10 +117,10 @@ public class OpretRåvareScene extends XScene {
         Button button35 = new Button("Tilbage til råvare oversigten");
         button35.setTranslateX(-150);
         button35.setTranslateY(-280);
-        button35.setPrefSize(250,45);
-        button35.setOnAction(e -> getGUI().switchScene(this));
-        button35.setFont(new Font("Arial",16));
-        button35.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button35.setPrefSize(250, 45);
+        button35.setOnAction(e -> getGUI().switchScene(SceneType.RÅVARE));
+        button35.setFont(new Font("Arial", 16));
+        button35.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button35.setCursor(Cursor.HAND);
         Tooltip tooltip51 = new Tooltip("Tryk her for at annullere og vende tilbage til oversigten");
         button35.setTooltip(tooltip51);
@@ -126,15 +128,19 @@ public class OpretRåvareScene extends XScene {
         Button button36 = new Button("Gå tilbage til forside");
         button36.setTranslateX(-150);
         button36.setTranslateY(-280);
-        button36.setPrefSize(100,100);
+        button36.setPrefSize(100, 100);
         button36.setOnAction(e -> getGUI().gåTilForside());
-        button36.setFont(new Font("Arial",16));
+        button36.setFont(new Font("Arial", 16));
         button36.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button36.setCursor(Cursor.HAND);
         Tooltip tooltip52 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button36.setTooltip(tooltip52);
 
         getLayout().getChildren().addAll(label41, label42, label43, label44, label45, label46, textField12, textField13, textField14, textField15, textField16, button34, button35, button36);
+    }
+
+    private void opretRåvare() {
+        //TODO: Opret råvare
     }
 
     @Override
