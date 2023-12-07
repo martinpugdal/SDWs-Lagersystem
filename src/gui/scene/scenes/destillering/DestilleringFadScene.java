@@ -61,15 +61,17 @@ public class DestilleringFadScene extends XScene {
 
         ListView<Destillering> listView2 = new ListView<>();
         listView2.getItems().addAll(getGUI().getController().getDestilleringer());
-        listView2.setTranslateX(20);
+        listView2.setTranslateX(-200);
         listView2.setTranslateY(20);
-        listView2.setPrefSize(50, 200);
+        listView2.setMaxWidth(200);
+        listView2.setPrefSize(200, 200);
 
         ListView<Fad> listView3 = new ListView<>();
         listView3.getItems().addAll(getGUI().getController().getFade());
-        listView3.setTranslateX(21);
+        listView3.setTranslateX(-200);
         listView3.setTranslateY(20);
-        listView3.setPrefSize(50, 200);
+        listView3.setMaxWidth(200);
+        listView3.setPrefSize(200, 200);
 
 /*        ImageView imageView4 = XIcon.ALKOHOL.getImageView();
         imageView4.setFitHeight(100);
