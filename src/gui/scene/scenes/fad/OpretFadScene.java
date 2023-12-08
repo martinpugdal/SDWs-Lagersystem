@@ -3,6 +3,7 @@ package gui.scene.scenes.fad;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -21,79 +22,79 @@ public class OpretFadScene extends XScene {
         Label label55 = new Label("Opret fad");
         label55.setTranslateX(0);
         label55.setTranslateY(150);
-        label55.setFont(new Font("Arial",36));
+        label55.setFont(XStyle.XXL_FONT);
         label55.setTextFill(Color.BLACK);
 
         Label label56 = new Label("Nummer");
         label56.setTranslateX(0);
         label56.setTranslateY(150);
-        label56.setFont(new Font("Arial",16));
+        label56.setFont(XStyle.M_FONT);
         label56.setTextFill(Color.BLACK);
 
         Label label57 = new Label("Type");
         label57.setTranslateX(0);
         label57.setTranslateY(150);
-        label57.setFont(new Font("Arial",16));
+        label57.setFont(XStyle.M_FONT);
         label57.setTextFill(Color.BLACK);
 
         Label label58 = new Label("Antal gange brugt");
         label58.setTranslateX(0);
         label58.setTranslateY(150);
-        label58.setFont(new Font("Arial",16));
+        label58.setFont(XStyle.M_FONT);
         label58.setTextFill(Color.BLACK);
 
         Label label59 = new Label("Seneste tømningsdato");
         label59.setTranslateX(0);
         label59.setTranslateY(150);
-        label59.setFont(new Font("Arial",16));
+        label59.setFont(XStyle.M_FONT);
         label59.setTextFill(Color.BLACK);
 
         Label label60 = new Label("Påfyldningsdato");
         label60.setTranslateX(0);
         label60.setTranslateY(150);
-        label60.setFont(new Font("Arial",16));
+        label60.setFont(XStyle.M_FONT);
         label60.setTextFill(Color.BLACK);
 
         Label label61 = new Label("Solgt til 1");
         label61.setTranslateX(0);
         label61.setTranslateY(150);
-        label61.setFont(new Font("Arial",16));
+        label61.setFont(XStyle.M_FONT);
         label61.setTextFill(Color.BLACK);
 
         Label label62 = new Label("Solgt til 2");
         label62.setTranslateX(0);
         label62.setTranslateY(150);
-        label62.setFont(new Font("Arial",16));
+        label62.setFont(XStyle.M_FONT);
         label62.setTextFill(Color.BLACK);
 
         Label label63 = new Label("Solgt til 3");
         label63.setTranslateX(0);
         label63.setTranslateY(150);
-        label63.setFont(new Font("Arial",16));
+        label63.setFont(XStyle.M_FONT);
         label63.setTextFill(Color.BLACK);
 
         Label label64 = new Label("Solgt til 4");
         label64.setTranslateX(0);
         label64.setTranslateY(150);
-        label64.setFont(new Font("Arial",16));
+        label64.setFont(XStyle.M_FONT);
         label64.setTextFill(Color.BLACK);
 
         Label label65 = new Label("Solgt til 5");
         label65.setTranslateX(0);
         label65.setTranslateY(150);
-        label65.setFont(new Font("Arial",16));
+        label65.setFont(XStyle.M_FONT);
         label65.setTextFill(Color.BLACK);
 
         Label label66 = new Label("Står ved");
         label66.setTranslateX(0);
         label66.setTranslateY(150);
-        label66.setFont(new Font("Arial",16));
+        label66.setFont(XStyle.M_FONT);
         label66.setTextFill(Color.BLACK);
 
         Label label67 = new Label("Antal liter");
         label67.setTranslateX(0);
         label67.setTranslateY(150);
-        label67.setFont(new Font("Arial",16));
+        label67.setFont(XStyle.M_FONT);
         label67.setTextFill(Color.BLACK);
 
         TextField textField22 = new TextField();
@@ -201,7 +202,7 @@ public class OpretFadScene extends XScene {
         button44.setTranslateY(-280);
         button44.setPrefSize(250,45);
         button44.setOnAction(e -> getGUI().switchScene(this));
-        button44.setFont(new Font("Arial",16));
+        button44.setFont(XStyle.M_FONT);
         button44.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button44.setCursor(Cursor.HAND);
         Tooltip tooltip77 = new Tooltip("Tryk her for at oprette fadet");
@@ -212,7 +213,7 @@ public class OpretFadScene extends XScene {
         button45.setTranslateY(-280);
         button45.setPrefSize(250,45);
         button45.setOnAction(e -> getGUI().switchScene(this));
-        button45.setFont(new Font("Arial",16));
+        button45.setFont(XStyle.M_FONT);
         button45.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button45.setCursor(Cursor.HAND);
         Tooltip tooltip78 = new Tooltip("Tryk her for at gå tilbage til oversigten");
@@ -223,7 +224,7 @@ public class OpretFadScene extends XScene {
         button46.setTranslateY(-280);
         button46.setPrefSize(250,45);
         button46.setOnAction(e -> getGUI().gåTilForside());
-        button46.setFont(new Font("Arial",16));
+        button46.setFont(XStyle.M_FONT);
         button46.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button46.setCursor(Cursor.HAND);
         Tooltip tooltip79 = new Tooltip("Tryk her for at gå tilbage til forsiden");

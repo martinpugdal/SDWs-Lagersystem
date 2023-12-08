@@ -16,7 +16,6 @@ public class GUI extends Application {
     private final Controller controller = Controller.getController();
     private Stage stage;
     private SceneManager sceneManager;
-    private Lager primærLager;
 
     @Override
     public void init() {
@@ -38,17 +37,19 @@ public class GUI extends Application {
         return controller;
     }
 
-    private double getScreenWidth() {
-        return Screen.getPrimary().getBounds().getWidth() * 0.85;
+    public double getScreenWidth() {
+        return Screen.getPrimary().getBounds().getWidth();
     }
 
-    private double getScreenHeight() {
-        return Screen.getPrimary().getBounds().getHeight() * 0.85;
+    public double getScreenHeight() {
+        return Screen.getPrimary().getBounds().getHeight();
     }
 
     public void switchScene(XScene scene) {
         scene.update();
+//        boolean isFullScreen = stage.isFullScreen();
         stage.setScene(scene);
+//        stage.setFullScreen(isFullScreen);
         stage.setTitle(scene.getTitle() != null ? scene.getTitle() : sceneManager.getScene(SceneType.FORSIDE).getTitle());
         if (scene.getIcon() != null) {
             if (stage.getIcons().isEmpty()) {
@@ -73,13 +74,5 @@ public class GUI extends Application {
 
     public Alert alert(String title, String headerText, String contentText, Alert.AlertType alertType) {
         return sceneManager.alert(title, headerText, contentText, alertType);
-    }
-
-    public Lager getPrimærLager() {
-        return primærLager;
-    }
-
-    public void setPrimærLager(Lager primærLager) {
-        this.primærLager = primærLager;
     }
 }

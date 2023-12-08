@@ -1,8 +1,13 @@
 package gui.scene.scenes.destillering;
 
+import application.model.Destillering;
+import application.model.opbevaring.Plastictank;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
+import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -27,19 +32,19 @@ public class DestilleringTankScene extends XScene {
         Label label29 = new Label("Omhæld fra tank til tank her");
         label29.setTranslateX(0);
         label29.setTranslateY(150);
-        label29.setFont(new Font("Arial", 16));
+        label29.setFont(XStyle.M_FONT);
         label29.setTextFill(Color.BLACK);
 
         Label label30 = new Label("Fra tank:");
         label30.setTranslateX(0);
         label30.setTranslateY(150);
-        label30.setFont(new Font("Arial", 16));
+        label30.setFont(XStyle.M_FONT);
         label30.setTextFill(Color.BLACK);
 
         Label label31 = new Label("Til tank:");
         label31.setTranslateX(0);
         label31.setTranslateY(150);
-        label31.setFont(new Font("Arial", 16));
+        label31.setFont(XStyle.M_FONT);
         label31.setTextFill(Color.BLACK);
 
         Label label32 = new Label("Antal liter der skal flyttes");
@@ -55,15 +60,17 @@ public class DestilleringTankScene extends XScene {
         textField10.setTooltip(tooltip33);
         textField10.setCursor(Cursor.TEXT);
 
-        ListView listView4 = new ListView<>();
+        ListView<Destillering> listView4 = new ListView<>();
         listView4.setTranslateX(20);
         listView4.setTranslateY(20);
         listView4.setPrefSize(200, 200);
+        listView4.getItems().addAll(getGUI().getController().getDestilleringer());
 
-        ListView listView5 = new ListView<>();
+        ListView<Plastictank> listView5 = new ListView<>();
         listView5.setTranslateX(20);
         listView5.setTranslateY(20);
         listView5.setPrefSize(200, 200);
+        listView5.getItems().addAll(getGUI().getController().getPlastictanke());
 
         ImageView imageView5 = XIcon.ALKOHOL.getImageView();
         imageView5.setFitHeight(100);
@@ -76,8 +83,8 @@ public class DestilleringTankScene extends XScene {
         button24.setTranslateX(-150);
         button24.setTranslateY(-280);
         button24.setPrefSize(250, 45);
-        button24.setOnAction(e -> getGUI().switchScene(this)); //TODO:
-        button24.setFont(new Font("Arial", 16));
+        button24.setOnAction(e -> flytDestillering(listView4.getSelectionModel().getSelectedItem(), listView5.getSelectionModel().getSelectedItems(), textField10.getText()));
+        button24.setFont(XStyle.M_FONT);
         button24.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button24.setCursor(Cursor.HAND);
         Tooltip tooltip34 = new Tooltip("Tryk her for at flytte destilleringsvæsken");
@@ -87,8 +94,8 @@ public class DestilleringTankScene extends XScene {
         button25.setTranslateX(-150);
         button25.setTranslateY(-280);
         button25.setPrefSize(250, 45);
-        button25.setOnAction(e -> getGUI().switchScene(this)); //TODO:
-        button25.setFont(new Font("Arial", 16));
+        button25.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERING));
+        button25.setFont(XStyle.M_FONT);
         button25.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button25.setCursor(Cursor.HAND);
         Tooltip tooltip35 = new Tooltip("Tryk her for at annullere");
@@ -99,13 +106,16 @@ public class DestilleringTankScene extends XScene {
         button26.setTranslateY(-280);
         button26.setPrefSize(250, 45);
         button26.setOnAction(e -> getGUI().gåTilForside());
-        button26.setFont(new Font("Arial", 16));
-        button26.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button26.setFont(XStyle.M_FONT);
+        button26.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button26.setCursor(Cursor.HAND);
         Tooltip tooltip36 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button26.setTooltip(tooltip36);
 
         getLayout().getChildren().addAll(label28, label29, label30, label31, label32, textField10, listView4, listView5, button24, button25, button26);
+    }
+
+    private void flytDestillering(Destillering selectedItem, ObservableList<Plastictank> selectedItems, String antalLiter) {
     }
 
     @Override

@@ -1,19 +1,21 @@
 package gui.scene.scenes.lager;
 
-import application.model.Lager;
 import gui.GUI;
 import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
 
 public class OpretLagerScene extends XScene {
+
+    private TextField textField69, textField70, textField71, textField72, textField73;
+
     public OpretLagerScene(GUI gui) {
         super(gui);
     }
@@ -21,90 +23,26 @@ public class OpretLagerScene extends XScene {
     @Override
     public void initLayout() {
         //Skærmbillede 18: Opret lager
+        double translateY = getGUI().getScreenWidth() * 0.275;
 
         Label label109 = new Label("Opret lager");
-        label109.setTranslateX(0);
-        label109.setTranslateY(150);
+        label109.setTranslateX(-getGUI().getScreenHeight() * 0.775 + 20*2);
+        label109.setTranslateY(-getGUI().getScreenWidth() * 0.135 - 20);
         label109.setFont(new Font("Arial", 36));
         label109.setTextFill(Color.BLACK);
-
-        Label label111 = new Label("Nummer");
-        label111.setTranslateX(0);
-        label111.setTranslateY(150);
-        label111.setFont(new Font("Arial",16));
-        label111.setTextFill(Color.BLACK);
-
-        Label label112 = new Label("Adresse");
-        label112.setTranslateX(0);
-        label112.setTranslateY(150);
-        label112.setFont(new Font("Arial", 16));
-        label112.setTextFill(Color.BLACK);
-
-        Label label113 = new Label("Postnummer");
-        label113.setTranslateX(0);
-        label113.setTranslateY(150);
-        label113.setFont(new Font("Arial", 16));
-        label113.setTextFill(Color.BLACK);
-
-        Label label114 = new Label("By");
-        label114.setTranslateX(0);
-        label114.setTranslateY(150);
-        label114.setFont(new Font("Arial", 16));
-        label114.setTextFill(Color.BLACK);
-
-        Label label115 = new Label("Kvadratmeter");
-        label115.setTranslateX(0);
-        label115.setTranslateY(150);
-        label115.setFont(new Font("Arial", 16));
-        label115.setTextFill(Color.BLACK);
-
-        TextField textField69 = new TextField();
-        textField69.setMaxWidth(100);
-        Tooltip tooltip131 = new Tooltip();
-        tooltip131.setText("Indtast nummeret for lageret her");
-        textField69.setTooltip(tooltip131);
-        textField69.setCursor(Cursor.TEXT);
-
-        TextField textField70 = new TextField();
-        textField70.setMaxWidth(100);
-        Tooltip tooltip133 = new Tooltip();
-        tooltip133.setText("Indtast adressen på lageret her");
-        textField70.setTooltip(tooltip133);
-        textField70.setCursor(Cursor.TEXT);
-
-        TextField textField71 = new TextField();
-        textField71.setMaxWidth(100);
-        Tooltip tooltip134 = new Tooltip();
-        tooltip134.setText("Indtast postnummeret for lageret her");
-        textField71.setTooltip(tooltip134);
-        textField71.setCursor(Cursor.TEXT);
-
-        TextField textField72 = new TextField();
-        textField72.setMaxWidth(100);
-        Tooltip tooltip135 = new Tooltip();
-        tooltip135.setText("Indtast by her");
-        textField72.setTooltip(tooltip135);
-        textField72.setCursor(Cursor.TEXT);
-
-        TextField textField73 = new TextField();
-        textField73.setMaxWidth(100);
-        Tooltip tooltip136 = new Tooltip();
-        tooltip136.setText("Indtast størrelsen på lageret i kvadratmeter her");
-        textField73.setTooltip(tooltip136);
-        textField73.setCursor(Cursor.TEXT);
-
-        ImageView imageView17 = XIcon.LAGER.getImageView();
-        imageView17.setFitHeight(100);
-        imageView17.setFitWidth(100);
-        imageView17.setTranslateX(10);
-        imageView17.setTranslateY(-10);
-        getLayout().getChildren().add(imageView17);
+        ImageView lagerIcon = XIcon.LAGER.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label109.setGraphic(lagerIcon);
+        label109.setContentDisplay(ContentDisplay.LEFT);
 
         Button button64 = new Button("Opret lager");
-        button64.setTranslateX(-150);
-        button64.setTranslateY(-280);
-        button64.setPrefSize(100, 100);
-        button64.setOnAction(e -> opretLager(textField69.getText(), textField70.getText(), textField71.getText(), textField72.getText(), textField73.getText()));
+        button64.setTranslateX(-325);
+        button64.setTranslateY(translateY + 45);
+        button64.setPrefSize(250, 45);
+        button64.setOnAction(e -> opretLager());
         button64.setFont(new Font("Arial", 16));
         button64.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button64.setCursor(Cursor.HAND);
@@ -112,9 +50,9 @@ public class OpretLagerScene extends XScene {
         button64.setTooltip(tooltip137);
 
         Button button65 = new Button("Annuller");
-        button65.setTranslateX(-150);
-        button65.setTranslateY(-280);
-        button65.setPrefSize(100, 100);
+        button65.setTranslateX(0);
+        button65.setTranslateY(translateY);
+        button65.setPrefSize(250, 45);
         button65.setOnAction(e -> getGUI().switchScene(SceneType.LAGER));
         button65.setFont(new Font("Arial", 16));
         button65.setStyle("-fx-background-color: black; -fx-text-fill: white;");
@@ -123,9 +61,9 @@ public class OpretLagerScene extends XScene {
         button65.setTooltip(tooltip138);
 
         Button button66 = new Button("Gå tilbage til forside");
-        button66.setTranslateX(-150);
-        button66.setTranslateY(-280);
-        button66.setPrefSize(100, 100);
+        button66.setTranslateX(325);
+        button66.setTranslateY(translateY - 45);
+        button66.setPrefSize(250, 45);
         button66.setOnAction(e -> getGUI().gåTilForside());
         button66.setFont(new Font("Arial", 16));
         button66.setStyle("-fx-background-color: black; -fx-text-fill: white;");
@@ -133,10 +71,106 @@ public class OpretLagerScene extends XScene {
         Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button66.setTooltip(tooltip139);
 
-        getLayout().getChildren().addAll(label109, label111, label112, label113, label114, label115, textField69, textField70, textField71, textField72, textField73, button64, button65, button66);
+        Label label111 = new Label("Nummer");
+        label111.setFont(XStyle.M_FONT);
+        label111.setTextFill(Color.BLACK);
+
+        Label label112 = new Label("Adresse");
+        label112.setFont(new Font("Arial", 16));
+        label112.setTextFill(Color.BLACK);
+
+        Label label113 = new Label("Postnummer");
+        label113.setFont(new Font("Arial", 16));
+        label113.setTextFill(Color.BLACK);
+
+        Label label114 = new Label("By");
+        label114.setFont(new Font("Arial", 16));
+        label114.setTextFill(Color.BLACK);
+
+        Label label115 = new Label("Kvadratmeter");
+        label115.setFont(new Font("Arial", 16));
+        label115.setTextFill(Color.BLACK);
+
+        textField69 = new TextField();
+        textField69.setMaxWidth(100);
+        Tooltip tooltip131 = new Tooltip();
+        tooltip131.setText("Indtast nummeret for lageret her");
+        textField69.setTooltip(tooltip131);
+        textField69.setCursor(Cursor.TEXT);
+
+        textField70 = new TextField();
+        textField70.setMaxWidth(100);
+        Tooltip tooltip133 = new Tooltip();
+        tooltip133.setText("Indtast adressen på lageret her");
+        textField70.setTooltip(tooltip133);
+        textField70.setCursor(Cursor.TEXT);
+
+        textField71 = new TextField();
+        textField71.setMaxWidth(100);
+        Tooltip tooltip134 = new Tooltip();
+        tooltip134.setText("Indtast postnummeret for lageret her");
+        textField71.setTooltip(tooltip134);
+        textField71.setCursor(Cursor.TEXT);
+
+        textField72 = new TextField();
+        textField72.setMaxWidth(100);
+        Tooltip tooltip135 = new Tooltip();
+        tooltip135.setText("Indtast by her");
+        textField72.setTooltip(tooltip135);
+        textField72.setCursor(Cursor.TEXT);
+
+        textField73 = new TextField();
+        textField73.setPromptText("m²");
+        textField73.setMaxWidth(100);
+        Tooltip tooltip136 = new Tooltip();
+        tooltip136.setText("Indtast størrelsen på lageret i kvadratmeter her");
+        textField73.setTooltip(tooltip136);
+        textField73.setCursor(Cursor.TEXT);
+
+        HBox hBox19 = new HBox();
+        hBox19.setPrefSize(250, 45);
+        hBox19.setSpacing(5);
+        hBox19.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
+        hBox19.setTranslateY(0);
+        hBox19.getChildren().addAll(label111, textField69);
+
+        HBox hBox20 = new HBox();
+        hBox20.setPrefSize(250, 45);
+        hBox20.setSpacing(5);
+        hBox20.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
+        hBox20.setTranslateY(0);
+        hBox20.getChildren().addAll(label112, textField70);
+
+        HBox hBox21 = new HBox();
+        hBox21.setPrefSize(250, 45);
+        hBox21.setSpacing(5);
+        hBox21.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
+        hBox21.setTranslateY(0);
+        hBox21.getChildren().addAll(label113, textField71);
+
+        HBox hBox22 = new HBox();
+        hBox22.setPrefSize(250, 45);
+        hBox22.setSpacing(5);
+        hBox22.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
+        hBox22.setTranslateY(0);
+        hBox22.getChildren().addAll(label114, textField72);
+
+        HBox hBox23 = new HBox();
+        hBox23.setPrefSize(250, 45);
+        hBox23.setSpacing(5);
+        hBox23.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
+        hBox23.setTranslateY(0);
+        hBox23.getChildren().addAll(label115, textField73);
+
+        getLayout().getChildren().addAll(label109, button64, button65, button66, hBox19, hBox20, hBox21, hBox22, hBox23);
     }
 
-    private void opretLager(String nummer, String adresse, String postnummer, String by, String kvadratmeter) {
+    private void opretLager() {
+        String nummer = textField69.getText();
+        String adresse = textField70.getText();
+        String postnummer = textField71.getText();
+        String by = textField72.getText();
+        String kvadratmeter = textField73.getText();
         if (nummer.isEmpty() || adresse.isEmpty() || postnummer.isEmpty() || by.isEmpty() || kvadratmeter.isEmpty()) {
             Alert alert = getGUI().alert("Fejl", "Udfyld alle felter", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
             alert.showAndWait();
@@ -158,14 +192,22 @@ public class OpretLagerScene extends XScene {
             alert.showAndWait();
             return;
         }
-        String adresseFormat = adresse + ", " + postnummer + " " + by;
-        Lager lager = getGUI().getController().createLager(nummerInt, adresseFormat, kvadratmeterDouble);
-        if (lager == null) {
-            Alert alert = getGUI().alert("Fejl", "Lageret kunne ikke oprettes", "Lageret kunne ikke oprettes", Alert.AlertType.ERROR);
+        String adresseFormat = adresse + ", " + postnummer + ", " + by;
+        try {
+            getGUI().getController().createLager(nummerInt, adresseFormat, kvadratmeterDouble);
+            getGUI().switchScene(SceneType.LAGER);
+        } catch (IllegalArgumentException e) {
+            Alert alert = getGUI().alert("Fejl", "Lageret kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
             alert.showAndWait();
-            return;
         }
-        getGUI().switchScene(SceneType.LAGER);
+    }
+
+    public void update() {
+        textField69.setText("");
+        textField70.setText("");
+        textField71.setText("");
+        textField72.setText("");
+        textField73.setText("");
     }
 
     @Override

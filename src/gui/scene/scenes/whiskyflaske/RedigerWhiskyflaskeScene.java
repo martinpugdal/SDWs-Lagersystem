@@ -3,6 +3,7 @@ package gui.scene.scenes.whiskyflaske;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,25 +25,25 @@ public class RedigerWhiskyflaskeScene extends XScene {
         Label label129 = new Label("Rediger whiskyflaske");
         label129.setTranslateX(0);
         label129.setTranslateY(150);
-        label129.setFont(new Font("Arial",36));
+        label129.setFont(XStyle.XXL_FONT);
         label129.setTextFill(Color.BLACK);
 
         Label label130 = new Label("Nummer");
         label130.setTranslateX(0);
         label130.setTranslateY(150);
-        label130.setFont(new Font("Arial",16));
+        label130.setFont(XStyle.M_FONT);
         label130.setTextFill(Color.BLACK);
 
         Label label131 = new Label("Navn");
         label131.setTranslateX(0);
         label131.setTranslateY(150);
-        label131.setFont(new Font("Arial",16));
+        label131.setFont(XStyle.M_FONT);
         label131.setTextFill(Color.BLACK);
 
         Label label132 = new Label("Volumen");
         label132.setTranslateX(0);
         label132.setTranslateY(150);
-        label132.setFont(new Font("Arial",16));
+        label132.setFont(XStyle.M_FONT);
         label132.setTextFill(Color.BLACK);
 
         TextField textField83 = new TextField();
@@ -78,7 +79,7 @@ public class RedigerWhiskyflaskeScene extends XScene {
         button77.setTranslateY(-280);
         button77.setPrefSize(250,45);
         button77.setOnAction(e -> getGUI().switchScene(this));
-        button77.setFont(new Font("Arial",16));
+        button77.setFont(XStyle.M_FONT);
         button77.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button77.setCursor(Cursor.HAND);
         Tooltip tooltip162 = new Tooltip("Tryk her for at redigere whiskyflasken");
@@ -89,7 +90,7 @@ public class RedigerWhiskyflaskeScene extends XScene {
         button78.setTranslateY(-280);
         button78.setPrefSize(250,45);
         button78.setOnAction(e -> getGUI().switchScene(this));
-        button78.setFont(new Font("Arial",16));
+        button78.setFont(XStyle.M_FONT);
         button78.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button78.setCursor(Cursor.HAND);
         Tooltip tooltip163 = new Tooltip("Tryk her for at annullere");
@@ -100,7 +101,7 @@ public class RedigerWhiskyflaskeScene extends XScene {
         button79.setTranslateY(-280);
         button79.setPrefSize(250,45);
         button79.setOnAction(e -> getGUI().gåTilForside());
-        button79.setFont(new Font("Arial",16));
+        button79.setFont(XStyle.M_FONT);
         button79.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button79.setCursor(Cursor.HAND);
         Tooltip tooltip164 = new Tooltip("Tryk her for at gå tilbage til forsiden");

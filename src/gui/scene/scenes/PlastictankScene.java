@@ -4,6 +4,7 @@ import gui.GUI;
 import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,13 +26,13 @@ public class PlastictankScene extends XScene {
         Label label81 = new Label("Plastictanke");
         label81.setTranslateX(0);
         label81.setTranslateY(150);
-        label81.setFont(new Font("Arial",36));
+        label81.setFont(XStyle.XXL_FONT);
         label81.setTextFill(Color.BLACK);
 
         Label label82 = new Label("Her ses en oversigt over plastictanke");
         label82.setTranslateX(0);
         label82.setTranslateY(150);
-        label82.setFont(new Font("Arial",16));
+        label82.setFont(XStyle.M_FONT);
         label82.setTextFill(Color.BLACK);
 
         ListView listView11 = new ListView<>();
@@ -51,7 +52,7 @@ public class PlastictankScene extends XScene {
         button50.setTranslateY(-280);
         button50.setPrefSize(250,45);
         button50.setOnAction(e -> getGUI().switchScene(SceneType.OPRETPLASTICTANK));
-        button50.setFont(new Font("Arial",16));
+        button50.setFont(XStyle.M_FONT);
         button50.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button50.setCursor(Cursor.HAND);
         Tooltip tooltip95 = new Tooltip("Tryk her for at oprette en plastictank");
@@ -62,7 +63,7 @@ public class PlastictankScene extends XScene {
         button51.setTranslateY(-280);
         button51.setPrefSize(250,45);
         button51.setOnAction(e -> getGUI().switchScene(SceneType.REDIGERPLASTICTANK));
-        button51.setFont(new Font("Arial",16));
+        button51.setFont(XStyle.M_FONT);
         button51.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button51.setCursor(Cursor.HAND);
         Tooltip tooltip96 = new Tooltip("Tryk her for at redigere en plastictank");
@@ -72,7 +73,7 @@ public class PlastictankScene extends XScene {
         button52.setTranslateX(-150);
         button52.setTranslateY(-280);
         button52.setPrefSize(250,45);
-        button52.setFont(new Font("Arial",16));
+        button52.setFont(XStyle.M_FONT);
         button52.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button52.setCursor(Cursor.HAND);
         Tooltip tooltip97 = new Tooltip("Tryk her for at en plastictank");
@@ -83,7 +84,7 @@ public class PlastictankScene extends XScene {
         button53.setTranslateY(-280);
         button53.setPrefSize(250,45);
         button53.setOnAction(e -> getGUI().gåTilForside());
-        button53.setFont(new Font("Arial",16));
+        button53.setFont(XStyle.M_FONT);
         button53.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button53.setCursor(Cursor.HAND);
         Tooltip tooltip98 = new Tooltip("Tryk her for at gå tilbage til forsiden");

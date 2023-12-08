@@ -7,10 +7,14 @@ import gui.scene.SceneType;
 import gui.scene.scenes.lager.RedigerLagerScene;
 import gui.setting.XIcon;
 import gui.setting.XScene;
-import javafx.beans.property.*;
+import gui.setting.XStyle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -27,92 +31,105 @@ public class LagerScene extends XScene {
     @Override
     public void initLayout() {
         //Skærmbillede 17: Lagre
+        double topTranslateX = -getGUI().getScreenHeight() * 0.775;
+        double topTranslateY = -getGUI().getScreenWidth() * 0.165;
 
-        Label label107 = new Label("Lagre");
-        label107.setTranslateX(0);
-        label107.setTranslateY(150);
+        Label label107 = new Label("Lager");
+        label107.setTranslateX(topTranslateX);
+        label107.setTranslateY(-getGUI().getScreenWidth() * 0.135);
         label107.setFont(new Font("Arial", 36));
         label107.setTextFill(Color.BLACK);
+        ImageView lagerIcon = XIcon.LAGER.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label107.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label107.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label107.setGraphic(lagerIcon);
+        label107.setContentDisplay(ContentDisplay.LEFT);
+
+        double buttonWidth = 250;
+        double buttonHeight = 45;
+
+        Button button60 = new Button("Opret lager");
+        button60.setTranslateX(topTranslateX + 325);
+        button60.setTranslateY(topTranslateY);
+        button60.setPrefSize(buttonWidth, buttonHeight);
+        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETLAGER));
+        button60.setFont(new Font("Arial", 16));
+        button60.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button60.setCursor(Cursor.HAND);
+        Tooltip tooltip127 = new Tooltip("Tryk her for at oprette et lager");
+        button60.setTooltip(tooltip127);
+
+        Button button61 = new Button("Rediger lager");
+        button61.setTranslateX(topTranslateX + 325 * 2);
+        button61.setTranslateY(topTranslateY - 45);
+        button61.setPrefSize(buttonWidth, buttonHeight);
+        button61.setOnAction(e -> redigerLager());
+        button61.setFont(new Font("Arial", 16));
+        button61.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button61.setCursor(Cursor.HAND);
+        Tooltip tooltip128 = new Tooltip("Tryk her for at redigere et lager");
+        button61.setTooltip(tooltip128);
+
+        Button button62 = new Button("Slet lager");
+        button62.setTranslateX(topTranslateX + 325 * 3);
+        button62.setTranslateY(topTranslateY - 45 * 2);
+        button62.setPrefSize(buttonWidth, buttonHeight);
+        button62.setOnAction(e -> sletLager());
+        button62.setFont(new Font("Arial", 16));
+        button62.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button62.setCursor(Cursor.HAND);
+        Tooltip tooltip129 = new Tooltip("Tryk her for at slette et lager");
+        button62.setTooltip(tooltip129);
+
+        Button button63 = new Button("Gå tilbage til forside");
+        button63.setTranslateX(topTranslateX + 325 * 4);
+        button63.setTranslateY(topTranslateY - 45 * 3);
+        button63.setPrefSize(buttonWidth, buttonHeight);
+        button63.setOnAction(e -> getGUI().gåTilForside());
+        button63.setFont(new Font("Arial", 16));
+        button63.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button63.setCursor(Cursor.HAND);
+        Tooltip tooltip130 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button63.setTooltip(tooltip130);
 
         Label label108 = new Label("Her ses en oversigt over lagre");
         label108.setTranslateX(0);
-        label108.setTranslateY(150);
+        label108.setTranslateY(-getGUI().getScreenWidth() * 0.152);
         label108.setFont(new Font("Arial", 16));
         label108.setTextFill(Color.BLACK);
 
         lagerTableView = new TableView<>();
+        lagerTableView.setPlaceholder(new Label("Der er ingen lagre"));
         lagerTableView.setEditable(false);
+        lagerTableView.setPrefSize(200, 200);
+        lagerTableView.setTranslateY(-getGUI().getScreenWidth() * 0.15);
+        lagerTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        VBox.setMargin(lagerTableView, new Insets(0, 20, 0, 20));
         TableColumn<Lager, Integer> lagerNRColumn = new TableColumn<>("Nummer");
         lagerNRColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
         TableColumn<Lager, String> lagerAdresseColumn = new TableColumn<>("Adresse");
         lagerAdresseColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAdresse()));
+        TableColumn<Lager, String> lagerPostNrColumn = new TableColumn<>("Postnummer");
+        lagerPostNrColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPostnummer()));
+        TableColumn<Lager, String> lagerByColumn = new TableColumn<>("By");
+        lagerByColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBy()));
         TableColumn<Lager, Double> lagerKVMColumn = new TableColumn<>("Kvadratmeter (m²)");
         lagerKVMColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStørrelse()));
         TableColumn<Lager, List<Afdeling>> lagerAfdelingColumn = new TableColumn<>("Afdelinger");
         lagerAfdelingColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAfdelinger()));
         lagerTableView.getColumns().add(lagerNRColumn);
         lagerTableView.getColumns().add(lagerAdresseColumn);
+        lagerTableView.getColumns().add(lagerPostNrColumn);
+        lagerTableView.getColumns().add(lagerByColumn);
         lagerTableView.getColumns().add(lagerKVMColumn);
         lagerTableView.getColumns().add(lagerAfdelingColumn);
-        lagerTableView.setPlaceholder(new Label("Der er ingen lagre"));
-        lagerTableView.getItems().addAll(getGUI().getController().getLagere());
-        lagerTableView.setTranslateX(20);
-        lagerTableView.setTranslateY(20);
-        lagerTableView.setPrefSize(200, 200);
+        for (TableColumn<Lager, ?> column : lagerTableView.getColumns()) {
+            column.setStyle("-fx-alignment: CENTER;");
+        }
 
-        ImageView imageView16 = XIcon.LAGER.getImageView();
-        imageView16.setFitHeight(100);
-        imageView16.setFitWidth(100);
-        imageView16.setTranslateX(10);
-        imageView16.setTranslateY(-10);
-        getLayout().getChildren().add(imageView16);
-
-        Button button60 = new Button("Opret lager");
-        button60.setTranslateX(-150);
-        button60.setTranslateY(-280);
-        button60.setPrefSize(250, 45);
-        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETLAGER));
-        button60.setFont(new Font("Arial", 16));
-        button60.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button60.setCursor(Cursor.HAND);
-        Tooltip tooltip127 = new Tooltip("Tryk her for at oprette et lager");
-        button60.setTooltip(tooltip127);
-
-        Button button61 = new Button("Rediger lager");
-        button61.setTranslateX(-150);
-        button61.setTranslateY(-280);
-        button61.setPrefSize(250, 45);
-        button61.setOnAction(e -> redigerLager());
-        button61.setFont(new Font("Arial", 16));
-        button61.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button61.setCursor(Cursor.HAND);
-        Tooltip tooltip128 = new Tooltip("Tryk her for at redigere et lager");
-        button61.setTooltip(tooltip128);
-
-        Button button62 = new Button("Slet lager");
-        button62.setTranslateX(-150);
-        button62.setTranslateY(-280);
-        button62.setPrefSize(250, 45);
-        button62.setOnAction(e -> sletLager());
-        button62.setFont(new Font("Arial", 16));
-        button62.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button62.setCursor(Cursor.HAND);
-        Tooltip tooltip129 = new Tooltip("Tryk her for at slette et lager");
-        button62.setTooltip(tooltip129);
-
-        Button button63 = new Button("Gå tilbage til forside");
-        button63.setTranslateX(-150);
-        button63.setTranslateY(-280);
-        button63.setPrefSize(250, 45);
-        button63.setOnAction(e -> getGUI().gåTilForside());
-        button63.setFont(new Font("Arial", 16));
-        button63.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button63.setCursor(Cursor.HAND);
-        Tooltip tooltip130 = new Tooltip("Tryk her for at gå tilbage til forsiden");
-        button63.setTooltip(tooltip130);
-
-        getLayout().getChildren().addAll(label107, label108, lagerTableView, button60, button61, button62, button63);
-
+        getLayout().getChildren().addAll(label107, button60, button61, button62, button63, label108, lagerTableView);
     }
 
     private void redigerLager() {
@@ -127,7 +144,7 @@ public class LagerScene extends XScene {
     private void sletLager() {
         if (lagerTableView.getSelectionModel().getSelectedItem() != null) {
             Lager lager = lagerTableView.getSelectionModel().getSelectedItem();
-            Alert confirmation = getGUI().alert("Slet lager", "Er du sikker på at du vil slette lageret?", "Du er ved at slette lageret " + lager.getAdresse() + ".\nDenne handling kan ikke fortrydes.", Alert.AlertType.CONFIRMATION);
+            Alert confirmation = getGUI().alert("Slet lager", "Er du sikker på at du vil slette lageret?", "Du er ved at slette lageret " + lager.getFuldeAdresse() + ".\nDenne handling kan ikke fortrydes.", Alert.AlertType.CONFIRMATION);
             confirmation.showAndWait();
             if (confirmation.getResult() == ButtonType.OK) {
                 getGUI().getController().deleteLager(lager);
@@ -147,11 +164,11 @@ public class LagerScene extends XScene {
 
     @Override
     public String getTitle() {
-        return null;
+        return "Sall Whisky Distillery - Lager";
     }
 
     @Override
     public XIcon getIcon() {
-        return null;
+        return XIcon.LAGER;
     }
 }

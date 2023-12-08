@@ -1,8 +1,10 @@
 package gui.scene.scenes.ginflaske;
 
+import application.model.flaske.Ginflaske;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +15,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class RedigerGinflaskeScene extends XScene {
+
+    private Ginflaske selectedGinflaske;
+
     public RedigerGinflaskeScene(GUI gui) {
         super(gui);
     }
@@ -24,31 +29,31 @@ public class RedigerGinflaskeScene extends XScene {
         Label label140 = new Label("Rediger ginflaske");
         label140.setTranslateX(0);
         label140.setTranslateY(150);
-        label140.setFont(new Font("Arial",36));
+        label140.setFont(XStyle.XXL_FONT);
         label140.setTextFill(Color.BLACK);
 
         Label label141 = new Label("Nummer");
         label141.setTranslateX(0);
         label141.setTranslateY(150);
-        label141.setFont(new Font("Arial",16));
+        label141.setFont(XStyle.M_FONT);
         label141.setTextFill(Color.BLACK);
 
         Label label142 = new Label("Navn");
         label142.setTranslateX(0);
         label142.setTranslateY(150);
-        label142.setFont(new Font("Arial",16));
+        label142.setFont(XStyle.M_FONT);
         label142.setTextFill(Color.BLACK);
 
         Label label143 = new Label("Volumen");
         label143.setTranslateX(0);
         label143.setTranslateY(150);
-        label143.setFont(new Font("Arial",16));
+        label143.setFont(XStyle.M_FONT);
         label143.setTextFill(Color.BLACK);
 
         Label label144 = new Label("Antal");
         label144.setTranslateX(0);
         label144.setTranslateY(150);
-        label144.setFont(new Font("Arial",16));
+        label144.setFont(XStyle.M_FONT);
         label144.setTextFill(Color.BLACK);
 
         TextField textField90 = new TextField();
@@ -91,7 +96,7 @@ public class RedigerGinflaskeScene extends XScene {
         button87.setTranslateY(-280);
         button87.setPrefSize(250,45);
         button87.setOnAction(e -> getGUI().switchScene(this));
-        button87.setFont(new Font("Arial",16));
+        button87.setFont(XStyle.M_FONT);
         button87.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button87.setCursor(Cursor.HAND);
         Tooltip tooltip180 = new Tooltip("Tryk her for at redigere");
@@ -102,7 +107,7 @@ public class RedigerGinflaskeScene extends XScene {
         button88.setTranslateY(-280);
         button88.setPrefSize(250,45);
         button88.setOnAction(e -> getGUI().switchScene(this));
-        button88.setFont(new Font("Arial",16));
+        button88.setFont(XStyle.M_FONT);
         button88.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button88.setCursor(Cursor.HAND);
         Tooltip tooltip181 = new Tooltip("Tryk her for at annullere");
@@ -113,7 +118,7 @@ public class RedigerGinflaskeScene extends XScene {
         button89.setTranslateY(-280);
         button89.setPrefSize(250,45);
         button89.setOnAction(e -> getGUI().switchScene(this));
-        button89.setFont(new Font("Arial",16));
+        button89.setFont(XStyle.M_FONT);
         button89.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button89.setCursor(Cursor.HAND);
         Tooltip tooltip182 = new Tooltip("Tryk her for at gå tilbage til forsiden");
@@ -130,5 +135,9 @@ public class RedigerGinflaskeScene extends XScene {
     @Override
     public XIcon getIcon() {
         return null;
+    }
+
+    public void setGinflaske(Ginflaske selectedItem) {
+        this.selectedGinflaske = selectedItem;
     }
 }

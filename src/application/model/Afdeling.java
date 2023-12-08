@@ -17,7 +17,8 @@ public class Afdeling {
         this.nummer = nummer;
     }
 
-    public Reol createReol(int antalHylder, int nummer) {
+    public Reol createReol(int antalHylder) {
+        int nummer = reoler.size() + 1;
         Reol reol = new Reol(this, antalHylder, nummer);
         reoler.add(reol);
         return reol;

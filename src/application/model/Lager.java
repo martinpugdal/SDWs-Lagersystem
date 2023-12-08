@@ -38,12 +38,27 @@ public class Lager {
         return afdelinger.size();
     }
 
-    public String getAdresse() {
+    public String getFuldeAdresse() {
         return adresse;
     }
 
-    public void setAdresse(String adresse) {
+    public void setFuldeAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public String getAdresse() {
+        String[] split = adresse.split(", ");
+        return split[0];
+    }
+
+    public String getPostnummer() {
+        String[] split = adresse.split(", ");
+        return split[1];
+    }
+
+    public String getBy() {
+        String[] split = adresse.split(", ");
+        return split[2];
     }
 
     public double getStørrelse() {

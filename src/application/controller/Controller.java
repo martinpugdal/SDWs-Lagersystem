@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.model.*;
+import application.model.flaske.Ginflaske;
+import application.model.flaske.Whiskyflaske;
 import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
 import storage.Storage;
@@ -93,7 +95,7 @@ public class Controller {
             throw new IllegalArgumentException("Lageret findes allerede");
         }
         selectedLager.setNummer(nummer);
-        selectedLager.setAdresse(adresse);
+        selectedLager.setFuldeAdresse(adresse);
         selectedLager.setStørrelse(kvadratmeter);
     }
 
@@ -122,35 +124,162 @@ public class Controller {
     /**
      * @param afdeling
      * @param reolType
-     * @param nummer
      * @return
      */
-    public Reol createReol(Afdeling afdeling, ReolType reolType, int nummer) {
-        return afdeling.createReol(reolType.getAntalHylder(), nummer);
+    public Reol createReol(Afdeling afdeling, ReolType reolType) {
+        return afdeling.createReol(reolType.getAntalHylder());
     }
 
     /**
      * @param afdeling
      * @param antalHylder
-     * @param nummer
      * @return
      */
-    public Reol createReol(Afdeling afdeling, int antalHylder, int nummer) {
-        return afdeling.createReol(antalHylder, nummer);
+    public Reol createReol(Afdeling afdeling, int antalHylder) {
+        return afdeling.createReol(antalHylder);
     }
 
     /**
      * @param reol
-     * @param nummer
      * @return
      */
-    public Hylde createHylde(Reol reol, int nummer) {
-        return reol.createHylde(nummer);
+    public Hylde createHylde(Reol reol) {
+        return reol.createHylde();
+    }
+
+    /**
+     * @param drikkelse
+     * @param nummer
+     * @param navn
+     * @param volumen
+     * @param antal
+     */
+    public Flaske createFlaske(Drikkelse drikkelse, int nummer, String navn, double volumen, int antal) {
+        if (checkFlaskeExists(nummer)) {
+            throw new IllegalArgumentException("Flasken findes allerede med dette nummer");
+        }
+        Flaske flaske = null;
+        if (drikkelse.equals(Drikkelse.GIN)) {
+            flaske = createGinflaske(nummer, navn, volumen, antal);
+        } else if (drikkelse.equals(Drikkelse.WHISKY)) {
+            flaske = createWhiskyflaske(nummer, navn, volumen, antal);
+        }
+        return flaske;
+    }
+
+    private boolean checkFlaskeExists(int nummer) {
+        for (Flaske flaske : storage.getFlasker()) {
+            if (flaske.getNummer() == nummer) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param nummer
+     * @param navn
+     * @param volumen
+     * @param antal
+     * @return Whiskyflaske
+     */
+    private Flaske createWhiskyflaske(int nummer, String navn, double volumen, int antal) {
+        Whiskyflaske whiskyflaske = new Whiskyflaske(nummer, navn, volumen, antal);
+        storage.addFlaske(whiskyflaske);
+        return whiskyflaske;
+    }
+
+    /**
+     * @param nummer
+     * @param navn
+     * @param volumen
+     * @param antal
+     * @return Ginflaske
+     */
+    private Flaske createGinflaske(int nummer, String navn, double volumen, int antal) {
+        Ginflaske ginflaske = new Ginflaske(nummer, navn, volumen, antal);
+        storage.addFlaske(ginflaske);
+        return ginflaske;
+    }
+
+    /**
+     * @param type
+     * @param antal
+     * @param liter
+     * @param kilogram
+     */
+    public void createRåvare(String type, double antal, double liter, double kilogram, int[] flaskeNumre) {
+        Råvare råvare = new Råvare(type, antal, liter, kilogram);
+        for (int flaskeNummer : flaskeNumre) {
+            Flaske flaske = getFlaske(flaskeNummer);
+            råvare.addBrugesTil(flaske);
+        }
+        storage.addRåvare(råvare);
+    }
+
+    /**
+     * @param råvare
+     * @param type
+     * @param antalInt
+     * @param literDouble
+     * @param kiloDouble
+     * @param flaskeNumre
+     */
+    public void updateRåvare(Råvare råvare, String type, int antalInt, double literDouble, double kiloDouble, int[] flaskeNumre) {
+        List<Flaske> flasker = new ArrayList<>();
+        for (int flaskeNummer : flaskeNumre) {
+            Flaske flaske = getFlaske(flaskeNummer);
+            flasker.add(flaske);
+        }
+        råvare.setType(type);
+        råvare.setAntal(antalInt);
+        råvare.setLiter(literDouble);
+        råvare.setKilogram(kiloDouble);
+        råvare.setBrugesTil(flasker);
+    }
+
+    public void deleteRåvare(Råvare råvare) {
+        storage.removeRåvare(råvare);
+    }
+
+    private Flaske getFlaske(int flaskeNummer) {
+        for (Flaske flaske : storage.getFlasker()) {
+            if (flaske.getNummer() == flaskeNummer) {
+                return flaske;
+            }
+        }
+        throw new IllegalArgumentException("Nummeret tilhører ikke en flaske");
+    }
+
+    /**
+     * @return
+     */
+    public List<Ginflaske> getGinflasker() {
+        List<Ginflaske> ginflasker = new ArrayList<>();
+        for (Flaske flaske : storage.getFlasker()) {
+            if (flaske instanceof Ginflaske) {
+                ginflasker.add((Ginflaske) flaske);
+            }
+        }
+        return ginflasker;
+    }
+
+    /**
+     * @return
+     */
+    public List<Whiskyflaske> getWhiskyflasker() {
+        List<Whiskyflaske> whiskyflasker = new ArrayList<>();
+        for (Flaske flaske : storage.getFlasker()) {
+            if (flaske instanceof Whiskyflaske) {
+                whiskyflasker.add((Whiskyflaske) flaske);
+            }
+        }
+        return whiskyflasker;
     }
 
     /**
      * @param adresse
-     * @return
+     * @return boolean true hvis lageret findes
      */
     public boolean checkLagerExists(String adresse) {
         for (Lager lager : storage.getLagere()) {
@@ -163,7 +292,7 @@ public class Controller {
 
     /**
      * @param nummer
-     * @return
+     * @return boolean true hvis lageret findes
      */
     public boolean checkLagerExists(int nummer) {
         for (Lager lager : storage.getLagere()) {
@@ -177,7 +306,7 @@ public class Controller {
     /**
      * @param lager
      * @param nummer
-     * @return
+     * @return boolean true hvis afdelingen findes
      */
     private boolean checkAfdelingExists(Lager lager, int nummer) {
         for (Afdeling afdeling : lager.getAfdelinger()) {
@@ -189,7 +318,6 @@ public class Controller {
     }
 
     public void initStorage() {
-
         // tilføj nogle lagere
         Lager lager1 = createLager(1, "Lagervej 1, 1234, By 1", 44);
         Lager lager2 = createLager(2, "Lagervej 3, 2223, By 2", 145);
@@ -201,15 +329,36 @@ public class Controller {
         Afdeling afdeling3 = createAfdeling(lager2, Drikkelse.GIN, 1);
 
         // tilføj nogle reoler
-        createReol(afdeling1, ReolType.MELLEM, 1);
-        createReol(afdeling1, ReolType.STOR, 2);
+        Reol a1Reol1 = createReol(afdeling1, ReolType.MELLEM);
+        Reol a1Reol2 = createReol(afdeling1, ReolType.STOR);
 
-        createReol(afdeling2, ReolType.MELLEM, 1);
-        createReol(afdeling2, ReolType.STOR, 2);
+        Reol a2Reol1 = createReol(afdeling2, ReolType.MELLEM);
+        Reol a2Reol2 = createReol(afdeling2, ReolType.STOR);
 
-        createReol(afdeling3, ReolType.MELLEM, 1);
-        createReol(afdeling3, ReolType.STOR, 2);
+        Reol a3Reol1 = createReol(afdeling3, ReolType.MELLEM);
+        Reol a3Reol2 = createReol(afdeling3, ReolType.STOR);
 
-        //TODO: create objects here by controller methods
+        // tilføj nogle hylde
+        createHylde(afdeling1.getReoler().get(0));
+        createHylde(afdeling1.getReoler().get(0));
+        createHylde(afdeling1.getReoler().get(0));
+
+        createHylde(afdeling1.getReoler().get(1));
+        createHylde(afdeling1.getReoler().get(1));
+        createHylde(afdeling1.getReoler().get(1));
+
+        createHylde(afdeling2.getReoler().get(0));
+        createHylde(afdeling2.getReoler().get(0));
+        createHylde(afdeling2.getReoler().get(0));
+
+        // tilføj nogle destilleringer
+
+        // tilføj nogle flasker
+        createFlaske(Drikkelse.GIN, 123456789, "Gin 1 Sind", 13.3, 202);
+        createFlaske(Drikkelse.WHISKY, 123456788, "Whisky 1 Sind", 50.4, 400);
+
+
+        // tilføj nogle råvarer
+        createRåvare("Korn", 100, 100, 100, new int[]{123456789, 123456788});
     }
 }

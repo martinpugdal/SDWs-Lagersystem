@@ -4,6 +4,7 @@ import gui.GUI;
 import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,13 +26,13 @@ public class WhiskyflaskeScene extends XScene {
         Label label123 = new Label("Whiskyflasker");
         label123.setTranslateX(0);
         label123.setTranslateY(150);
-        label123.setFont(new Font("Arial",36));
+        label123.setFont(XStyle.XXL_FONT);
         label123.setTextFill(Color.BLACK);
 
         Label label124 = new Label("Her ses en oversigt over whiskyflasker registreret i systemet");
         label124.setTranslateX(0);
         label124.setTranslateY(150);
-        label124.setFont(new Font("Arial",16));
+        label124.setFont(XStyle.M_FONT);
         label124.setTextFill(Color.BLACK);
 
         ListView listView13 = new ListView<>();
@@ -51,7 +52,7 @@ public class WhiskyflaskeScene extends XScene {
         button70.setTranslateY(-280);
         button70.setPrefSize(250,45);
         button70.setOnAction(e -> getGUI().switchScene(SceneType.OPRETWHISKYFLASKE));
-        button70.setFont(new Font("Arial",16));
+        button70.setFont(XStyle.M_FONT);
         button70.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button70.setCursor(Cursor.HAND);
         Tooltip tooltip149 = new Tooltip("Tryk her for at oprette en whiskyflaske");
@@ -62,7 +63,7 @@ public class WhiskyflaskeScene extends XScene {
         button71.setTranslateY(-280);
         button71.setPrefSize(250,45);
         button71.setOnAction(e -> getGUI().switchScene(SceneType.REDIGERWHISKYFLASKE));
-        button71.setFont(new Font("Arial",16));
+        button71.setFont(XStyle.M_FONT);
         button71.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button71.setCursor(Cursor.HAND);
         Tooltip tooltip150 = new Tooltip("Tryk her for at redigere en whiskyflaske");
@@ -72,7 +73,7 @@ public class WhiskyflaskeScene extends XScene {
         button72.setTranslateX(-150);
         button72.setTranslateY(-280);
         button72.setPrefSize(250,45);
-        button72.setFont(new Font("Arial",16));
+        button72.setFont(XStyle.M_FONT);
         button72.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button72.setCursor(Cursor.HAND);
         Tooltip tooltip151 = new Tooltip("Tryk her for at slette en whiskyflaske");
@@ -83,7 +84,7 @@ public class WhiskyflaskeScene extends XScene {
         button73.setTranslateY(-280);
         button73.setPrefSize(250,45);
         button73.setOnAction(e -> getGUI().gåTilForside());
-        button73.setFont(new Font("Arial",16));
+        button73.setFont(XStyle.M_FONT);
         button73.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button73.setCursor(Cursor.HAND);
         Tooltip tooltip152 = new Tooltip("Tryk her for at gå tilbage til forsiden");

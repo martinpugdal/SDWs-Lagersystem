@@ -14,7 +14,7 @@ class LagerTest {
     @Order(1)
     void createAfdeling() {
         //Arrange
-        //Vi opretter nyt lager, da vi ikke kan oprette en afdeling uden et lager
+        //Vi opretter nyt lager, da vi ikke kan oprette en AfdelingScene uden et lager
         Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
         //Vi vælger hvad der skal opbevares i afdelingen og giver afdelingen et nummer
@@ -26,7 +26,7 @@ class LagerTest {
         Afdeling afdeling = lager.createAfdeling(Drikkelse.WHISKY, nummer);
 
         //Assert
-        //Vi tjekker om, at der rent faktisk er oprettet en afdeling
+        //Vi tjekker om, at der rent faktisk er oprettet en AfdelingScene
         assertNotNull(afdeling);
 
         //Vi tjekker om, der rent faktisk bliver opbevaret det, vi har sagt der skal og om afdelingens nummer er rigtig
@@ -39,10 +39,10 @@ class LagerTest {
     @Order(2)
     void addAfdeling() {
         //Arrange
-        //Vi opretter nyt lager, da vi ikke kan oprette en afdeling uden et lager
+        //Vi opretter nyt lager, da vi ikke kan oprette en AfdelingScene uden et lager
         Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
-        //Vi opretter en ny afdeling indholdende whisky og med nummeret 1. Vi opretter også en ny liste hvor vores testafdeling kan være i
+        //Vi opretter en ny AfdelingScene indholdende whisky og med nummeret 1. Vi opretter også en ny liste hvor vores testafdeling kan være i
         Afdeling testafdeling = new Afdeling(lager, Drikkelse.WHISKY, 1);
         ArrayList<Afdeling> testafdelinger = new ArrayList<>();
 
@@ -60,10 +60,10 @@ class LagerTest {
     @Order(3)
     void removeAfdeling() {
         //Arrange
-        //Vi opretter nyt lager, da vi ikke kan oprette en afdeling uden et lager
+        //Vi opretter nyt lager, da vi ikke kan oprette en AfdelingScene uden et lager
         Lager lager = new Lager(1, "Lagervej 1, 1234, Viby J", 100);
 
-        //Vi opretter en ny afdeling indholdende whisky og med nummeret 1.
+        //Vi opretter en ny AfdelingScene indholdende whisky og med nummeret 1.
         Afdeling afdeling = new Afdeling(lager, Drikkelse.WHISKY, 1);
 
         //Act
@@ -110,7 +110,7 @@ class LagerTest {
 
         //Act
         //Vi finder den faktiske adresse
-        String faktisk = lager.getAdresse();
+        String faktisk = lager.getFuldeAdresse();
 
         //Assert
         //Vi tjekker om den forventede adresse og den faktiske adresse er ens

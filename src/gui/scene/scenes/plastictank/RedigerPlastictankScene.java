@@ -3,6 +3,7 @@ package gui.scene.scenes.plastictank;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -21,73 +22,73 @@ public class RedigerPlastictankScene extends XScene {
         Label label95 = new Label("Rediger plastictank");
         label95.setTranslateX(0);
         label95.setTranslateY(150);
-        label95.setFont(new Font("Arial",16));
+        label95.setFont(XStyle.M_FONT);
         label95.setTextFill(Color.BLACK);
 
         Label label96 = new Label("Nummer");
         label96.setTranslateX(0);
         label96.setTranslateY(150);
-        label96.setFont(new Font("Arial",16));
+        label96.setFont(XStyle.M_FONT);
         label96.setTextFill(Color.BLACK);
 
         Label label97 = new Label("Antal gange brugt");
         label97.setTranslateX(0);
         label97.setTranslateY(150);
-        label97.setFont(new Font("Arial",16));
+        label97.setFont(XStyle.M_FONT);
         label97.setTextFill(Color.BLACK);
 
         Label label98 = new Label("Seneste tømningsdato");
         label98.setTranslateX(0);
         label98.setTranslateY(150);
-        label98.setFont(new Font("Arial",16));
+        label98.setFont(XStyle.M_FONT);
         label98.setTextFill(Color.BLACK);
 
         Label label99 = new Label("Påfyldningsdato");
         label99.setTranslateX(0);
         label99.setTranslateY(150);
-        label99.setFont(new Font("Arial",16));
+        label99.setFont(XStyle.M_FONT);
         label99.setTextFill(Color.BLACK);
 
         Label label100 = new Label("Solgt til 1");
         label100.setTranslateX(0);
         label100.setTranslateY(150);
-        label100.setFont(new Font("Arial",16));
+        label100.setFont(XStyle.M_FONT);
         label100.setTextFill(Color.BLACK);
 
         Label label101 = new Label("Solgt til 2");
         label101.setTranslateX(0);
         label101.setTranslateY(150);
-        label101.setFont(new Font("Arial",16));
+        label101.setFont(XStyle.M_FONT);
         label101.setTextFill(Color.BLACK);
 
         Label label102 = new Label("Solgt til 3");
         label102.setTranslateX(0);
         label102.setTranslateY(150);
-        label102.setFont(new Font("Arial",16));
+        label102.setFont(XStyle.M_FONT);
         label102.setTextFill(Color.BLACK);
 
         Label label103 = new Label("Solgt til 4");
         label103.setTranslateX(0);
         label103.setTranslateY(150);
-        label103.setFont(new Font("Arial",16));
+        label103.setFont(XStyle.M_FONT);
         label103.setTextFill(Color.BLACK);
 
         Label label104 = new Label("Solgt til 5");
         label104.setTranslateX(0);
         label104.setTranslateY(150);
-        label104.setFont(new Font("Arial",16));
+        label104.setFont(XStyle.M_FONT);
         label104.setTextFill(Color.BLACK);
 
         Label label105 = new Label("Står ved");
         label105.setTranslateX(0);
         label105.setTranslateY(150);
-        label105.setFont(new Font("Arial",16));
+        label105.setFont(XStyle.M_FONT);
         label105.setTextFill(Color.BLACK);
 
         Label label106 = new Label("Antal liter");
         label106.setTranslateX(0);
         label106.setTranslateY(150);
-        label106.setFont(new Font("Arial",16));
+        label106.setFont(XStyle.M_FONT);
         label106.setTextFill(Color.BLACK);
 
         TextField textField57 = new TextField();
@@ -188,7 +189,7 @@ public class RedigerPlastictankScene extends XScene {
         button57.setTranslateY(-280);
         button57.setPrefSize(250,45);
         button57.setOnAction(e -> getGUI().switchScene(this));
-        button57.setFont(new Font("Arial",16));
+        button57.setFont(XStyle.M_FONT);
         button57.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button57.setCursor(Cursor.HAND);
         Tooltip tooltip124 = new Tooltip("Tryk her for at flytte destilleringsvæsken");
@@ -199,7 +200,7 @@ public class RedigerPlastictankScene extends XScene {
         button58.setTranslateY(-280);
         button58.setPrefSize(250,45);
         button58.setOnAction(e -> getGUI().switchScene(this));
-        button58.setFont(new Font("Arial",16));
+        button58.setFont(XStyle.M_FONT);
         button58.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button58.setCursor(Cursor.HAND);
         Tooltip tooltip125 = new Tooltip("Tryk her for at annullere");
@@ -210,7 +211,7 @@ public class RedigerPlastictankScene extends XScene {
         button59.setTranslateY(-280);
         button59.setPrefSize(250,45);
         button59.setOnAction(e -> getGUI().gåTilForside());
-        button59.setFont(new Font("Arial",16));
+        button59.setFont(XStyle.M_FONT);
         button59.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button59.setCursor(Cursor.HAND);
         Tooltip tooltip126 = new Tooltip("Tryk her for at flytte destilleringsvæsken");

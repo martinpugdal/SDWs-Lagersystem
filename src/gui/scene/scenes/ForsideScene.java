@@ -23,7 +23,7 @@ public class ForsideScene extends XScene {
         //Skærmbillede 1: Forside
         Label label1 = new Label("Sall Whisky Distillery - Lagersystem");
         label1.setTranslateX(0);
-        label1.setTranslateY(150);
+        label1.setTranslateY(getGUI().getScreenWidth() * 0.05);
         label1.setFont(new Font("Calibri", 24));
         label1.setTextFill(Color.BLACK);
 

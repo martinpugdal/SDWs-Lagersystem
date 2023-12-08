@@ -96,13 +96,6 @@ public class OpretRåvareScene extends XScene {
         textField16.setTooltip(tooltip49);
         textField16.setCursor(Cursor.TEXT);
 
-        ImageView imageView8 = XIcon.KORIANDERFRØ.getImageView();
-        imageView8.setFitHeight(100);
-        imageView8.setFitWidth(100);
-        imageView8.setTranslateX(10);
-        imageView8.setTranslateY(-10);
-        getLayout().getChildren().add(imageView8);
-
         Button button34 = new Button("Opret råvare");
         button34.setTranslateX(-150);
         button34.setTranslateY(-280);
@@ -128,10 +121,10 @@ public class OpretRåvareScene extends XScene {
         Button button36 = new Button("Gå tilbage til forside");
         button36.setTranslateX(-150);
         button36.setTranslateY(-280);
-        button36.setPrefSize(100, 100);
+        button36.setPrefSize(250, 45);
         button36.setOnAction(e -> getGUI().gåTilForside());
         button36.setFont(new Font("Arial", 16));
-        button36.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button36.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button36.setCursor(Cursor.HAND);
         Tooltip tooltip52 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button36.setTooltip(tooltip52);

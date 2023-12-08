@@ -3,6 +3,7 @@ package gui.scene.scenes.destillering;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
+import gui.setting.XStyle;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -22,37 +23,37 @@ public class DestilleringFlaskeScene extends XScene {
         Label label33 = new Label("Tilføj destillering til flaske");
         label33.setTranslateX(0);
         label33.setTranslateY(150);
-        label33.setFont(new Font("Arial",36));
+        label33.setFont(XStyle.XXL_FONT);
         label33.setTextFill(Color.BLACK);
 
         Label label34 = new Label("Hæld fra fad eller tank til flaske her");
         label34.setTranslateX(0);
         label34.setTranslateY(150);
-        label34.setFont(new Font("Arial",16));
+        label34.setFont(XStyle.M_FONT);
         label34.setTextFill(Color.BLACK);
 
         Label label35 = new Label("Fra fad:");
         label35.setTranslateX(0);
         label35.setTranslateY(150);
-        label35.setFont(new Font("Arial",16));
+        label35.setFont(XStyle.M_FONT);
         label35.setTextFill(Color.BLACK);
 
         Label label36 = new Label("Fra tank:");
         label36.setTranslateX(0);
         label36.setTranslateY(150);
-        label36.setFont(new Font("Arial",16));
+        label36.setFont(XStyle.M_FONT);
         label36.setTextFill(Color.BLACK);
 
         Label label37 = new Label("Til flaske:");
         label37.setTranslateX(0);
         label37.setTranslateY(150);
-        label37.setFont(new Font("Arial",16));
+        label37.setFont(XStyle.M_FONT);
         label37.setTextFill(Color.BLACK);
 
         Label label38 = new Label("Antal liter der skal flyttes");
         label38.setTranslateX(0);
         label38.setTranslateY(150);
-        label38.setFont(new Font("Arial",16));
+        label38.setFont(XStyle.M_FONT);
         label38.setTextFill(Color.BLACK);
 
         TextField textField11 = new TextField();
@@ -89,7 +90,7 @@ public class DestilleringFlaskeScene extends XScene {
         button27.setTranslateY(-280);
         button27.setPrefSize(250,45);
         button27.setOnAction(e -> getGUI().switchScene(this));
-        button27.setFont(new Font("Arial",16));
+        button27.setFont(XStyle.M_FONT);
         button27.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button27.setCursor(Cursor.HAND);
         Tooltip tooltip38 = new Tooltip("Tryk her for at flytte destilleringsvæsken");
@@ -100,7 +101,7 @@ public class DestilleringFlaskeScene extends XScene {
         button28.setTranslateY(-280);
         button28.setPrefSize(250,45);
         button28.setOnAction(e -> getGUI().switchScene(this));
-        button28.setFont(new Font("Arial",16));
+        button28.setFont(XStyle.M_FONT);
         button28.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button28.setCursor(Cursor.HAND);
         Tooltip tooltip39 = new Tooltip("Tryk her for at annullere");
@@ -111,7 +112,7 @@ public class DestilleringFlaskeScene extends XScene {
         button29.setTranslateY(-280);
         button29.setPrefSize(250,45);
         button29.setOnAction(e -> getGUI().gåTilForside());
-        button29.setFont(new Font("Arial",16));
+        button29.setFont(XStyle.M_FONT);
         button29.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         button29.setCursor(Cursor.HAND);
         Tooltip tooltip40 = new Tooltip("Tryk her for at gå tilbage til forsiden");

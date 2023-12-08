@@ -26,6 +26,6 @@ public enum XIcon {
     }
 
     public ImageView getImageView() {
-        return imageView;
+        return new ImageView(imageView.getImage());
     }
 }
