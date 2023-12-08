@@ -26,8 +26,8 @@ public class OpretLagerScene extends XScene {
         double translateY = getGUI().getScreenWidth() * 0.275;
 
         Label label109 = new Label("Opret lager");
-        label109.setTranslateX(-getGUI().getScreenHeight() * 0.775 + 20*2);
-        label109.setTranslateY(-getGUI().getScreenWidth() * 0.135 - 20);
+        label109.setTranslateX(0);
+        label109.setTranslateY(-70);
         label109.setFont(new Font("Arial", 36));
         label109.setTextFill(Color.BLACK);
         ImageView lagerIcon = XIcon.LAGER.getImageView();
@@ -72,24 +72,24 @@ public class OpretLagerScene extends XScene {
         button66.setTooltip(tooltip139);
 
         Label label111 = new Label("Nummer");
+        label111.setPrefSize(100, 1);
         label111.setFont(XStyle.M_FONT);
-        label111.setTextFill(Color.BLACK);
 
         Label label112 = new Label("Adresse");
+        label112.setPrefSize(100, 1);
         label112.setFont(new Font("Arial", 16));
-        label112.setTextFill(Color.BLACK);
 
         Label label113 = new Label("Postnummer");
+        label113.setPrefSize(100, 1);
         label113.setFont(new Font("Arial", 16));
-        label113.setTextFill(Color.BLACK);
 
         Label label114 = new Label("By");
+        label114.setPrefSize(100, 1);
         label114.setFont(new Font("Arial", 16));
-        label114.setTextFill(Color.BLACK);
 
         Label label115 = new Label("Kvadratmeter");
+        label115.setPrefSize(100, 1);
         label115.setFont(new Font("Arial", 16));
-        label115.setTextFill(Color.BLACK);
 
         textField69 = new TextField();
         textField69.setMaxWidth(100);
@@ -130,36 +130,36 @@ public class OpretLagerScene extends XScene {
         HBox hBox19 = new HBox();
         hBox19.setPrefSize(250, 45);
         hBox19.setSpacing(5);
-        hBox19.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
-        hBox19.setTranslateY(0);
+        hBox19.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox19.setTranslateY(-90);
         hBox19.getChildren().addAll(label111, textField69);
 
         HBox hBox20 = new HBox();
         hBox20.setPrefSize(250, 45);
         hBox20.setSpacing(5);
-        hBox20.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
-        hBox20.setTranslateY(0);
+        hBox20.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox20.setTranslateY(-90);
         hBox20.getChildren().addAll(label112, textField70);
 
         HBox hBox21 = new HBox();
         hBox21.setPrefSize(250, 45);
         hBox21.setSpacing(5);
-        hBox21.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
-        hBox21.setTranslateY(0);
+        hBox21.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox21.setTranslateY(-90);
         hBox21.getChildren().addAll(label113, textField71);
 
         HBox hBox22 = new HBox();
         hBox22.setPrefSize(250, 45);
         hBox22.setSpacing(5);
-        hBox22.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
-        hBox22.setTranslateY(0);
+        hBox22.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox22.setTranslateY(-90);
         hBox22.getChildren().addAll(label114, textField72);
 
         HBox hBox23 = new HBox();
         hBox23.setPrefSize(250, 45);
         hBox23.setSpacing(5);
-        hBox23.setTranslateX(getGUI().getScreenHeight() * 0.5 + (250 * 1.25));
-        hBox23.setTranslateY(0);
+        hBox23.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox23.setTranslateY(-90);
         hBox23.getChildren().addAll(label115, textField73);
 
         getLayout().getChildren().addAll(label109, button64, button65, button66, hBox19, hBox20, hBox21, hBox22, hBox23);

@@ -1,13 +1,10 @@
 package gui.setting;
 
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class XStyle {
 
-    public static final String PRIMARY_COLOR_STYLE = "-fx-background-color: moccasin";
-
-    public static final Color PRIMARY_TEXT_COLOR = Color.BLACK;
+    public static final String PRIMARY_BACKGROUND_STYLE = "-fx-background-color: moccasin";
 
     public static final String PRIMARY_BUTTON_STYLE = "-fx-background-color: black; -fx-text-fill: white;";
 

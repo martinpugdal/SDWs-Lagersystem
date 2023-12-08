@@ -77,7 +77,7 @@ public class Controller {
      * @return
      */
     public Lager createLager(int nummer, String adresse, double størrelse) {
-        if (checkLagerExists(adresse) || checkLagerExists(nummer)) {
+        if (checkLagerExists(nummer)) {
             throw new IllegalArgumentException("Lageret findes allerede");
         }
         Lager lager = new Lager(nummer, adresse, størrelse);
@@ -91,7 +91,7 @@ public class Controller {
      * @param kvadratmeter
      */
     public void updateLager(Lager selectedLager, int nummer, String adresse, double kvadratmeter) {
-        if (checkLagerExists(adresse) && checkLagerExists(nummer)) {
+        if ((checkLagerExists(nummer) && selectedLager.getNummer() != nummer)) {
             throw new IllegalArgumentException("Lageret findes allerede");
         }
         selectedLager.setNummer(nummer);
@@ -278,19 +278,6 @@ public class Controller {
     }
 
     /**
-     * @param adresse
-     * @return boolean true hvis lageret findes
-     */
-    public boolean checkLagerExists(String adresse) {
-        for (Lager lager : storage.getLagere()) {
-            if (lager.getAdresse().equals(adresse)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * @param nummer
      * @return boolean true hvis lageret findes
      */
@@ -322,6 +309,11 @@ public class Controller {
         Lager lager1 = createLager(1, "Lagervej 1, 1234, By 1", 44);
         Lager lager2 = createLager(2, "Lagervej 3, 2223, By 2", 145);
         Lager lager3 = createLager(3, "Lagervej 5, 4332, By 3", 664);
+
+        for (int i = 4; i < 100; i++) {
+            createLager(i, "Lagervej " + i + ", " + i + i + i + i + ", By " + i, i * 10);
+        }
+
 
         // tilføj nogle afdelinger
         Afdeling afdeling1 = createAfdeling(lager1, Drikkelse.GIN, 1);

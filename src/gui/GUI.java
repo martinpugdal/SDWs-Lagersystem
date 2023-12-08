@@ -22,12 +22,10 @@ public class GUI extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.stage = stage;
-//        stage.setFullScreen(true);
-        stage.setWidth(getScreenWidth());
-        stage.setHeight(getScreenHeight());
         switchScene(sceneManager.getScene(SceneType.FORSIDE));
+        stage.setResizable(false);
         stage.show();
     }
 

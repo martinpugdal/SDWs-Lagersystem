@@ -8,6 +8,6 @@ public class XLayout extends VBox {
     public XLayout() {
         super();
         setAlignment(Pos.CENTER);
-        setStyle(XStyle.PRIMARY_COLOR_STYLE);
+        setStyle(XStyle.PRIMARY_BACKGROUND_STYLE);
     }
 }
