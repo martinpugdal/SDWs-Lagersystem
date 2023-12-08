@@ -8,7 +8,7 @@ public abstract class XScene extends Scene {
     private final GUI gui;
 
     public XScene(GUI gui) {
-        super(new XLayout());
+        super(new XLayout(), gui.getScreenWidth(), gui.getScreenHeight());
         this.gui = gui;
         initLayout();
     }

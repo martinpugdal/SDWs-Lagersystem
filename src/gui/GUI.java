@@ -1,12 +1,10 @@
 package gui;
 
 import application.controller.Controller;
-import application.model.Lager;
 import gui.scene.SceneManager;
 import gui.scene.SceneType;
 import gui.setting.XScene;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -38,11 +36,21 @@ public class GUI extends Application {
     }
 
     public double getScreenWidth() {
-        return Screen.getPrimary().getBounds().getWidth();
+        double w = 1920;
+        double primaryW = Screen.getPrimary().getBounds().getWidth();
+        if (primaryW < w) {
+            w = primaryW;
+        }
+        return w;
     }
 
     public double getScreenHeight() {
-        return Screen.getPrimary().getBounds().getHeight();
+        double h = 1080;
+        double primaryH = Screen.getPrimary().getBounds().getHeight();
+        if (primaryH < h) {
+            h = primaryH;
+        }
+        return h;
     }
 
     public void switchScene(XScene scene) {
