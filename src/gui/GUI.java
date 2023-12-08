@@ -5,8 +5,8 @@ import gui.scene.SceneManager;
 import gui.scene.SceneType;
 import gui.setting.XScene;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
@@ -36,28 +36,20 @@ public class GUI extends Application {
     }
 
     public double getScreenWidth() {
-        double w = 1920;
-        double primaryW = Screen.getPrimary().getBounds().getWidth();
-        if (primaryW < w) {
-            w = primaryW;
-        }
-        return w;
+        return 1280;
     }
 
     public double getScreenHeight() {
-        double h = 1080;
-        double primaryH = Screen.getPrimary().getBounds().getHeight();
-        if (primaryH < h) {
-            h = primaryH;
-        }
-        return h;
+        return 720;
     }
 
     public void switchScene(XScene scene) {
         scene.update();
-//        boolean isFullScreen = stage.isFullScreen();
+        double width = stage.getWidth();
+        double height = stage.getHeight();
         stage.setScene(scene);
-//        stage.setFullScreen(isFullScreen);
+        stage.setWidth(width);
+        stage.setHeight(height);
         stage.setTitle(scene.getTitle() != null ? scene.getTitle() : sceneManager.getScene(SceneType.FORSIDE).getTitle());
         if (scene.getIcon() != null) {
             if (stage.getIcons().isEmpty()) {
