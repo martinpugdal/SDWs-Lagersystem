@@ -33,7 +33,7 @@ public class LagerScene extends XScene {
         //Skærmbillede 17: Lagre
         Label label107 = new Label("Lager");
         label107.setTranslateX(-550);
-        label107.setTranslateY(-100);
+        label107.setTranslateY(10);
         label107.setFont(new Font("Arial", 36));
         label107.setTextFill(Color.BLACK);
         ImageView lagerIcon = XIcon.LAGER.getImageView();
@@ -49,7 +49,7 @@ public class LagerScene extends XScene {
 
         Button button60 = new Button("Opret lager");
         button60.setTranslateX(-550 + (buttonWidth + 20));
-        button60.setTranslateY(-110 - buttonHeight);
+        button60.setTranslateY(- buttonHeight);
         button60.setPrefSize(buttonWidth, buttonHeight);
         button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETLAGER));
         button60.setFont(new Font("Arial", 16));
@@ -60,7 +60,7 @@ public class LagerScene extends XScene {
 
         Button button61 = new Button("Rediger lager");
         button61.setTranslateX(-550 + (buttonWidth + 20) * 2);
-        button61.setTranslateY(-110 - buttonHeight * 2);
+        button61.setTranslateY(-buttonHeight * 2);
         button61.setPrefSize(buttonWidth, buttonHeight);
         button61.setOnAction(e -> redigerLager());
         button61.setFont(new Font("Arial", 16));
@@ -71,7 +71,7 @@ public class LagerScene extends XScene {
 
         Button button62 = new Button("Slet lager");
         button62.setTranslateX(-550 + (buttonWidth + 20) * 3);
-        button62.setTranslateY(-110 - buttonHeight * 3);
+        button62.setTranslateY(-buttonHeight * 3);
         button62.setPrefSize(buttonWidth, buttonHeight);
         button62.setOnAction(e -> sletLager());
         button62.setFont(new Font("Arial", 16));
@@ -82,7 +82,7 @@ public class LagerScene extends XScene {
 
         Button button63 = new Button("Gå tilbage til forside");
         button63.setTranslateX(-550 + (buttonWidth + 20) * 4);
-        button63.setTranslateY(-110 - buttonHeight * 4);
+        button63.setTranslateY(-buttonHeight * 4);
         button63.setPrefSize(buttonWidth, buttonHeight);
         button63.setOnAction(e -> getGUI().gåTilForside());
         button63.setFont(new Font("Arial", 16));
@@ -93,16 +93,16 @@ public class LagerScene extends XScene {
 
         Label label108 = new Label("Her ses en oversigt over lagre");
         label108.setTranslateX(0);
-        label108.setTranslateY(-200);
+        label108.setTranslateY(-50);
         label108.setFont(XStyle.M_FONT);
         label108.setTextFill(Color.BLACK);
 
         lagerTableView = new TableView<>();
         lagerTableView.setPlaceholder(new Label("Der er ingen lagre"));
         lagerTableView.setEditable(false);
-        lagerTableView.setPrefSize(200, 200);
+        lagerTableView.setPrefSize(200, 450);
         lagerTableView.setTranslateX(0);
-        lagerTableView.setTranslateY(-175);
+        lagerTableView.setTranslateY(-30);
         lagerTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         VBox.setMargin(lagerTableView, new Insets(0, 20, 0, 20));
         TableColumn<Lager, Integer> lagerNRColumn = new TableColumn<>("Nummer");
