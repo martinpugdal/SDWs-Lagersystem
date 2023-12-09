@@ -5,6 +5,7 @@ import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,7 +36,7 @@ public class ForsideScene extends XScene {
         Label label2 = new Label("Destilleringer");
         label2.setFont(XStyle.M_FONT);
         label2.setPrefSize(100, 25);
-        label2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label2.setAlignment(Pos.CENTER);
         Button button1 = new Button();
         button1.setPrefSize(100, 100);
         button1.setMinSize(100, 100);
@@ -48,9 +49,11 @@ public class ForsideScene extends XScene {
 
         VBox vboxDestillering = new VBox();
         vboxDestillering.setPrefSize(100, 100);
+        vboxDestillering.setMaxSize(100, 100);
+        vboxDestillering.setMinSize(100, 100);
         vboxDestillering.setAlignment(javafx.geometry.Pos.CENTER);
         vboxDestillering.setTranslateX(-300);
-        vboxDestillering.setTranslateY(100 + 60 + 20 + 10 + 100 + 20);
+        vboxDestillering.setTranslateY(270);
         vboxDestillering.getChildren().addAll(button1, label2);
 
 
@@ -62,7 +65,7 @@ public class ForsideScene extends XScene {
         Label label3 = new Label("Råvarer");
         label3.setFont(XStyle.M_FONT);
         label3.setPrefSize(100, 25);
-        label3.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label3.setAlignment(Pos.CENTER);
         Button button2 = new Button();
         button2.setPrefSize(100, 100);
         button2.setMinSize(100, 100);
@@ -75,9 +78,11 @@ public class ForsideScene extends XScene {
 
         VBox vboxRåvarer = new VBox();
         vboxRåvarer.setPrefSize(100, 100);
+        vboxRåvarer.setMaxSize(100, 100);
+        vboxRåvarer.setMinSize(100, 100);
         vboxRåvarer.setAlignment(javafx.geometry.Pos.CENTER);
         vboxRåvarer.setTranslateX(-100);
-        vboxRåvarer.setTranslateY(100 + 60 + 20 + 10);
+        vboxRåvarer.setTranslateY(170);
         vboxRåvarer.getChildren().addAll(button2, label3);
 
 
@@ -89,7 +94,7 @@ public class ForsideScene extends XScene {
         Label label4 = new Label("Fade");
         label4.setFont(XStyle.M_FONT);
         label4.setPrefSize(100, 25);
-        label4.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label4.setAlignment(Pos.CENTER);
         Button button3 = new Button();
         button3.setPrefSize(100, 100);
         button3.setMinSize(100, 100);
@@ -102,6 +107,8 @@ public class ForsideScene extends XScene {
 
         VBox vboxFade = new VBox();
         vboxFade.setPrefSize(100, 100);
+        vboxFade.setMaxSize(100, 100);
+        vboxFade.setMinSize(100, 100);
         vboxFade.setAlignment(javafx.geometry.Pos.CENTER);
         vboxFade.setTranslateX(100);
         vboxFade.setTranslateY(50 + 20);
@@ -116,7 +123,7 @@ public class ForsideScene extends XScene {
         Label label5 = new Label("Plastictanke");
         label5.setFont(XStyle.M_FONT);
         label5.setPrefSize(100, 25);
-        label5.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label5.setAlignment(Pos.CENTER);
         Button button4 = new Button();
         button4.setPrefSize(100, 100);
         button4.setMinSize(100, 100);
@@ -129,9 +136,11 @@ public class ForsideScene extends XScene {
 
         VBox vboxPlastictanke = new VBox();
         vboxPlastictanke.setPrefSize(100, 100);
+        vboxPlastictanke.setMaxSize(100, 100);
+        vboxPlastictanke.setMinSize(100, 100);
         vboxPlastictanke.setAlignment(javafx.geometry.Pos.CENTER);
         vboxPlastictanke.setTranslateX(300);
-        vboxPlastictanke.setTranslateY(-50);
+        vboxPlastictanke.setTranslateY(-30);
         vboxPlastictanke.getChildren().addAll(button4, label5);
 
         ImageView view5 = XIcon.LAGER.getImageView();
@@ -142,7 +151,7 @@ public class ForsideScene extends XScene {
         Label label6 = new Label("Lager");
         label6.setFont(XStyle.M_FONT);
         label6.setPrefSize(100, 25);
-        label6.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label6.setAlignment(Pos.CENTER);
         Button button5 = new Button();
         button5.setPrefSize(100, 100);
         button5.setMinSize(100, 100);
@@ -155,9 +164,11 @@ public class ForsideScene extends XScene {
 
         VBox vboxLager = new VBox();
         vboxLager.setPrefSize(100, 100);
+        vboxLager.setMaxSize(100, 100);
+        vboxLager.setMinSize(100, 100);
         vboxLager.setAlignment(javafx.geometry.Pos.CENTER);
         vboxLager.setTranslateX(-200);
-        vboxLager.setTranslateY(40);
+        vboxLager.setTranslateY(40 + 10);
         vboxLager.getChildren().addAll(button5, label6);
 
 
@@ -169,7 +180,7 @@ public class ForsideScene extends XScene {
         Label label7 = new Label("Whiskyflasker");
         label7.setFont(XStyle.M_FONT);
         label7.setPrefSize(100, 25);
-        label7.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label7.setAlignment(Pos.CENTER);
         Button button6 = new Button();
         button6.setPrefSize(100, 100);
         button6.setMinSize(100, 100);
@@ -182,9 +193,11 @@ public class ForsideScene extends XScene {
 
         VBox vboxWhiskyflasker = new VBox();
         vboxWhiskyflasker.setPrefSize(100, 100);
+        vboxWhiskyflasker.setMaxSize(100, 100);
+        vboxWhiskyflasker.setMinSize(100, 100);
         vboxWhiskyflasker.setAlignment(javafx.geometry.Pos.CENTER);
         vboxWhiskyflasker.setTranslateX(0);
-        vboxWhiskyflasker.setTranslateY(-100 + 20);
+        vboxWhiskyflasker.setTranslateY(-100 + 50);
         vboxWhiskyflasker.getChildren().addAll(button6, label7);
 
 
@@ -196,7 +209,7 @@ public class ForsideScene extends XScene {
         Label label8 = new Label("Ginflasker");
         label8.setFont(XStyle.M_FONT);
         label8.setPrefSize(100, 25);
-        label8.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        label8.setAlignment(Pos.CENTER);
         Button button7 = new Button();
         button7.setPrefSize(100, 100);
         button7.setMinSize(100, 100);
@@ -209,9 +222,11 @@ public class ForsideScene extends XScene {
 
         VBox vboxGinflasker = new VBox();
         vboxGinflasker.setPrefSize(100, 100);
+        vboxGinflasker.setMaxSize(100, 100);
+        vboxGinflasker.setMinSize(100, 100);
         vboxGinflasker.setAlignment(javafx.geometry.Pos.CENTER);
         vboxGinflasker.setTranslateX(200);
-        vboxGinflasker.setTranslateY(-200);
+        vboxGinflasker.setTranslateY(-150);
         vboxGinflasker.getChildren().addAll(button7, label8);
 
         getLayout().getChildren().addAll(label1, vboxDestillering, vboxRåvarer, vboxFade, vboxPlastictanke, vboxLager, vboxWhiskyflasker, vboxGinflasker);
