@@ -23,7 +23,7 @@ public class ForsideScene extends XScene {
         //Skærmbillede 1: Forside
         Label label1 = new Label("Sall Whisky Distillery - Lagersystem");
         label1.setTranslateX(0);
-        label1.setTranslateY(-200);
+        label1.setTranslateY(100 + 60 + 20);
         label1.setFont(XStyle.XXL_FONT);
 
 
@@ -50,7 +50,7 @@ public class ForsideScene extends XScene {
         vboxDestillering.setPrefSize(100, 100);
         vboxDestillering.setAlignment(javafx.geometry.Pos.CENTER);
         vboxDestillering.setTranslateX(-300);
-        vboxDestillering.setTranslateY(-100);
+        vboxDestillering.setTranslateY(100 + 60 + 20 + 10 + 100 + 20);
         vboxDestillering.getChildren().addAll(button1, label2);
 
 
@@ -77,7 +77,7 @@ public class ForsideScene extends XScene {
         vboxRåvarer.setPrefSize(100, 100);
         vboxRåvarer.setAlignment(javafx.geometry.Pos.CENTER);
         vboxRåvarer.setTranslateX(-100);
-        vboxRåvarer.setTranslateY(-200 - 20);
+        vboxRåvarer.setTranslateY(100 + 60 + 20 + 10);
         vboxRåvarer.getChildren().addAll(button2, label3);
 
 
@@ -104,7 +104,7 @@ public class ForsideScene extends XScene {
         vboxFade.setPrefSize(100, 100);
         vboxFade.setAlignment(javafx.geometry.Pos.CENTER);
         vboxFade.setTranslateX(100);
-        vboxFade.setTranslateY(-300);
+        vboxFade.setTranslateY(50 + 20);
         vboxFade.getChildren().addAll(button3, label4);
 
 
@@ -131,7 +131,7 @@ public class ForsideScene extends XScene {
         vboxPlastictanke.setPrefSize(100, 100);
         vboxPlastictanke.setAlignment(javafx.geometry.Pos.CENTER);
         vboxPlastictanke.setTranslateX(300);
-        vboxPlastictanke.setTranslateY(-400);
+        vboxPlastictanke.setTranslateY(-50);
         vboxPlastictanke.getChildren().addAll(button4, label5);
 
         ImageView view5 = XIcon.LAGER.getImageView();
@@ -157,7 +157,7 @@ public class ForsideScene extends XScene {
         vboxLager.setPrefSize(100, 100);
         vboxLager.setAlignment(javafx.geometry.Pos.CENTER);
         vboxLager.setTranslateX(-200);
-        vboxLager.setTranslateY(-200);
+        vboxLager.setTranslateY(40);
         vboxLager.getChildren().addAll(button5, label6);
 
 
@@ -184,7 +184,7 @@ public class ForsideScene extends XScene {
         vboxWhiskyflasker.setPrefSize(100, 100);
         vboxWhiskyflasker.setAlignment(javafx.geometry.Pos.CENTER);
         vboxWhiskyflasker.setTranslateX(0);
-        vboxWhiskyflasker.setTranslateY(-300);
+        vboxWhiskyflasker.setTranslateY(-100 + 20);
         vboxWhiskyflasker.getChildren().addAll(button6, label7);
 
 
@@ -211,7 +211,7 @@ public class ForsideScene extends XScene {
         vboxGinflasker.setPrefSize(100, 100);
         vboxGinflasker.setAlignment(javafx.geometry.Pos.CENTER);
         vboxGinflasker.setTranslateX(200);
-        vboxGinflasker.setTranslateY(-400);
+        vboxGinflasker.setTranslateY(-200);
         vboxGinflasker.getChildren().addAll(button7, label8);
 
         getLayout().getChildren().addAll(label1, vboxDestillering, vboxRåvarer, vboxFade, vboxPlastictanke, vboxLager, vboxWhiskyflasker, vboxGinflasker);
