@@ -1,18 +1,23 @@
 package gui.scene.scenes.destillering;
 
-import application.model.Destillering;
 import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class DestilleringFadScene extends XScene {
+
+    private TableView<Fad> fraFadTableView, tilFadTableView;
+    private TextField textFieldAntalLiter;
 
     public DestilleringFadScene(GUI gui) {
         super(gui);
@@ -20,100 +25,154 @@ public class DestilleringFadScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 5: Tilføj/fjern destillering til/fra fad
+        double translateY = getGUI().getScreenWidth() * 0.275;
 
-        Label label23 = new Label("Tilføj/fjern destillering til/fra fad");
-        label23.setTranslateX(0);
-        label23.setTranslateY(150);
-        label23.setFont(new Font("Arial", 36));
-        label23.setTextFill(Color.BLACK);
+        Label label109 = new Label("Tilføj/fjern destillering til/fra fad");
+        label109.setTranslateX(0);
+        label109.setTranslateY(-100);
+        label109.setFont(XStyle.XXL_FONT);
+        ImageView lagerIcon = XIcon.ALKOHOL.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label109.setGraphic(lagerIcon);
+        label109.setContentDisplay(ContentDisplay.LEFT);
 
-        Label label24 = new Label("Omhæld fra fad til fad her");
-        label24.setTranslateX(0);
-        label24.setTranslateY(150);
-        label24.setFont(new Font("Arial", 16));
-        label24.setTextFill(Color.BLACK);
+        Button button64 = new Button("Flyt destillering");
+        button64.setTranslateX(-325);
+        button64.setTranslateY(translateY + 180);
+        button64.setPrefSize(250, 45);
+        button64.setOnAction(e -> flytDestillering());
+        button64.setFont(XStyle.M_FONT);
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip137 = new Tooltip("Tryk her for at oprette");
+        button64.setTooltip(tooltip137);
 
-        Label label25 = new Label("Fra fad:");
-        label25.setTranslateX(0);
-        label25.setTranslateY(150);
-        label25.setFont(new Font("Arial", 16));
-        label25.setTextFill(Color.BLACK);
+        Button button65 = new Button("Annuller");
+        button65.setTranslateX(0);
+        button65.setTranslateY(translateY + 180 - 45);
+        button65.setPrefSize(250, 45);
+        button65.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERING));
+        button65.setFont(XStyle.M_FONT);
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button65.setCursor(Cursor.HAND);
+        Tooltip tooltip138 = new Tooltip("Tryk her for at annullere");
+        button65.setTooltip(tooltip138);
 
-        Label label26 = new Label("Til fad:");
-        label26.setTranslateX(0);
-        label26.setTranslateY(150);
-        label26.setFont(new Font("Arial", 16));
-        label26.setTextFill(Color.BLACK);
+        Button button66 = new Button("Gå tilbage til forside");
+        button66.setTranslateX(325);
+        button66.setTranslateY(translateY + 180 - 90);
+        button66.setPrefSize(250, 45);
+        button66.setOnAction(e -> getGUI().gåTilForside());
+        button66.setFont(XStyle.M_FONT);
+        button66.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button66.setCursor(Cursor.HAND);
+        Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button66.setTooltip(tooltip139);
 
-        Label label27 = new Label("Antal liter der skal flyttes");
-        label27.setTranslateX(0);
-        label27.setTranslateY(150);
-        label27.setFont(new Font("Arial", 16));
-        label27.setTextFill(Color.BLACK);
+        Label label108 = new Label("Her kan du flytte destillering fra et fad til et andet fad.");
+        label108.setTranslateX(0);
+        label108.setTranslateY(-50);
+        label108.setFont(XStyle.M_FONT);
+        label108.setTextFill(Color.BLACK);
 
-        TextField textField9 = new TextField();
-        textField9.setMaxWidth(100);
-        Tooltip tooltip29 = new Tooltip();
-        tooltip29.setText("Indtast antal liter her");
-        textField9.setTooltip(tooltip29);
-        textField9.setCursor(Cursor.TEXT);
+        fraFadTableView = new TableView<>();
+        fraFadTableView.setPlaceholder(new Label("Der er ingen fade"));
+        fraFadTableView.setEditable(false);
+        fraFadTableView.setPrefSize(200, 200);
+        fraFadTableView.setMaxWidth(500);
+        fraFadTableView.setTranslateX(-400);
+        fraFadTableView.setTranslateY(0);
+        fraFadTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        VBox.setMargin(fraFadTableView, new Insets(0, 0, 0, 20));
+        TableColumn<Fad, Integer> nummerC = new TableColumn<>("Nummer");
+        nummerC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
+        fraFadTableView.getColumns().add(nummerC);
+        TableColumn<Fad, String> typeC = new TableColumn<>("Type");
+        typeC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getType()));
+        fraFadTableView.getColumns().add(typeC);
+        TableColumn<Fad, Double> volumenC = new TableColumn<>("Volumen (L)");
+        volumenC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen()));
+        fraFadTableView.getColumns().add(volumenC);
+        TableColumn<Fad, Double> literC = new TableColumn<>("Påfyldt liter");
+        literC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning().getLiter()));
+        fraFadTableView.getColumns().add(literC);
+        TableColumn<Fad, String> placeringC = new TableColumn<>("Placering");
+        placeringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
+        fraFadTableView.getColumns().add(placeringC);
 
-        ListView<Destillering> listView2 = new ListView<>();
-        listView2.getItems().addAll(getGUI().getController().getDestilleringer());
-        listView2.setTranslateX(-200);
-        listView2.setTranslateY(20);
-        listView2.setMaxWidth(200);
-        listView2.setPrefSize(200, 200);
+        tilFadTableView = new TableView<>();
+        tilFadTableView.setPlaceholder(new Label("Der er ingen fade"));
+        tilFadTableView.setEditable(false);
+        tilFadTableView.setPrefSize(200, 200);
+        tilFadTableView.setMaxWidth(500);
+        tilFadTableView.setTranslateX(400);
+        tilFadTableView.setTranslateY(-200);
+        tilFadTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        VBox.setMargin(tilFadTableView, new Insets(0, 20, 0, 0));
+        nummerC = new TableColumn<>("Nummer");
+        nummerC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
+        tilFadTableView.getColumns().add(nummerC);
+        typeC = new TableColumn<>("Type");
+        typeC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getType()));
+        tilFadTableView.getColumns().add(typeC);
+        volumenC = new TableColumn<>("Volumen (L)");
+        volumenC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen()));
+        tilFadTableView.getColumns().add(volumenC);
+        placeringC = new TableColumn<>("Placering");
+        placeringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
+        tilFadTableView.getColumns().add(placeringC);
 
-        ListView<Fad> listView3 = new ListView<>();
-        listView3.getItems().addAll(getGUI().getController().getFade());
-        listView3.setTranslateX(-200);
-        listView3.setTranslateY(20);
-        listView3.setMaxWidth(200);
-        listView3.setPrefSize(200, 200);
+        Label label110 = new Label("Fra fad");
+        label110.setTranslateX(-350);
+        label110.setTranslateY(0);
+        label110.setFont(XStyle.M_FONT);
 
-/*        ImageView imageView4 = XIcon.ALKOHOL.getImageView();
-        imageView4.setFitHeight(100);
-        imageView4.setFitWidth(100);
-        imageView4.setTranslateX(10);
-        imageView4.setTranslateY(-10);
-        getLayout().getChildren().add(imageView4);*/
+        Label label111 = new Label("Til fad");
+        label111.setPrefSize(100, 1);
+        label111.setTranslateX(350);
+        label111.setTranslateY(-400);
+        label111.setFont(XStyle.M_FONT);
 
-        Button button21 = new Button("Flyt destillering");
-        button21.setTranslateX(-150);
-        button21.setTranslateY(-280);
-        button21.setPrefSize(250, 45);
-        button21.setOnAction(e -> flytDestillering());
-        button21.setFont(new Font("Arial", 16));
-        button21.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button21.setCursor(Cursor.HAND);
-        Tooltip tooltip30 = new Tooltip("Tryk her for at flytte destilleringsvæsken");
-        button21.setTooltip(tooltip30);
 
-        Button button22 = new Button("Annuller");
-        button22.setTranslateX(-150);
-        button22.setTranslateY(-280);
-        button22.setPrefSize(250, 45);
-        button22.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERING));
-        button22.setFont(new Font("Arial", 16));
-        button22.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button22.setCursor(Cursor.HAND);
-        Tooltip tooltip31 = new Tooltip("Tryk her for at annullere");
-        button22.setTooltip(tooltip31);
+        Label label112 = new Label("Antal liter");
+        label112.setFont(XStyle.M_FONT);
 
-        Button button23 = new Button("Gå tilbage til forside");
-        button23.setTranslateX(-150);
-        button23.setTranslateY(-280);
-        button23.setPrefSize(250, 45);
-        button23.setOnAction(e -> getGUI().gåTilForside());
-        button23.setFont(new Font("Arial", 16));
-        button23.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button23.setCursor(Cursor.HAND);
-        Tooltip tooltip32 = new Tooltip("Tryk her for at gå tilbage til forsiden");
-        button23.setTooltip(tooltip32);
+        textFieldAntalLiter = new TextField();
+        textFieldAntalLiter.setPromptText("Antal liter");
+        textFieldAntalLiter.setMaxWidth(150);
+        textFieldAntalLiter.setFont(XStyle.M_FONT);
+        textFieldAntalLiter.setCursor(Cursor.HAND);
+        Tooltip tooltip140 = new Tooltip("Indtast antal liter");
+        textFieldAntalLiter.setTooltip(tooltip140);
 
-        getLayout().getChildren().addAll(label23, label24, label25, label26, label27, textField9, listView2, listView3, button21, button22, button23);
+        VBox vBox1 = new VBox();
+        vBox1.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        vBox1.setTranslateY(-100);
+        vBox1.setPrefSize(250, 45);
+        vBox1.setSpacing(5);
+        vBox1.getChildren().addAll(label112, textFieldAntalLiter);
+
+        getLayout().getChildren().addAll(label109, button64, button65, button66, label108, label110, label111, fraFadTableView, tilFadTableView, vBox1);
+    }
+
+    @Override
+    public void update() {
+        fraFadTableView.getItems().clear();
+        for (Fad fad : getGUI().getController().getFade()) {
+            if (fad.getPåfyldning() != null) {
+                fraFadTableView.getItems().add(fad);
+            }
+        }
+        tilFadTableView.getItems().clear();
+        for (Fad fad : getGUI().getController().getFade()) {
+            if (fad.getPåfyldning() == null && fad.isIntakt() && !fad.isTom() && fad.getGangeBrugt() < 3) {
+                tilFadTableView.getItems().add(fad);
+            }
+        }
+        textFieldAntalLiter.setText("");
     }
 
     private void flytDestillering() {
@@ -127,6 +186,6 @@ public class DestilleringFadScene extends XScene {
 
     @Override
     public XIcon getIcon() {
-        return null;
+        return XIcon.ALKOHOL;
     }
 }
