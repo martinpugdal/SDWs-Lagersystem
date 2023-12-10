@@ -10,14 +10,13 @@ public class Destillering {
     private int nummer;
     private double liter;
     private double alkoholprocent;
-    private final List<Påfyldning> påfyldning;
+    private Påfyldning påfyldning;
 
     public Destillering(String navn, int nummer, double liter, double alkoholprocent) {
         this.navn = navn;
         this.nummer = nummer;
         this.liter = liter;
         this.alkoholprocent = alkoholprocent;
-        this.påfyldning = new ArrayList<>();
     }
 
     public String getNavn() {
@@ -52,25 +51,12 @@ public class Destillering {
         this.alkoholprocent = alkoholprocent;
     }
 
-    public List<Påfyldning> getPåfyldninger() {
+    public Påfyldning getPåfyldning() {
         return påfyldning;
     }
 
-    public void addPåfyldning(Påfyldning påfyldning) {
-        this.påfyldning.add(påfyldning);
-    }
-
-    public void removePåfyldning(Påfyldning påfyldning) {
-        this.påfyldning.remove(påfyldning);
-    }
-
-    public Påfyldning getPåfyldning(LocalDate dato) {
-        for (Påfyldning påfyldning : påfyldning) {
-            if (påfyldning.getDato().equals(dato)) {
-                return påfyldning;
-            }
-        }
-        return null;
+    public void setPåfyldning(Påfyldning påfyldning) {
+        this.påfyldning = påfyldning;
     }
 
     public String toString() {

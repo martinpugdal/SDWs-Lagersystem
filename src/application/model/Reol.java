@@ -13,6 +13,9 @@ public class Reol {
         this.antalHylder = antalHylder;
         this.hylder = new Hylde[antalHylder];
         this.nummer = nummer;
+        for (int i = 0; i < antalHylder; i++) {
+            createHylde();
+        }
     }
 
     public Reol(Afdeling afdeling, ReolType reolType, int nummer) {
@@ -39,7 +42,7 @@ public class Reol {
     }
 
     public Hylde getHylde(int nummer) {
-        return hylder[nummer];
+        return hylder[nummer - 1];
     }
 
     public Afdeling getAfdeling() {

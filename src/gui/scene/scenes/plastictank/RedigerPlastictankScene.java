@@ -1,224 +1,274 @@
 package gui.scene.scenes.plastictank;
 
+import application.model.Drikkelse;
+import application.model.Hylde;
 import application.model.opbevaring.Plastictank;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RedigerPlastictankScene extends XScene {
+
+    private Plastictank selectedPlastictank;
+    private TextField textField69, textField70, textFieldPlacering, textField74;
+    private CheckBox checkBox1;
+    private ComboBox<String> placering1;
+
     public RedigerPlastictankScene(GUI gui) {
         super(gui);
     }
 
+    public void setSelectedPlastictank(Plastictank plastictank) {
+        selectedPlastictank = plastictank;
+    }
+
     @Override
     public void initLayout() {
-        //Skærmbillede 16: Rediger plastictank
+        double translateY = getGUI().getScreenWidth() * 0.275;
 
-        Label label95 = new Label("Rediger plastictank");
-        label95.setTranslateX(0);
-        label95.setTranslateY(150);
-        label95.setFont(XStyle.M_FONT);
-        label95.setTextFill(Color.BLACK);
+        Label label109 = new Label("Rediger plastictank");
+        label109.setTranslateX(0);
+        label109.setTranslateY(-10);
+        label109.setFont(XStyle.XXL_FONT);
+        ImageView lagerIcon = XIcon.FAD.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label109.setGraphic(lagerIcon);
+        label109.setContentDisplay(ContentDisplay.LEFT);
 
-        Label label96 = new Label("Nummer");
-        label96.setTranslateX(0);
-        label96.setTranslateY(150);
-        label96.setFont(XStyle.M_FONT);
-        label96.setTextFill(Color.BLACK);
+        Button button64 = new Button("Rediger plastictank");
+        button64.setTranslateX(-325);
+        button64.setTranslateY(translateY + 45);
+        button64.setPrefSize(250, 45);
+        button64.setOnAction(e -> redigerFad());
+        button64.setFont(XStyle.M_FONT);
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip137 = new Tooltip("Tryk her for at redigere");
+        button64.setTooltip(tooltip137);
 
-        Label label97 = new Label("Antal gange brugt");
-        label97.setTranslateX(0);
-        label97.setTranslateY(150);
-        label97.setFont(XStyle.M_FONT);
-        label97.setTextFill(Color.BLACK);
+        Button button65 = new Button("Annuller");
+        button65.setTranslateX(0);
+        button65.setTranslateY(translateY);
+        button65.setPrefSize(250, 45);
+        button65.setOnAction(e -> getGUI().switchScene(SceneType.PLASTICTANK));
+        button65.setFont(XStyle.M_FONT);
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button65.setCursor(Cursor.HAND);
+        Tooltip tooltip138 = new Tooltip("Tryk her for at annullere");
+        button65.setTooltip(tooltip138);
 
-        Label label98 = new Label("Seneste tømningsdato");
-        label98.setTranslateX(0);
-        label98.setTranslateY(150);
-        label98.setFont(XStyle.M_FONT);
-        label98.setTextFill(Color.BLACK);
+        Button button66 = new Button("Gå tilbage til forside");
+        button66.setTranslateX(325);
+        button66.setTranslateY(translateY - 45);
+        button66.setPrefSize(250, 45);
+        button66.setOnAction(e -> getGUI().gåTilForside());
+        button66.setFont(XStyle.M_FONT);
+        button66.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button66.setCursor(Cursor.HAND);
+        Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button66.setTooltip(tooltip139);
 
-        Label label99 = new Label("Påfyldningsdato");
-        label99.setTranslateX(0);
-        label99.setTranslateY(150);
-        label99.setFont(XStyle.M_FONT);
-        label99.setTextFill(Color.BLACK);
+        Label label111 = new Label("Nummer");
+        label111.setAlignment(Pos.BASELINE_RIGHT);
+        label111.setPrefSize(200, 1);
+        label111.setFont(XStyle.M_FONT);
 
-        Label label100 = new Label("Solgt til 1");
-        label100.setTranslateX(0);
-        label100.setTranslateY(150);
-        label100.setFont(XStyle.M_FONT);
-        label100.setTextFill(Color.BLACK);
+        Label label112 = new Label("Type");
+        label112.setAlignment(Pos.BASELINE_RIGHT);
+        label112.setPrefSize(200, 1);
+        label112.setFont(new Font("Arial", 16));
 
-        Label label101 = new Label("Solgt til 2");
-        label101.setTranslateX(0);
-        label101.setTranslateY(150);
-        label101.setFont(XStyle.M_FONT);
-        label101.setTextFill(Color.BLACK);
+        Label label114 = new Label("Intakt");
+        label114.setAlignment(Pos.BASELINE_RIGHT);
+        label114.setPrefSize(200, 1);
+        label114.setFont(new Font("Arial", 16));
 
-        Label label102 = new Label("Solgt til 3");
-        label102.setTranslateX(0);
-        label102.setTranslateY(150);
-        label102.setFont(XStyle.M_FONT);
-        label102.setTextFill(Color.BLACK);
+        Label label117 = new Label("Placering");
+        label117.setAlignment(Pos.BASELINE_RIGHT);
+        label117.setPrefSize(200, 1);
+        label117.setFont(new Font("Arial", 16));
 
-        Label label103 = new Label("Solgt til 4");
-        label103.setTranslateX(0);
-        label103.setTranslateY(150);
-        label103.setFont(XStyle.M_FONT);
-        label103.setTextFill(Color.BLACK);
+        Label label118 = new Label("Antal liter");
+        label118.setAlignment(Pos.BASELINE_RIGHT);
+        label118.setPrefSize(200, 1);
+        label118.setFont(new Font("Arial", 16));
 
-        Label label104 = new Label("Solgt til 5");
-        label104.setTranslateX(0);
-        label104.setTranslateY(150);
-        label104.setFont(XStyle.M_FONT);
-        label104.setTextFill(Color.BLACK);
+        textField69 = new TextField();
+        textField69.setMaxWidth(200);
+        Tooltip tooltip131 = new Tooltip();
+        tooltip131.setText("Indtast nummeret på plastictanken her");
+        textField69.setTooltip(tooltip131);
+        textField69.setCursor(Cursor.TEXT);
 
-        Label label105 = new Label("Står ved");
-        label105.setTranslateX(0);
-        label105.setTranslateY(150);
-        label105.setFont(XStyle.M_FONT);
-        label105.setTextFill(Color.BLACK);
+        textField70 = new TextField();
+        textField70.setMaxWidth(200);
+        Tooltip tooltip133 = new Tooltip();
+        tooltip133.setText("Indtast type for plastictanken her");
+        textField70.setTooltip(tooltip133);
+        textField70.setCursor(Cursor.TEXT);
 
-        Label label106 = new Label("Antal liter");
-        label106.setTranslateX(0);
-        label106.setTranslateY(150);
-        label106.setFont(XStyle.M_FONT);
-        label106.setTextFill(Color.BLACK);
+        checkBox1 = new CheckBox();
+        checkBox1.setMaxWidth(200);
+        Tooltip tooltip135 = new Tooltip();
+        tooltip135.setText("Aktivere hvis plastictanken er intakt");
+        checkBox1.setTooltip(tooltip135);
+        checkBox1.setCursor(Cursor.TEXT);
 
-        TextField textField57 = new TextField();
-        textField57.setMaxWidth(100);
-        Tooltip tooltip113 = new Tooltip();
-        tooltip113.setText("Indtast nummeret på tanken her");
-        textField57.setTooltip(tooltip113);
-        textField57.setCursor(Cursor.TEXT);
+        textFieldPlacering = new TextField();
+        textFieldPlacering.setMaxWidth(200);
+        Tooltip tooltip18 = new Tooltip();
+        tooltip18.setText("Indtast hvor plastictanken står her");
+        textFieldPlacering.setTooltip(tooltip18);
+        textFieldPlacering.setCursor(Cursor.TEXT);
+        placering1 = new ComboBox<>();
+        placering1.setMaxWidth(200);
+        Tooltip tooltip2 = new Tooltip();
+        tooltip2.setText("Vælg placeringen af plastictanken her");
+        placering1.setTooltip(tooltip2);
+        placering1.setCursor(Cursor.TEXT);
 
-        TextField textField58 = new TextField();
-        textField58.setMaxWidth(100);
-        Tooltip tooltip114 = new Tooltip();
-        tooltip114.setText("Indtast antal gange tanken har været brugt her");
-        textField58.setTooltip(tooltip114);
-        textField58.setCursor(Cursor.TEXT);
+        textField74 = new TextField();
+        textField74.setMaxWidth(200);
+        Tooltip tooltip3 = new Tooltip();
+        tooltip139.setText("Indtast antal liter på plastictanken her");
+        textField74.setTooltip(tooltip3);
+        textField74.setCursor(Cursor.TEXT);
 
-        TextField textField59 = new TextField();
-        textField59.setMaxWidth(100);
-        Tooltip tooltip115 = new Tooltip();
-        tooltip115.setText("Indtast datoen for hvornår tanken sidst har været tømt her");
-        textField59.setTooltip(tooltip115);
-        textField59.setCursor(Cursor.TEXT);
+        HBox hBox19 = new HBox();
+        hBox19.setPrefSize(250, 45);
+        hBox19.setSpacing(5);
+        hBox19.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox19.setTranslateY(-90);
+        hBox19.getChildren().addAll(label111, textField69);
 
-        TextField textField60 = new TextField();
-        textField60.setMaxWidth(100);
-        Tooltip tooltip116 = new Tooltip();
-        tooltip116.setText("Indtast datoen for hvornår tanken er blevet fyldt her");
-        textField60.setTooltip(tooltip116);
-        textField60.setCursor(Cursor.TEXT);
+        HBox hBox20 = new HBox();
+        hBox20.setPrefSize(250, 45);
+        hBox20.setSpacing(5);
+        hBox20.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox20.setTranslateY(-90);
+        hBox20.getChildren().addAll(label112, textField70);
 
-        TextField textField61 = new TextField();
-        textField61.setMaxWidth(100);
-        Tooltip tooltip117 = new Tooltip();
-        tooltip117.setText("Indtast navnet på eventuel køber 1 her");
-        textField61.setTooltip(tooltip117);
-        textField61.setCursor(Cursor.TEXT);
+        HBox hBox22 = new HBox();
+        hBox22.setPrefSize(250, 45);
+        hBox22.setSpacing(5);
+        hBox22.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox22.setTranslateY(-90);
+        hBox22.getChildren().addAll(label114, checkBox1);
 
-        TextField textField62 = new TextField();
-        textField62.setMaxWidth(100);
-        Tooltip tooltip118 = new Tooltip();
-        tooltip118.setText("Indtast navnet på eventuel køber 2 her");
-        textField62.setTooltip(tooltip118);
-        textField62.setCursor(Cursor.TEXT);
+        HBox hBox25 = new HBox();
+        hBox25.setPrefSize(250, 45);
+        hBox25.setSpacing(5);
+        hBox25.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox25.setTranslateY(-90);
+        hBox25.getChildren().addAll(label117, textFieldPlacering, placering1);
 
-        TextField textField63 = new TextField();
-        textField63.setMaxWidth(100);
-        Tooltip tooltip119 = new Tooltip();
-        tooltip119.setText("Indtast navnet på eventuel køber 3 her");
-        textField63.setTooltip(tooltip119);
-        textField63.setCursor(Cursor.TEXT);
+        HBox hBox26 = new HBox();
+        hBox26.setPrefSize(250, 45);
+        hBox26.setSpacing(5);
+        hBox26.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox26.setTranslateY(-90);
+        hBox26.getChildren().addAll(label118, textField74);
 
-        TextField textField64 = new TextField();
-        textField64.setMaxWidth(100);
-        Tooltip tooltip120 = new Tooltip();
-        tooltip120.setText("Indtast navnet på eventuel køber 4 her");
-        textField64.setTooltip(tooltip120);
-        textField64.setCursor(Cursor.TEXT);
 
-        TextField textField65 = new TextField();
-        textField65.setMaxWidth(100);
-        Tooltip tooltip121 = new Tooltip();
-        tooltip121.setText("Indtast navnet på eventuel køber 5 her");
-        textField65.setTooltip(tooltip121);
-        textField65.setCursor(Cursor.TEXT);
+        getLayout().getChildren().addAll(label109, button64, button65, button66, hBox19, hBox20, hBox22, hBox25, hBox26);
+    }
 
-        TextField textField66 = new TextField();
-        textField66.setMaxWidth(100);
-        Tooltip tooltip122 = new Tooltip();
-        tooltip122.setText("Indtast hvor tanken står her");
-        textField66.setTooltip(tooltip122);
-        textField66.setCursor(Cursor.TEXT);
+    public void redigerFad() {
+        String nummer = textField69.getText();
+        String type = textField70.getText();
+        boolean intakt = checkBox1.isSelected();
+        String antalLiter = textField74.getText();
+        String hylde = placering1.getValue();
+        if (nummer.isEmpty() || type.isEmpty() || antalLiter.isEmpty()) {
+            getGUI().alert("Fejl", "Alle felter skal udfyldes", "Alle felter skal udfyldes", Alert.AlertType.ERROR).showAndWait();
+            return;
+        }
+        int nummerInt;
+        try {
+            nummerInt = Integer.parseInt(nummer);
+        } catch (NumberFormatException e) {
+            getGUI().alert("Fejl", "Nummeret skal være et tal", "Nummeret skal være et tal", Alert.AlertType.ERROR).showAndWait();
+            return;
+        }
+        double antalLiterDouble;
+        try {
+            antalLiterDouble = Double.parseDouble(antalLiter);
+        } catch (NumberFormatException e) {
+            getGUI().alert("Fejl", "Antal liter skal være et tal", "Antal liter skal være et tal", Alert.AlertType.ERROR).showAndWait();
+            return;
+        }
+        Hylde hyldeObjekt = null;
+        if (hylde != null && !hylde.isEmpty()) {
+            for (Hylde hylde1 : getGUI().getController().getHylder()) {
+                if (hylde1.getPlacering().equals(hylde)) {
+                    hyldeObjekt = hylde1;
+                    break;
+                }
+            }
+            if (hyldeObjekt == null) {
+                getGUI().alert("Fejl", "Hylde findes ikke", "Hylde findes ikke", Alert.AlertType.ERROR).showAndWait();
+                return;
+            }
+        }
+        try {
+            getGUI().getController().updatePlastictank(selectedPlastictank, nummerInt, type, antalLiterDouble, intakt, hyldeObjekt);
+            getGUI().switchScene(SceneType.PLASTICTANK);
+        } catch (IllegalArgumentException e) {
+            getGUI().alert("Fejl", "Plastictanken kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR).showAndWait();
+        }
+    }
 
-        TextField textField67 = new TextField();
-        textField67.setMaxWidth(100);
-        Tooltip tooltip123 = new Tooltip();
-        tooltip123.setText("Indtast antal liter her");
-        textField67.setTooltip(tooltip123);
-        textField67.setCursor(Cursor.TEXT);
-
-        CheckBox checkBox10 = new CheckBox();
-        checkBox10.setText("Intakt");
-
-        CheckBox checkBox11 = new CheckBox();
-        checkBox11.setText("Tanken kan anvendes igen");
-
-        CheckBox checkBox12 = new CheckBox();
-        checkBox12.setText("Solgt");
-
-        ImageView imageView15 = XIcon.PLASTIKTANK.getImageView();
-        imageView15.setFitHeight(100);
-        imageView15.setFitWidth(100);
-        imageView15.setTranslateX(10);
-        imageView15.setTranslateY(-10);
-        getLayout().getChildren().add(imageView15);
-
-        Button button57 = new Button("Rediger plastictank");
-        button57.setTranslateX(-150);
-        button57.setTranslateY(-280);
-        button57.setPrefSize(250,45);
-        button57.setOnAction(e -> getGUI().switchScene(this));
-        button57.setFont(XStyle.M_FONT);
-        button57.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button57.setCursor(Cursor.HAND);
-        Tooltip tooltip124 = new Tooltip("Tryk her for at flytte destilleringsvæsken");
-        button57.setTooltip(tooltip124);
-
-        Button button58 = new Button("Annuller");
-        button58.setTranslateX(-150);
-        button58.setTranslateY(-280);
-        button58.setPrefSize(250,45);
-        button58.setOnAction(e -> getGUI().switchScene(this));
-        button58.setFont(XStyle.M_FONT);
-        button58.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button58.setCursor(Cursor.HAND);
-        Tooltip tooltip125 = new Tooltip("Tryk her for at annullere");
-        button58.setTooltip(tooltip125);
-
-        Button button59 = new Button("Gå tilbage til forside");
-        button59.setTranslateX(-150);
-        button59.setTranslateY(-280);
-        button59.setPrefSize(250,45);
-        button59.setOnAction(e -> getGUI().gåTilForside());
-        button59.setFont(XStyle.M_FONT);
-        button59.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button59.setCursor(Cursor.HAND);
-        Tooltip tooltip126 = new Tooltip("Tryk her for at flytte destilleringsvæsken");
-        button59.setTooltip(tooltip126);
-
-        getLayout().getChildren().addAll(label95, label96, label97, label98, label99, label100, label101, label102, label103, label104, label105, label106, textField57, textField58, textField59, textField60, textField61, textField62, textField63, textField64, textField65, textField66, textField67, checkBox10, checkBox11, checkBox12, button57, button58, button59);
+    @Override
+    public void update() {
+        textField69.setText(selectedPlastictank.getNummer() + "");
+        textField70.setText(selectedPlastictank.getNavn());
+        textField74.setText(selectedPlastictank.getVolumen() + "");
+        textFieldPlacering.setText(selectedPlastictank.getHylde() == null ? "" : selectedPlastictank.getHylde().getPlacering());
+        checkBox1.setSelected(selectedPlastictank.isIntakt());
+        placering1.setValue(selectedPlastictank.getHylde() == null ? "" : selectedPlastictank.getHylde().getPlacering());
+        List<String> placeringer = new ArrayList<>();
+        for (Hylde hylde : getGUI().getController().getHylder()) {
+            if (hylde == null || !hylde.hasPlads(selectedPlastictank) || !hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.GIN)) {
+                continue;
+            }
+            placeringer.add(hylde.getPlacering());
+        }
+        FilteredList<String> filteredItems = new FilteredList<>(FXCollections.observableArrayList(placeringer));
+        textFieldPlacering.textProperty().addListener((obs, oldValue, newValue) -> {
+            final String selected = placering1.getSelectionModel().getSelectedItem();
+            if (selected == null || !selected.equals(textFieldPlacering.getText())) {
+                filteredItems.setPredicate(item -> {
+                    if (item == null || item.isEmpty()) {
+                        return false;
+                    } else {
+                        return item.toLowerCase().contains(newValue.toLowerCase());
+                    }
+                });
+            }
+        });
+        placering1.setItems(filteredItems);
+        placering1.valueProperty().addListener((obs, oldValue, newValue) -> {
+            final String selected = placering1.getSelectionModel().getSelectedItem() == null ? "" : placering1.getSelectionModel().getSelectedItem();
+            if (selected != null && !selected.isEmpty() && !selected.equals(textFieldPlacering.getText())) {
+                textFieldPlacering.setText(selected);
+            }
+        });
     }
 
     @Override
@@ -229,8 +279,5 @@ public class RedigerPlastictankScene extends XScene {
     @Override
     public XIcon getIcon() {
         return null;
-    }
-
-    public void setSelectedPlastictank(Plastictank selectedItem) {
     }
 }

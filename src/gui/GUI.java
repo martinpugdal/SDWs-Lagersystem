@@ -3,6 +3,7 @@ package gui;
 import application.controller.Controller;
 import gui.scene.SceneManager;
 import gui.scene.SceneType;
+import gui.setting.XIcon;
 import gui.setting.XScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        switchScene(sceneManager.getScene(SceneType.FORSIDE));
+        switchScene(sceneManager.getScene(SceneType.DESTILLERING));
         stage.setResizable(false);
         stage.show();
     }
@@ -49,12 +50,11 @@ public class GUI extends Application {
         stage.setWidth(width);
         stage.setHeight(height);
         stage.setTitle(scene.getTitle() != null ? scene.getTitle() : sceneManager.getScene(SceneType.FORSIDE).getTitle());
-        if (scene.getIcon() != null) {
-            if (stage.getIcons().isEmpty()) {
-                stage.getIcons().add(scene.getIcon().getImageView().getImage());
-            } else {
-                stage.getIcons().set(0, scene.getIcon().getImageView().getImage());
-            }
+        XIcon icon = scene.getIcon() != null ? scene.getIcon() : XIcon.SALLWHISKY;
+        if (stage.getIcons().isEmpty()) {
+            stage.getIcons().add(icon.getImageView().getImage());
+        } else {
+            stage.getIcons().set(0, icon.getImageView().getImage());
         }
     }
 

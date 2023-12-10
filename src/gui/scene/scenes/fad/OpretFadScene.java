@@ -1,5 +1,6 @@
 package gui.scene.scenes.fad;
 
+import application.model.Drikkelse;
 import application.model.Hylde;
 import application.model.Opbevaring;
 import application.model.Påfyldning;
@@ -218,7 +219,7 @@ public class OpretFadScene extends XScene {
         placering1.setValue(null);
         List<String> placeringer = new ArrayList<>();
         for (Hylde hylde : getGUI().getController().getHylder())  {
-            if (hylde == null || hylde.erOptaget()) {
+            if (hylde == null || hylde.erOptaget() || !hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.WHISKY)) {
                 continue;
             }
             placeringer.add(hylde.getPlacering());
@@ -248,7 +249,6 @@ public class OpretFadScene extends XScene {
         String type = textField70.getText();
         String antalGangeBrugt = textField71.getText();
         boolean intakt = checkBox1.isSelected();
-        String placering = placering1.getValue();
         String antalLiter = textField74.getText();
         String hylde = placering1.getValue();
         if (nummer.isEmpty() || type.isEmpty() || antalGangeBrugt.isEmpty() || antalLiter.isEmpty()) {
@@ -281,19 +281,23 @@ public class OpretFadScene extends XScene {
             return;
         }
         Hylde hyldeObjekt = null;
-        for (Hylde loopHylde : getGUI().getController().getHylder()) {
-            if (loopHylde != null && loopHylde.getPlacering().equals(hylde)) {
-                hyldeObjekt = loopHylde;
-                break;
+        if (hylde != null && !hylde.isEmpty()) {
+            for (Hylde loopHylde : getGUI().getController().getHylder()) {
+                if (loopHylde.getPlacering().equals(hylde)) {
+                    hyldeObjekt = loopHylde;
+                    break;
+                }
             }
-        }
-        if (hyldeObjekt == null) {
-            getGUI().alert("Fejl", "Hylde findes ikke", "Hylde findes ikke", Alert.AlertType.ERROR).showAndWait();
-            return;
+            if (hyldeObjekt == null) {
+                getGUI().alert("Fejl", "Hylde findes ikke", "Hylde findes ikke", Alert.AlertType.ERROR).showAndWait();
+                return;
+            }
         }
         try {
             Opbevaring fad = getGUI().getController().createFad(type, nummerInt, antalGangeBrugtInt, antalLiterDouble, intakt, null);
-            getGUI().getController().addOpbevaringToHylde(fad, hyldeObjekt);
+            if (hyldeObjekt != null) {
+                getGUI().getController().addOpbevaringToHylde(fad, hyldeObjekt);
+            }
             getGUI().switchScene(SceneType.FAD);
         } catch (IllegalArgumentException e) {
             Alert alert = getGUI().alert("Fejl", "Fadet kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
@@ -303,11 +307,11 @@ public class OpretFadScene extends XScene {
 
     @Override
     public String getTitle() {
-        return null;
+        return "Opret fad";
     }
 
     @Override
     public XIcon getIcon() {
-        return null;
+        return XIcon.FAD;
     }
 }

@@ -1,6 +1,7 @@
 package gui.scene.scenes;
 
 import application.model.Destillering;
+import application.model.Opbevaring;
 import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
@@ -16,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+
+import java.util.List;
 
 public class DestilleringScene extends XScene {
 
@@ -43,7 +46,7 @@ public class DestilleringScene extends XScene {
         double buttonHeight = 45;
 
         Button button60 = new Button("Opret destillering");
-        button60.setTranslateX(-550 + buttonWidth);
+        button60.setTranslateX(-550 + buttonWidth + 20);
         button60.setTranslateY(-buttonHeight + 10);
         button60.setPrefSize(buttonWidth, buttonHeight);
         button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETDESTILLERING));
@@ -136,9 +139,9 @@ public class DestilleringScene extends XScene {
         TableColumn<Destillering, Double> destilleringAlkoholProcent = new TableColumn<>("Alkoholprocent");
         destilleringAlkoholProcent.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAlkoholprocent()));
         destilleringTableView.getColumns().add(destilleringAlkoholProcent);
-        TableColumn<Destillering, String> destilleringPåfyldningerColumn = new TableColumn<>("Påfyldninger");
-        destilleringPåfyldningerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPåfyldninger().toString()));
-        destilleringTableView.getColumns().add(destilleringPåfyldningerColumn);
+        TableColumn<Destillering, List<Opbevaring>> destilleringOpbevaringC = new TableColumn<>("Påfyldninger");
+        destilleringOpbevaringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getOpbevaringer() : null));
+        destilleringTableView.getColumns().add(destilleringOpbevaringC);
         destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
         for (TableColumn<Destillering, ?> column : destilleringTableView.getColumns()) {
             column.setStyle("-fx-alignment: CENTER;");

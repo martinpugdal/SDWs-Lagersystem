@@ -33,7 +33,7 @@ public class RåvareScene extends XScene {
         label107.setTranslateY(10);
         label107.setFont(new Font("Arial", 36));
         label107.setTextFill(Color.BLACK);
-        ImageView lagerIcon = XIcon.LAGER.getImageView();
+        ImageView lagerIcon = XIcon.ENEBÆR.getImageView();
         lagerIcon.setPreserveRatio(true);
         lagerIcon.setFitHeight(label107.getFont().getSize() * 2);
         lagerIcon.setFitWidth(label107.getFont().getSize() * 2);

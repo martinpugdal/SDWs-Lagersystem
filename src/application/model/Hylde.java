@@ -46,7 +46,6 @@ public class Hylde {
     public void removeOpbevaring(Opbevaring opbevaring) {
         opbevaringer.remove(opbevaring);
         antalBeholdere -= opbevaring.getPladsmængde();
-        opbevaring.setHylde(null);
     }
 
     public boolean hasPlads(Opbevaring opbevaring) {

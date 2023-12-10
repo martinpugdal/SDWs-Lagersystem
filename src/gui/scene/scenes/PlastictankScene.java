@@ -113,8 +113,8 @@ public class PlastictankScene extends XScene {
         TableColumn<Plastictank, String> intaktC = new TableColumn<>("Intakt");
         intaktC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isIntakt() ? "Ja" : "Nej"));
         plastictankTableView.getColumns().add(intaktC);
-        TableColumn<Plastictank, String> volumenC = new TableColumn<>("Volumen");
-        volumenC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen() + " L"));
+        TableColumn<Plastictank, Double> volumenC = new TableColumn<>("Volumen (L)");
+        volumenC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen()));
         plastictankTableView.getColumns().add(volumenC);
         TableColumn<Plastictank, String> tomC = new TableColumn<>("Tom");
         tomC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isTom() ? "Ja" : "Nej"));

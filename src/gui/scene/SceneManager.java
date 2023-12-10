@@ -31,7 +31,6 @@ public class SceneManager {
     private final XScene opretDestilleringScene;
     private final XScene redigerDestilleringScene;
     private final XScene destilleringFadScene;
-    private final XScene destilleringFlaskeScene;
     private final XScene destilleringTankScene;
     // fad
     private final XScene fadScene;
@@ -66,7 +65,6 @@ public class SceneManager {
         opretDestilleringScene = new OpretDestilleringScene(gui);
         redigerDestilleringScene = new RedigerDestilleringScene(gui);
         destilleringFadScene = new DestilleringFadScene(gui);
-        destilleringFlaskeScene = new DestilleringFlaskeScene(gui);
         destilleringTankScene = new DestilleringTankScene(gui);
         // fad
         fadScene = new FadScene(gui);
@@ -103,7 +101,6 @@ public class SceneManager {
             case OPRETDESTILLERING -> opretDestilleringScene;
             case REDIGERDESTILLERING -> redigerDestilleringScene;
             case DESTILLERINGFAD -> destilleringFadScene;
-            case DESTILLERINGFLASKE -> destilleringFlaskeScene;
             case DESTILLERINGTANK -> destilleringTankScene;
             // fad
             case FAD -> fadScene;

@@ -1,21 +1,25 @@
 package application.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Påfyldning {
 
-    private final Opbevaring opbevaring;
+    private final List<Opbevaring> opbevaringer;
     private final Destillering destillering;
     private LocalDate dato;
     private double liter;
 
-    public Påfyldning(Opbevaring opbevaring, Destillering destillering, double liter, LocalDate dato) {
+    public Påfyldning(Destillering destillering, Opbevaring opbevaring, double liter, LocalDate dato) {
         this.dato = dato;
-        this.opbevaring = opbevaring;
         this.liter = liter;
         this.destillering = destillering;
-        opbevaring.setPåfyldning(this);
-        destillering.addPåfyldning(this);
+        this.opbevaringer = new ArrayList<>();
+        if (opbevaring != null) {
+            addOpbevaring(opbevaring);
+        }
+        destillering.setPåfyldning(this);
     }
 
     public double getLiter() {
@@ -30,11 +34,20 @@ public class Påfyldning {
         return destillering;
     }
 
-    public Opbevaring getOpbevaring() {
-        return opbevaring;
+    public List<Opbevaring> getOpbevaringer() {
+        return opbevaringer;
+    }
+
+    public void addOpbevaring(Opbevaring opbevaring) {
+        opbevaringer.add(opbevaring);
+        opbevaring.setPåfyldning(this);
+    }
+
+    public void removeOpbevaring(Opbevaring opbevaring) {
+        opbevaringer.remove(opbevaring);
     }
 
     public String toString() {
-        return destillering + " " + liter + " liter" + " " + dato;
+        return destillering.toString();
     }
 }

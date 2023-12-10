@@ -2,113 +2,160 @@ package gui.scene.scenes.whiskyflaske;
 
 import application.model.Drikkelse;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import javafx.scene.layout.HBox;
 
 public class OpretWhiskyflaskeScene extends XScene {
+
+    private TextField textField1, textField2, textField3, textField4;
+
     public OpretWhiskyflaskeScene(GUI gui) {
         super(gui);
     }
 
     @Override
     public void initLayout() {
-        //Skærmbillede 21: Opret whiskyflaske
+        double translateY = getGUI().getScreenWidth() * 0.275;
 
-        Label label125 = new Label("Opret whiskyflaske");
-        label125.setTranslateX(0);
-        label125.setTranslateY(150);
-        label125.setFont(XStyle.XXL_FONT);
-        label125.setTextFill(Color.BLACK);
+        Label label109 = new Label("Opret whiskyflaske");
+        label109.setTranslateX(0);
+        label109.setTranslateY(-10);
+        label109.setFont(XStyle.XXL_FONT);
+        ImageView lagerIcon = XIcon.WHISKYFLASKE.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label109.setGraphic(lagerIcon);
+        label109.setContentDisplay(ContentDisplay.LEFT);
 
-        Label label126 = new Label("Nummer");
-        label126.setTranslateX(0);
-        label126.setTranslateY(150);
-        label126.setFont(XStyle.M_FONT);
-        label126.setTextFill(Color.BLACK);
+        Button button64 = new Button("Opret whiskyflaske");
+        button64.setTranslateX(-325);
+        button64.setTranslateY(translateY + 45);
+        button64.setPrefSize(250, 45);
+        button64.setOnAction(e -> opretGinflaske());
+        button64.setFont(XStyle.M_FONT);
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip137 = new Tooltip("Tryk her for at oprette");
+        button64.setTooltip(tooltip137);
 
-        Label label127 = new Label("Navn");
-        label127.setTranslateX(0);
-        label127.setTranslateY(150);
-        label127.setFont(XStyle.M_FONT);
-        label127.setTextFill(Color.BLACK);
+        Button button65 = new Button("Annuller");
+        button65.setTranslateX(0);
+        button65.setTranslateY(translateY);
+        button65.setPrefSize(250, 45);
+        button65.setOnAction(e -> getGUI().switchScene(SceneType.GINFLASKE));
+        button65.setFont(XStyle.M_FONT);
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button65.setCursor(Cursor.HAND);
+        Tooltip tooltip138 = new Tooltip("Tryk her for at annullere");
+        button65.setTooltip(tooltip138);
 
-        Label label128 = new Label("Volumen");
-        label128.setTranslateX(0);
-        label128.setTranslateY(150);
-        label128.setFont(XStyle.M_FONT);
-        label128.setTextFill(Color.BLACK);
+        Button button66 = new Button("Gå tilbage til forside");
+        button66.setTranslateX(325);
+        button66.setTranslateY(translateY - 45);
+        button66.setPrefSize(250, 45);
+        button66.setOnAction(e -> getGUI().gåTilForside());
+        button66.setFont(XStyle.M_FONT);
+        button66.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button66.setCursor(Cursor.HAND);
+        Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button66.setTooltip(tooltip139);
 
-        TextField textField80 = new TextField();
-        textField80.setMaxWidth(100);
-        Tooltip tooltip153 = new Tooltip();
-        tooltip153.setText("Indtast nummeret på whiskyflasken her");
-        textField80.setTooltip(tooltip153);
-        textField80.setCursor(Cursor.TEXT);
+        Label label111 = new Label("Nummer");
+        label111.setAlignment(Pos.BASELINE_RIGHT);
+        label111.setPrefSize(200, 1);
+        label111.setFont(XStyle.M_FONT);
 
-        TextField textField81 = new TextField();
-        textField81.setMaxWidth(100);
-        Tooltip tooltip154 = new Tooltip();
-        tooltip154.setText("Indtast navnet på flasken her");
-        textField81.setTooltip(tooltip154);
-        textField81.setCursor(Cursor.TEXT);
+        Label label112 = new Label("Navn");
+        label112.setAlignment(Pos.BASELINE_RIGHT);
+        label112.setPrefSize(200, 1);
+        label112.setFont(XStyle.M_FONT);
 
-        TextField textField82 = new TextField();
-        textField82.setMaxWidth(100);
-        Tooltip tooltip155 = new Tooltip();
-        tooltip155.setText("Indtast antal liter her");
-        textField82.setTooltip(tooltip155);
-        textField82.setCursor(Cursor.TEXT);
+        Label label113 = new Label("Alkoholprocent");
+        label113.setAlignment(Pos.BASELINE_RIGHT);
+        label113.setPrefSize(200, 1);
+        label113.setFont(XStyle.M_FONT);
 
-        ImageView imageView20 = XIcon.WHISKYFLASKE.getImageView();
-        imageView20.setFitHeight(100);
-        imageView20.setFitWidth(100);
-        imageView20.setTranslateX(10);
-        imageView20.setTranslateY(-10);
-        getLayout().getChildren().add(imageView20);
+        Label label114 = new Label("Antal flasker");
+        label114.setAlignment(Pos.BASELINE_RIGHT);
+        label114.setPrefSize(200, 1);
+        label114.setFont(XStyle.M_FONT);
 
-        Button button74 = new Button("Opret whiskyflaske");
-        button74.setTranslateX(-150);
-        button74.setTranslateY(-280);
-        button74.setPrefSize(250,45);
-        button74.setOnAction(e -> opretWhiskyFlaske(textField80.getText(), textField81.getText(), textField82.getText(), textField82.getText()));
-        button74.setFont(XStyle.M_FONT);
-        button74.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button74.setCursor(Cursor.HAND);
-        Tooltip tooltip156 = new Tooltip("Tryk her for at oprette whiskyflasken");
-        button74.setTooltip(tooltip156);
+        textField1 = new TextField();
+        textField1.setMaxWidth(200);
+        Tooltip tooltip1 = new Tooltip();
+        tooltip1.setText("Indtast nummeret på whiskyflasken her");
+        textField1.setTooltip(tooltip1);
+        textField1.setCursor(Cursor.TEXT);
 
-        Button button75 = new Button("Annuller");
-        button75.setTranslateX(-150);
-        button75.setTranslateY(-280);
-        button75.setPrefSize(250,45);
-        button75.setOnAction(e -> getGUI().switchScene(this));
-        button75.setFont(XStyle.M_FONT);
-        button75.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button75.setCursor(Cursor.HAND);
-        Tooltip tooltip157 = new Tooltip("Tryk her for at annullere");
-        button75.setTooltip(tooltip157);
+        textField2 = new TextField();
+        textField2.setMaxWidth(200);
+        Tooltip tooltip2 = new Tooltip();
+        tooltip2.setText("Indtast navnet på whiskyflasken her");
+        textField2.setTooltip(tooltip2);
+        textField2.setCursor(Cursor.TEXT);
 
-        Button button76 = new Button("Gå tilbage til forside");
-        button76.setTranslateX(-150);
-        button76.setTranslateY(-280);
-        button76.setPrefSize(250,45);
-        button76.setOnAction(e -> getGUI().gåTilForside());
-        button76.setFont(XStyle.M_FONT);
-        button76.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button76.setCursor(Cursor.HAND);
-        Tooltip tooltip158 = new Tooltip("Tryk her for at gå tilbage til forsiden");
-        button76.setTooltip(tooltip158);
+        textField3 = new TextField();
+        textField3.setMaxWidth(200);
+        Tooltip tooltip3 = new Tooltip();
+        tooltip3.setText("Indtast alkoholprocenten på whiskyflasken her");
+        textField3.setTooltip(tooltip3);
+        textField3.setCursor(Cursor.TEXT);
 
-        getLayout().getChildren().addAll(label125, label126, label127, label128, textField80, textField81, textField82, button74, button75, button76);
+        textField4 = new TextField();
+        textField4.setMaxWidth(200);
+        Tooltip tooltip4 = new Tooltip();
+        tooltip4.setText("Indtast antallet af flasker her");
+        textField4.setTooltip(tooltip4);
+        textField4.setCursor(Cursor.TEXT);
+
+        HBox hBox1 = new HBox();
+        hBox1.setPrefSize(250, 45);
+        hBox1.setSpacing(5);
+        hBox1.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox1.setTranslateY(-90);
+        hBox1.getChildren().addAll(label111, textField1);
+
+        HBox hBox2 = new HBox();
+        hBox2.setPrefSize(250, 45);
+        hBox2.setSpacing(5);
+        hBox2.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox2.setTranslateY(-90);
+        hBox2.getChildren().addAll(label112, textField2);
+
+        HBox hBox3 = new HBox();
+        hBox3.setPrefSize(250, 45);
+        hBox3.setSpacing(5);
+        hBox3.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox3.setTranslateY(-90);
+        hBox3.getChildren().addAll(label113, textField3);
+
+        HBox hBox4 = new HBox();
+        hBox4.setPrefSize(250, 45);
+        hBox4.setSpacing(5);
+        hBox4.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox4.setTranslateY(-90);
+        hBox4.getChildren().addAll(label114, textField4);
+
+
+        getLayout().getChildren().addAll(label109, button64, button65, button66, hBox1, hBox2, hBox3, hBox4);
+
     }
 
-    private void opretWhiskyFlaske(String nummer, String navn, String volumen, String antal) {
+    private void opretGinflaske() {
+        String nummer = textField1.getText();
+        String navn = textField2.getText();
+        String volumen = textField3.getText();
+        String antal = textField4.getText();
+
         if (nummer.isEmpty() || navn.isEmpty() || volumen.isEmpty() || antal.isEmpty()) {
             Alert alert = getGUI().alert("Fejl", "Udfyld alle felter", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
             alert.showAndWait();
@@ -140,20 +187,28 @@ public class OpretWhiskyflaskeScene extends XScene {
         }
         try {
             getGUI().getController().createFlaske(Drikkelse.WHISKY, nummerInt, navn, volumenDouble, antalInt);
+            getGUI().switchScene(SceneType.WHISKYFLASKE);
         } catch (IllegalArgumentException e) {
             Alert alert = getGUI().alert("Fejl", "Nummeret er allerede i brug", "Nummeret er allerede i brug", Alert.AlertType.ERROR);
             alert.showAndWait();
-            return;
         }
     }
 
     @Override
+    public void update() {
+        textField1.setText("");
+        textField2.setText("");
+        textField3.setText("");
+        textField4.setText("");
+    }
+
+    @Override
     public String getTitle() {
-        return null;
+        return "Opret whiskyflaske";
     }
 
     @Override
     public XIcon getIcon() {
-        return null;
+        return XIcon.WHISKYFLASKE;
     }
 }

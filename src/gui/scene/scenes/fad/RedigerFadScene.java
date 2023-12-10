@@ -1,5 +1,6 @@
 package gui.scene.scenes.fad;
 
+import application.model.Drikkelse;
 import application.model.Hylde;
 import application.model.opbevaring.Fad;
 import gui.GUI;
@@ -60,7 +61,7 @@ public class RedigerFadScene extends XScene {
         button64.setFont(XStyle.M_FONT);
         button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button64.setCursor(Cursor.HAND);
-        Tooltip tooltip137 = new Tooltip("Tryk her for at oprette");
+        Tooltip tooltip137 = new Tooltip("Tryk her for at redigere");
         button64.setTooltip(tooltip137);
 
         Button button65 = new Button("Annuller");
@@ -244,7 +245,7 @@ public class RedigerFadScene extends XScene {
         Hylde hyldeObjekt = null;
         if (hylde != null && !hylde.isEmpty()) {
             for (Hylde hylde1 : getGUI().getController().getHylder()) {
-                if (hylde1 != null && hylde1.getPlacering().equals(hylde)) {
+                if (hylde1.getPlacering().equals(hylde)) {
                     hyldeObjekt = hylde1;
                     break;
                 }
@@ -258,7 +259,7 @@ public class RedigerFadScene extends XScene {
             getGUI().getController().updateFad(selectedFad, nummerInt, type, antalGangeBrugtInt, antalLiterDouble, intakt, hyldeObjekt);
             getGUI().switchScene(SceneType.FAD);
         } catch (IllegalArgumentException e) {
-            getGUI().alert("Fejl", "Fadet kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR).showAndWait();
+            getGUI().alert("Fejl", "Fadet kunne ikke redigeres", e.getMessage(), Alert.AlertType.ERROR).showAndWait();
         }
     }
 
@@ -273,7 +274,7 @@ public class RedigerFadScene extends XScene {
         placering1.setValue(selectedFad.getHylde() == null ? "" : selectedFad.getHylde().getPlacering());
         List<String> placeringer = new ArrayList<>();
         for (Hylde hylde : getGUI().getController().getHylder()) {
-            if (hylde == null || hylde.erOptaget()) {
+            if (hylde == null || !hylde.hasPlads(selectedFad) || !hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.WHISKY)) {
                 continue;
             }
             placeringer.add(hylde.getPlacering());

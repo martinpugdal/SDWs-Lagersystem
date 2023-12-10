@@ -113,8 +113,8 @@ public class FadScene extends XScene {
         TableColumn<Fad, String> intaktC = new TableColumn<>("Intakt");
         intaktC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isIntakt() ? "Ja" : "Nej"));
         fadTableView.getColumns().add(intaktC);
-        TableColumn<Fad, String> volumenC = new TableColumn<>("Volumen");
-        volumenC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen() + " L"));
+        TableColumn<Fad, Double> volumenC = new TableColumn<>("Volumen (L)");
+        volumenC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen()));
         fadTableView.getColumns().add(volumenC);
         TableColumn<Fad, String> tomC = new TableColumn<>("Tom");
         tomC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().isTom() ? "Ja" : "Nej"));

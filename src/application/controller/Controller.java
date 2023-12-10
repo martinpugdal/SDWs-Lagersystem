@@ -166,14 +166,6 @@ public class Controller {
     }
 
     /**
-     * @param reol
-     * @return
-     */
-    public Hylde createHylde(Reol reol) {
-        return reol.createHylde();
-    }
-
-    /**
      * @param type
      * @param nummer
      * @param antalGangeBrugt
@@ -199,7 +191,22 @@ public class Controller {
         fad.setGangeBrugt(antalGangeBrugt);
         fad.setVolumen(volumen);
         fad.setIntakt(intakt);
-        updateOpbevaringHylde(fad, hylde);
+        if (fad.getHylde() != hylde) {
+            updateOpbevaringHylde(fad, hylde);
+        }
+    }
+
+    public void updatePlastictank(Plastictank plastictank, int nummer, String navn, double volumen, boolean intakt, Hylde hylde) {
+        if ((checkOpbevaringExists(nummer) && plastictank.getNummer() != nummer)) {
+            throw new IllegalArgumentException("Opbevaringen findes allerede med dette nummer");
+        }
+        plastictank.setNummer(nummer);
+        plastictank.setNavn(navn);
+        plastictank.setVolumen(volumen);
+        plastictank.setIntakt(intakt);
+        if (plastictank.getHylde() != hylde) {
+            updateOpbevaringHylde(plastictank, hylde);
+        }
     }
 
     public void addOpbevaringToHylde(Opbevaring opbevaring, Hylde hylde) {
@@ -212,34 +219,32 @@ public class Controller {
         opbevaring.setHylde(hylde);
     }
 
-    public void removeOpbevaringFromHylde(Opbevaring opbevaring, Hylde hylde) {
+    public void removeOpbevaringFromHylde(Opbevaring opbevaring) {
         if (opbevaring.getHylde() == null) {
             throw new IllegalArgumentException("Opbevaringen er ikke på en hylde");
         }
-        hylde.removeOpbevaring(opbevaring);
+        opbevaring.setHylde(null);
     }
 
     public void updateOpbevaringHylde(Opbevaring opbevaring, Hylde hylde) {
-        if (opbevaring.getHylde() != null) {
-            removeOpbevaringFromHylde(opbevaring, opbevaring.getHylde());
-        }
-        if (hylde != null) {
-            addOpbevaringToHylde(opbevaring, hylde);
-        }
+        opbevaring.setHylde(hylde);
     }
 
     public Opbevaring createPlastictank(String navn, int nummer, double volumen, boolean intakt, Påfyldning påfyldning) {
         if (checkOpbevaringExists(nummer)) {
             throw new IllegalArgumentException("Opbevaringen findes allerede med dette nummer");
         }
-        Plastictank plastictank = new Plastictank(nummer, navn, intakt, volumen, påfyldning);
+        Plastictank plastictank = new Plastictank(nummer, navn, intakt, volumen);
         storage.addOpbevaring(plastictank);
         return plastictank;
     }
 
     public void deleteOpbevaring(Opbevaring opbevaring) {
         storage.removeOpbevaring(opbevaring);
-        opbevaring.getHylde().removeOpbevaring(opbevaring);
+        if (opbevaring.getHylde() != null) {
+            opbevaring.getHylde().removeOpbevaring(opbevaring);
+            opbevaring.setHylde(null);
+        }
     }
 
     private boolean checkOpbevaringExists(int nummer) {
@@ -297,7 +302,7 @@ public class Controller {
         if (opbevaring.getPåfyldning() != null) {
             throw new IllegalArgumentException("Opbevaringen er allerede påfyldt");
         }
-        return new Påfyldning(opbevaring, destillering, liter, dato);
+        return new Påfyldning(destillering, opbevaring, liter, dato);
     }
 
     /**
@@ -319,6 +324,16 @@ public class Controller {
             flaske = createWhiskyflaske(nummer, navn, volumen, antal);
         }
         return flaske;
+    }
+
+    public void updateFlaske(Flaske flaske, int nummer, String navn, double volumen, int antal) {
+        if ((checkFlaskeExists(nummer) && flaske.getNummer() != nummer)) {
+            throw new IllegalArgumentException("Flasken findes allerede med dette nummer");
+        }
+        flaske.setNummer(nummer);
+        flaske.setNavn(navn);
+        flaske.setAlkoholprocent(volumen);
+        flaske.setAntal(antal);
     }
 
     /**
@@ -511,24 +526,6 @@ public class Controller {
         Reol a3Reol1 = createReol(afdeling3, ReolType.MELLEM);
         Reol a3Reol2 = createReol(afdeling3, ReolType.STOR);
 
-        // tilføj nogle hylder
-        Hylde a1Reol1Hylde1 = createHylde(a1Reol1);
-        Hylde a1Reol1Hylde2 = createHylde(a1Reol1);
-        Hylde a1Reol1Hylde3 = createHylde(a1Reol1);
-
-        Hylde a1Reol2Hylde1 = createHylde(a1Reol2);
-
-        Hylde a2Reol1Hylde1 = createHylde(a2Reol1);
-        Hylde a2Reol1Hylde2 = createHylde(a2Reol1);
-
-        Hylde a2Reol2Hylde1 = createHylde(a2Reol2);
-        Hylde a2Reol2Hylde2 = createHylde(a2Reol2);
-
-        Hylde a3Reol1Hylde1 = createHylde(a3Reol1);
-
-        Hylde a3Reol2Hylde1 = createHylde(a3Reol2);
-        Hylde a3Reol2Hylde2 = createHylde(a3Reol2);
-
         // tilføj nogle destilleringer
         Destillering destillering1 = createDestillering("NM 77P", 1, 86, 50);
         Destillering destillering2 = createDestillering("NM 77P", 2, 245, 52);
@@ -542,25 +539,25 @@ public class Controller {
         createFlaske(Drikkelse.WHISKY, 123456786, "Whisky 2 Sind", 50.4, 400);
 
         // tilføj nogle råvarer
-        createRåvare("Korn", 100, 100, 100, new int[]{123456789, 123456788});
-        createRåvare("Korn", 100, 100, 100, new int[]{123456787, 123456786});
-        createRåvare("Korn", 100, 100, 100, new int[]{123456789, 123456788});
+        createRåvare("Korn", 100, 11, 2, new int[]{123456789, 123456788});
+        createRåvare("Hvede", 311, 22, 44, new int[]{123456787, 123456786});
+        createRåvare("Byg", 12312, 100, 111, new int[]{123456789, 123456788});
 
         // tilføj nogle opbevaringer
         // fad
         Opbevaring fad1 = createFad("Bourbon", 1, 2, 40, false, null);
-        fad1.setHylde(a2Reol1Hylde1);
+        fad1.setHylde(a2Reol1.getHylde(1));
         Opbevaring fad2 = createFad("Bourbon", 2, 1, 50, true, null);
-        fad2.setHylde(a2Reol1Hylde2);
+        fad2.setHylde(a2Reol1.getHylde(2));
         Opbevaring fad3 = createFad("Sherry", 3, 2, 35, true, null);
-        fad3.setHylde(a2Reol1Hylde1);
+        fad3.setHylde(a2Reol1.getHylde(1));
         // plastictank
-        Opbevaring plastictank1 = createPlastictank("Plastictank 1", 4, 100, true, null);
-        plastictank1.setHylde(a1Reol1Hylde1);
-        Opbevaring plastictank2 = createPlastictank("Plastictank 2", 5, 100, true, null);
-        plastictank2.setHylde(a1Reol1Hylde1);
-        Opbevaring plastictank3 = createPlastictank("Plastictank 3", 6, 100, true, null);
-        plastictank3.setHylde(a1Reol1Hylde2);
+        Opbevaring plastictank1 = createPlastictank("Gin 1 Sind", 4, 125, true, null);
+        plastictank1.setHylde(a1Reol1.getHylde(1));
+        Opbevaring plastictank2 = createPlastictank("Gin 4 Sind", 5, 255, true, null);
+        plastictank2.setHylde(a1Reol1.getHylde(1));
+        Opbevaring plastictank3 = createPlastictank("Gin 7 Sind", 6, 95, true, null);
+        plastictank3.setHylde(a1Reol1.getHylde(2));
 
         // tilføj nogle påfyldninger
         createPåfyldning(fad1, destillering1, LocalDate.now(), 40);

@@ -8,7 +8,6 @@ public class Fad extends Opbevaring {
 
     private String type;
     private int gangeBrugt;
-    private Påfyldning påfyldning;
 
     public Fad(int nr, String type, int gangeBrugt, boolean intakt, double volumen, Påfyldning påfyldning) {
         super(nr, intakt, volumen, påfyldning);

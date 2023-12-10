@@ -14,12 +14,11 @@ public abstract class Opbevaring {
     private Påfyldning påfyldning;
     private Hylde hylde;
 
-    public Opbevaring(int nr, boolean intakt, double volumen, Påfyldning påfyldning) {
+    public Opbevaring(int nr, boolean intakt, double volumen) {
         this.intakt = intakt;
         this.volumen = volumen;
         this.nr = nr;
-        this.påfyldning = påfyldning;
-        this.tom = påfyldning == null;
+        this.tom = true;
     }
 
     public Hylde getHylde() {
@@ -27,22 +26,24 @@ public abstract class Opbevaring {
     }
 
     public void setHylde(Hylde hylde) {
-        if (hylde == null) {
-            throw new IllegalArgumentException("Hylde er ikke oprettet");
-        }
         if (this instanceof Plastictank) {
-            if (hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.WHISKY)) {
+            if (hylde != null && hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.WHISKY)) {
                 throw new IllegalArgumentException("Forkerte opbevaring til denne afdeling, her skal der være whisky");
             }
         } else if (this instanceof Fad) {
-            if (hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.GIN)) {
+            if (hylde != null && hylde.getReol().getAfdeling().getDrikkelse().equals(Drikkelse.GIN)) {
                 throw new IllegalArgumentException("Forkerte opbevaring til denne afdeling, her skal der være gin");
             }
         }
-        if (hylde.erOptaget() || !hylde.hasPlads(this)) {
-            throw new IllegalArgumentException("Der er ikke plads til denne opbevaring");
+        if (hylde != null) {
+            if (hylde.erOptaget() || !hylde.hasPlads(this)) {
+                throw new IllegalArgumentException("Der er ikke plads til denne opbevaring");
+            }
+            hylde.addOpbevaring(this);
         }
-        hylde.addOpbevaring(this);
+        if (this.hylde != null) {
+            this.hylde.removeOpbevaring(this);
+        }
         this.hylde = hylde;
     }
 
@@ -101,7 +102,7 @@ public abstract class Opbevaring {
             throw new IllegalArgumentException("Der er ikke plads til " + liter + " liter i " + this);
         }
         tom = false;
-        påfyldning = new Påfyldning(this, destillering, liter, LocalDate.now());
+        påfyldning = new Påfyldning(destillering, this, liter, LocalDate.now());
     }
 
     public String toString() {
