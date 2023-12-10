@@ -44,7 +44,7 @@ public class OpretLagerScene extends XScene {
         button64.setPrefSize(250, 45);
         button64.setOnAction(e -> opretLager());
         button64.setFont(new Font("Arial", 16));
-        button64.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button64.setCursor(Cursor.HAND);
         Tooltip tooltip137 = new Tooltip("Tryk her for at oprette");
         button64.setTooltip(tooltip137);
@@ -55,7 +55,7 @@ public class OpretLagerScene extends XScene {
         button65.setPrefSize(250, 45);
         button65.setOnAction(e -> getGUI().switchScene(SceneType.LAGER));
         button65.setFont(new Font("Arial", 16));
-        button65.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button65.setCursor(Cursor.HAND);
         Tooltip tooltip138 = new Tooltip("Tryk her for at annullere");
         button65.setTooltip(tooltip138);
@@ -66,7 +66,7 @@ public class OpretLagerScene extends XScene {
         button66.setPrefSize(250, 45);
         button66.setOnAction(e -> getGUI().gåTilForside());
         button66.setFont(new Font("Arial", 16));
-        button66.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        button66.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button66.setCursor(Cursor.HAND);
         Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button66.setTooltip(tooltip139);

@@ -1,5 +1,6 @@
 package gui.scene.scenes.whiskyflaske;
 
+import application.model.flaske.Whiskyflaske;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
@@ -118,5 +119,8 @@ public class RedigerWhiskyflaskeScene extends XScene {
     @Override
     public XIcon getIcon() {
         return null;
+    }
+
+    public void setSelectedWhiskyflaske(Whiskyflaske selectedItem) {
     }
 }

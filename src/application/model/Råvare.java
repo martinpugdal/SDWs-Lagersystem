@@ -22,6 +22,10 @@ public class Råvare {
         brugesTil.add(flaske);
     }
 
+    public void removeBrugesTil(Flaske flaske) {
+        brugesTil.remove(flaske);
+    }
+
     public String getType() {
         return type;
     }

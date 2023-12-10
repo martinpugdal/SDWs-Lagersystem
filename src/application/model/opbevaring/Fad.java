@@ -1,30 +1,23 @@
 package application.model.opbevaring;
 
+import application.model.Destillering;
 import application.model.Opbevaring;
 import application.model.Påfyldning;
-
-import java.time.LocalDate;
 
 public class Fad extends Opbevaring {
 
     private String type;
-    private int gangeBrugt = 0;
+    private int gangeBrugt;
     private Påfyldning påfyldning;
 
-    public Fad(String type, int gangeBrugt, boolean intakt, double volumen, int nr, boolean tom) {
-        super(intakt, volumen, nr, tom, null);
+    public Fad(int nr, String type, int gangeBrugt, boolean intakt, double volumen, Påfyldning påfyldning) {
+        super(nr, intakt, volumen, påfyldning);
         this.type = type;
         this.gangeBrugt = gangeBrugt;
     }
 
-    public Fad(String type, int gangeBrugt, boolean intakt, double volumen, int nr) {
-        this(type, gangeBrugt, intakt, volumen, nr, false);
-    }
-
-    public Fad(String type, int gangeBrugt, boolean intakt, double volumen, int nr, LocalDate påfyldningsDato) {
-        super(intakt, volumen, nr, false, påfyldningsDato);
-        this.type = type;
-        this.gangeBrugt = gangeBrugt;
+    public Fad(int nr, String type, int gangeBrugt, boolean intakt, double volumen) {
+        this(nr, type, gangeBrugt, intakt, volumen, null);
     }
 
     @Override
@@ -33,8 +26,8 @@ public class Fad extends Opbevaring {
     }
 
     @Override
-    public void påfyldes() {
-        super.påfyldes();
+    public void påfyldes(Destillering destillering, double liter) {
+        super.påfyldes(destillering, liter);
         gangeBrugt++;
     }
 
@@ -60,5 +53,10 @@ public class Fad extends Opbevaring {
 
     public void setPåfyldning(Påfyldning påfyldning) {
         this.påfyldning = påfyldning;
+    }
+
+    @Override
+    public String toString() {
+        return getNummer() + " " + type;
     }
 }

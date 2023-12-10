@@ -49,4 +49,8 @@ public class Reol {
     public int getNummer() {
         return nummer;
     }
+
+    public String toString() {
+        return "R" + nummer;
+    }
 }

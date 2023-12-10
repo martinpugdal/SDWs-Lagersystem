@@ -5,13 +5,13 @@ public abstract class Flaske {
 
     private int nummer;
     private String navn;
-    private double volumen;
     private int antal;
+    private double alkoholprocent;
 
-    public Flaske(int nummer, String navn, double volumen, int antal) {
+    public Flaske(int nummer, String navn, double alkoholprocent, int antal) {
         this.nummer = nummer;
         this.navn = navn;
-        this.volumen = volumen;
+        this.alkoholprocent = alkoholprocent;
         this.antal = antal;
     }
 
@@ -23,12 +23,12 @@ public abstract class Flaske {
         this.navn = navn;
     }
 
-    public double getVolumen() {
-        return volumen;
+    public double getAlkoholprocent() {
+        return alkoholprocent;
     }
 
-    public void setVolumen(double volumen) {
-        this.volumen = volumen;
+    public void setAlkoholprocent(double alkoholprocent) {
+        this.alkoholprocent = alkoholprocent;
     }
 
     public int getAntal() {

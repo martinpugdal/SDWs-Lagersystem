@@ -1,22 +1,25 @@
 package application.model;
 
-import application.model.opbevaring.Fad;
-
 import java.time.LocalDate;
 
 public class Påfyldning {
 
-    private final Fad fad;
+    private final Opbevaring opbevaring;
     private final Destillering destillering;
     private LocalDate dato;
+    private double liter;
 
-
-    public Påfyldning(Fad fad, Destillering destillering, LocalDate dato) {
+    public Påfyldning(Opbevaring opbevaring, Destillering destillering, double liter, LocalDate dato) {
         this.dato = dato;
-        this.fad = fad;
+        this.opbevaring = opbevaring;
+        this.liter = liter;
         this.destillering = destillering;
-        fad.setPåfyldning(this);
+        opbevaring.setPåfyldning(this);
         destillering.setPåfyldning(this);
+    }
+
+    public double getLiter() {
+        return liter;
     }
 
     public LocalDate getDato() {
@@ -27,7 +30,7 @@ public class Påfyldning {
         return destillering;
     }
 
-    public Fad getFad() {
-        return fad;
+    public Opbevaring getOpbevaring() {
+        return opbevaring;
     }
 }

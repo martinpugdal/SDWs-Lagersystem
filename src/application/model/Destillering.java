@@ -54,4 +54,8 @@ public class Destillering {
     public void setPåfyldning(Påfyldning påfyldning) {
         this.påfyldning = påfyldning;
     }
+
+    public String toString() {
+        return nummer + " " + navn;
+    }
 }

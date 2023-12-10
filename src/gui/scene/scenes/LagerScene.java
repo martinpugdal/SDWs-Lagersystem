@@ -34,8 +34,7 @@ public class LagerScene extends XScene {
         Label label107 = new Label("Lager");
         label107.setTranslateX(-550);
         label107.setTranslateY(10);
-        label107.setFont(new Font("Arial", 36));
-        label107.setTextFill(Color.BLACK);
+        label107.setFont(XStyle.XXL_FONT);
         ImageView lagerIcon = XIcon.LAGER.getImageView();
         lagerIcon.setPreserveRatio(true);
         lagerIcon.setFitHeight(label107.getFont().getSize() * 2);

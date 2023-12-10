@@ -137,7 +137,7 @@ public class RedigerGinflaskeScene extends XScene {
         return null;
     }
 
-    public void setGinflaske(Ginflaske selectedItem) {
+    public void setSelectedGinflaske(Ginflaske selectedItem) {
         this.selectedGinflaske = selectedItem;
     }
 }

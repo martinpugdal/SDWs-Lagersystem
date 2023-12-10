@@ -1,24 +1,17 @@
 package application.model.opbevaring;
 
+import application.model.Destillering;
 import application.model.Opbevaring;
-
-import java.time.LocalDate;
+import application.model.Påfyldning;
 
 public class Plastictank extends Opbevaring {
 
     private String navn;
+    private int årgang;
 
-    public Plastictank(String navn, boolean intakt, double volumen, int nr, boolean tom) {
-        super(intakt, volumen, nr, tom, null);
-        this.navn = navn;
-    }
 
-    public Plastictank(String navn, boolean intakt, double volumen, int nr) {
-        this(navn, intakt, volumen, nr, false);
-    }
-
-    public Plastictank(String navn, boolean intakt, double volumen, int nr, LocalDate påfyldningsDato) {
-        super(intakt, volumen, nr, false, påfyldningsDato);
+    public Plastictank(int nr, String navn, boolean intakt, double volumen, Påfyldning påfyldning) {
+        super(nr, intakt, volumen, påfyldning);
         this.navn = navn;
     }
 
@@ -30,12 +23,27 @@ public class Plastictank extends Opbevaring {
         this.navn = navn;
     }
 
+    public int getÅrgang() {
+        return årgang;
+    }
+
+    public void setÅrgang(int årgang) {
+        this.årgang = årgang;
+    }
+
+    @Override
     public String toString() {
-        return "PlastictankScene: " + navn;
+        return navn + " " + årgang;
     }
 
     @Override
     public int getPladsmængde() {
         return 2;
+    }
+
+    @Override
+    public void påfyldes(Destillering destillering, double liter) {
+        super.påfyldes(destillering, liter);
+        årgang = destillering.getPåfyldning().getDato().getYear();
     }
 }

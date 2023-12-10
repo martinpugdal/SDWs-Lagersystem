@@ -1,236 +1,304 @@
 package gui.scene.scenes.fad;
 
+import application.model.Hylde;
+import application.model.Opbevaring;
+import application.model.Påfyldning;
+import application.model.opbevaring.Fad;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class OpretFadScene extends XScene {
+
+    private TextField textField69, textField70, textField71, textFieldPlacering, textField74;
+    private CheckBox checkBox1;
+    private ComboBox<String> placering1;
+
     public OpretFadScene(GUI gui) {
         super(gui);
     }
 
     @Override
     public void initLayout() {
-        //Skærmbillede 12: Opret fad
+        double translateY = getGUI().getScreenWidth() * 0.275;
 
-        Label label55 = new Label("Opret fad");
-        label55.setTranslateX(0);
-        label55.setTranslateY(150);
-        label55.setFont(XStyle.XXL_FONT);
-        label55.setTextFill(Color.BLACK);
+        Label label109 = new Label("Opret fad");
+        label109.setTranslateX(0);
+        label109.setTranslateY(-10);
+        label109.setFont(XStyle.XXL_FONT);
+        ImageView lagerIcon = XIcon.FAD.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label109.setGraphic(lagerIcon);
+        label109.setContentDisplay(ContentDisplay.LEFT);
 
-        Label label56 = new Label("Nummer");
-        label56.setTranslateX(0);
-        label56.setTranslateY(150);
-        label56.setFont(XStyle.M_FONT);
-        label56.setTextFill(Color.BLACK);
+        Button button64 = new Button("Opret fad");
+        button64.setTranslateX(-325);
+        button64.setTranslateY(translateY + 45);
+        button64.setPrefSize(250, 45);
+        button64.setOnAction(e -> opretFad());
+        button64.setFont(XStyle.M_FONT);
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip137 = new Tooltip("Tryk her for at oprette");
+        button64.setTooltip(tooltip137);
 
-        Label label57 = new Label("Type");
-        label57.setTranslateX(0);
-        label57.setTranslateY(150);
-        label57.setFont(XStyle.M_FONT);
-        label57.setTextFill(Color.BLACK);
+        Button button65 = new Button("Annuller");
+        button65.setTranslateX(0);
+        button65.setTranslateY(translateY);
+        button65.setPrefSize(250, 45);
+        button65.setOnAction(e -> getGUI().switchScene(SceneType.FAD));
+        button65.setFont(XStyle.M_FONT);
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button65.setCursor(Cursor.HAND);
+        Tooltip tooltip138 = new Tooltip("Tryk her for at annullere");
+        button65.setTooltip(tooltip138);
 
-        Label label58 = new Label("Antal gange brugt");
-        label58.setTranslateX(0);
-        label58.setTranslateY(150);
-        label58.setFont(XStyle.M_FONT);
-        label58.setTextFill(Color.BLACK);
+        Button button66 = new Button("Gå tilbage til forside");
+        button66.setTranslateX(325);
+        button66.setTranslateY(translateY - 45);
+        button66.setPrefSize(250, 45);
+        button66.setOnAction(e -> getGUI().gåTilForside());
+        button66.setFont(XStyle.M_FONT);
+        button66.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button66.setCursor(Cursor.HAND);
+        Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button66.setTooltip(tooltip139);
 
-        Label label59 = new Label("Seneste tømningsdato");
-        label59.setTranslateX(0);
-        label59.setTranslateY(150);
-        label59.setFont(XStyle.M_FONT);
-        label59.setTextFill(Color.BLACK);
+        Label label111 = new Label("Nummer");
+        label111.setAlignment(Pos.BASELINE_RIGHT);
+        label111.setPrefSize(200, 1);
+        label111.setFont(XStyle.M_FONT);
 
-        Label label60 = new Label("Påfyldningsdato");
-        label60.setTranslateX(0);
-        label60.setTranslateY(150);
-        label60.setFont(XStyle.M_FONT);
-        label60.setTextFill(Color.BLACK);
+        Label label112 = new Label("Type");
+        label112.setAlignment(Pos.BASELINE_RIGHT);
+        label112.setPrefSize(200, 1);
+        label112.setFont(new Font("Arial", 16));
 
-        Label label61 = new Label("Solgt til 1");
-        label61.setTranslateX(0);
-        label61.setTranslateY(150);
-        label61.setFont(XStyle.M_FONT);
-        label61.setTextFill(Color.BLACK);
+        Label label113 = new Label("Antal gange brugt");
+        label113.setAlignment(Pos.BASELINE_RIGHT);
+        label113.setPrefSize(200, 1);
+        label113.setFont(new Font("Arial", 16));
 
-        Label label62 = new Label("Solgt til 2");
-        label62.setTranslateX(0);
-        label62.setTranslateY(150);
-        label62.setFont(XStyle.M_FONT);
-        label62.setTextFill(Color.BLACK);
+        Label label114 = new Label("Intakt");
+        label114.setAlignment(Pos.BASELINE_RIGHT);
+        label114.setPrefSize(200, 1);
+        label114.setFont(new Font("Arial", 16));
 
-        Label label63 = new Label("Solgt til 3");
-        label63.setTranslateX(0);
-        label63.setTranslateY(150);
-        label63.setFont(XStyle.M_FONT);
-        label63.setTextFill(Color.BLACK);
+        Label label117 = new Label("Placering");
+        label117.setAlignment(Pos.BASELINE_RIGHT);
+        label117.setPrefSize(200, 1);
+        label117.setFont(new Font("Arial", 16));
 
-        Label label64 = new Label("Solgt til 4");
-        label64.setTranslateX(0);
-        label64.setTranslateY(150);
-        label64.setFont(XStyle.M_FONT);
-        label64.setTextFill(Color.BLACK);
+        Label label118 = new Label("Antal liter");
+        label118.setAlignment(Pos.BASELINE_RIGHT);
+        label118.setPrefSize(200, 1);
+        label118.setFont(new Font("Arial", 16));
 
-        Label label65 = new Label("Solgt til 5");
-        label65.setTranslateX(0);
-        label65.setTranslateY(150);
-        label65.setFont(XStyle.M_FONT);
-        label65.setTextFill(Color.BLACK);
+        textField69 = new TextField();
+        textField69.setMaxWidth(200);
+        Tooltip tooltip131 = new Tooltip();
+        tooltip131.setText("Indtast nummeret på fadet her");
+        textField69.setTooltip(tooltip131);
+        textField69.setCursor(Cursor.TEXT);
 
-        Label label66 = new Label("Står ved");
-        label66.setTranslateX(0);
-        label66.setTranslateY(150);
-        label66.setFont(XStyle.M_FONT);
-        label66.setTextFill(Color.BLACK);
+        textField70 = new TextField();
+        textField70.setMaxWidth(200);
+        Tooltip tooltip133 = new Tooltip();
+        tooltip133.setText("Indtast type for fadet her");
+        textField70.setTooltip(tooltip133);
+        textField70.setCursor(Cursor.TEXT);
 
-        Label label67 = new Label("Antal liter");
-        label67.setTranslateX(0);
-        label67.setTranslateY(150);
-        label67.setFont(XStyle.M_FONT);
-        label67.setTextFill(Color.BLACK);
+        textField71 = new TextField();
+        textField71.setMaxWidth(200);
+        Tooltip tooltip134 = new Tooltip();
+        tooltip134.setText("Indtast antal gange fadet er brugt her");
+        textField71.setTooltip(tooltip134);
+        textField71.setCursor(Cursor.TEXT);
 
-        TextField textField22 = new TextField();
-        textField22.setMaxWidth(100);
-        Tooltip tooltip65 = new Tooltip();
-        tooltip65.setText("Indtast nummeret på fadet her");
-        textField22.setTooltip(tooltip65);
-        textField22.setCursor(Cursor.TEXT);
+        checkBox1 = new CheckBox();
+        checkBox1.setMaxWidth(200);
+        Tooltip tooltip135 = new Tooltip();
+        tooltip135.setText("Aktivere hvis fadet er intakt");
+        checkBox1.setTooltip(tooltip135);
+        checkBox1.setCursor(Cursor.TEXT);
 
-        TextField textField23 = new TextField();
-        textField23.setMaxWidth(100);
-        Tooltip tooltip66 = new Tooltip();
-        tooltip66.setText("Indtast typen af fad her");
-        textField23.setTooltip(tooltip66);
-        textField23.setCursor(Cursor.TEXT);
+        textFieldPlacering = new TextField();
+        textFieldPlacering.setMaxWidth(200);
+        Tooltip tooltip18 = new Tooltip();
+        tooltip18.setText("Indtast hvor fadet står her");
+        textFieldPlacering.setTooltip(tooltip18);
+        textFieldPlacering.setCursor(Cursor.TEXT);
+        placering1 = new ComboBox<>();
+        placering1.setMaxWidth(200);
+        Tooltip tooltip2 = new Tooltip();
+        tooltip2.setText("Vælg placeringen af fadet her");
+        placering1.setTooltip(tooltip2);
+        placering1.setCursor(Cursor.TEXT);
 
-        TextField textField24 = new TextField();
-        textField24.setMaxWidth(100);
-        Tooltip tooltip67 = new Tooltip();
-        tooltip67.setText("Indtast antallet af gange fadet har været brugt her");
-        textField24.setTooltip(tooltip67);
-        textField24.setCursor(Cursor.TEXT);
+        textField74 = new TextField();
+        textField74.setMaxWidth(200);
+        Tooltip tooltip3 = new Tooltip();
+        tooltip139.setText("Indtast antal liter på fadet her");
+        textField74.setTooltip(tooltip3);
+        textField74.setCursor(Cursor.TEXT);
 
-        TextField textField25 = new TextField();
-        textField25.setMaxWidth(100);
-        Tooltip tooltip68 = new Tooltip();
-        tooltip68.setText("Indtast datoen for hvornår fadet senest har været tømt her");
-        textField25.setTooltip(tooltip68);
-        textField25.setCursor(Cursor.TEXT);
+        HBox hBox19 = new HBox();
+        hBox19.setPrefSize(250, 45);
+        hBox19.setSpacing(5);
+        hBox19.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox19.setTranslateY(-90);
+        hBox19.getChildren().addAll(label111, textField69);
 
-        TextField textField26 = new TextField();
-        textField26.setMaxWidth(100);
-        Tooltip tooltip69 = new Tooltip();
-        tooltip69.setText("Indtast datoen for hvornår fadet er blevet fyldt her");
-        textField26.setTooltip(tooltip69);
-        textField26.setCursor(Cursor.TEXT);
+        HBox hBox20 = new HBox();
+        hBox20.setPrefSize(250, 45);
+        hBox20.setSpacing(5);
+        hBox20.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox20.setTranslateY(-90);
+        hBox20.getChildren().addAll(label112, textField70);
 
-        TextField textField27 = new TextField();
-        textField27.setMaxWidth(100);
-        Tooltip tooltip70 = new Tooltip();
-        tooltip70.setText("Indtast navnet på eventuel køber 1 her");
-        textField27.setTooltip(tooltip70);
-        textField27.setCursor(Cursor.TEXT);
+        HBox hBox21 = new HBox();
+        hBox21.setPrefSize(250, 45);
+        hBox21.setSpacing(5);
+        hBox21.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox21.setTranslateY(-90);
+        hBox21.getChildren().addAll(label113, textField71);
 
-        TextField textField28 = new TextField();
-        textField28.setMaxWidth(100);
-        Tooltip tooltip71 = new Tooltip();
-        tooltip71.setText("Indtast navnet på eventuel køber 2 her");
-        textField28.setTooltip(tooltip71);
-        textField28.setCursor(Cursor.TEXT);
+        HBox hBox22 = new HBox();
+        hBox22.setPrefSize(250, 45);
+        hBox22.setSpacing(5);
+        hBox22.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox22.setTranslateY(-90);
+        hBox22.getChildren().addAll(label114, checkBox1);
 
-        TextField textField29 = new TextField();
-        textField29.setMaxWidth(100);
-        Tooltip tooltip72 = new Tooltip();
-        tooltip72.setText("Indtast navnet på eventuel køber 3 her");
-        textField29.setTooltip(tooltip72);
-        textField29.setCursor(Cursor.TEXT);
+        HBox hBox25 = new HBox();
+        hBox25.setPrefSize(250, 45);
+        hBox25.setSpacing(5);
+        hBox25.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox25.setTranslateY(-90);
+        hBox25.getChildren().addAll(label117, textFieldPlacering, placering1);
 
-        TextField textField30 = new TextField();
-        textField30.setMaxWidth(100);
-        Tooltip tooltip73 = new Tooltip();
-        tooltip73.setText("Indtast navnet på eventuel køber 4 her");
-        textField30.setTooltip(tooltip73);
-        textField30.setCursor(Cursor.TEXT);
+        HBox hBox26 = new HBox();
+        hBox26.setPrefSize(250, 45);
+        hBox26.setSpacing(5);
+        hBox26.setTranslateX(getGUI().getScreenHeight() * 0.5 + 125);
+        hBox26.setTranslateY(-90);
+        hBox26.getChildren().addAll(label118, textField74);
 
-        TextField textField31 = new TextField();
-        textField31.setMaxWidth(100);
-        Tooltip tooltip74 = new Tooltip();
-        tooltip74.setText("Indtast navnet på eventuel køber 5 her");
-        textField31.setTooltip(tooltip74);
-        textField31.setCursor(Cursor.TEXT);
 
-        TextField textField32 = new TextField();
-        textField32.setMaxWidth(100);
-        Tooltip tooltip75 = new Tooltip();
-        tooltip75.setText("Indtast hvor fadet står her");
-        textField32.setTooltip(tooltip75);
-        textField32.setCursor(Cursor.TEXT);
+        getLayout().getChildren().addAll(label109, button64, button65, button66, hBox19, hBox20, hBox21, hBox22, hBox25, hBox26);
+    }
 
-        TextField textField33 = new TextField();
-        textField33.setMaxWidth(100);
-        Tooltip tooltip76 = new Tooltip();
-        tooltip76.setText("Indtast antal liter på fadet her");
-        textField33.setTooltip(tooltip76);
-        textField33.setCursor(Cursor.TEXT);
+    @Override
+    public void update() {
+        textField69.setText("");
+        textField70.setText("");
+        textField71.setText("");
+        textField74.setText("");
+        textFieldPlacering.setText("");
+        checkBox1.setSelected(false);
+        placering1.setValue(null);
+        List<String> placeringer = new ArrayList<>();
+        for (Hylde hylde : getGUI().getController().getHylder())  {
+            if (hylde == null || hylde.erOptaget()) {
+                continue;
+            }
+            placeringer.add(hylde.getPlacering());
+        }
+        FilteredList<String> filteredItems = new FilteredList<>(FXCollections.observableArrayList(placeringer));
+        textFieldPlacering.textProperty().addListener((obs, oldValue, newValue) -> {
+            final String selected = placering1.getSelectionModel().getSelectedItem();
+            if (selected == null || !selected.equals(textFieldPlacering.getText())) {
+                filteredItems.setPredicate(item -> {
+                    if (item == null || item.isEmpty()) {
+                        return false;
+                    } else {
+                        return item.toLowerCase().contains(newValue.toLowerCase());
+                    }
+                });
+            }
+        });
+        placering1.setItems(filteredItems);
+        placering1.valueProperty().addListener((obs, oldValue, newValue) -> {
+            final String selected = placering1.getSelectionModel().getSelectedItem() == null ? "" : placering1.getSelectionModel().getSelectedItem();
+            textFieldPlacering.setText(selected);
+        });
+    }
 
-        CheckBox checkBox1 = new CheckBox();
-        checkBox1.setText("Intakt");
-
-        CheckBox checkBox2 = new CheckBox();
-        checkBox2.setText("Fadet kan anvendes igen");
-
-        CheckBox checkBox3 = new CheckBox();
-        checkBox3.setText("Solgt");
-
-        ImageView imageView11 = XIcon.FAD.getImageView();
-        imageView11.setFitHeight(100);
-        imageView11.setFitWidth(100);
-        imageView11.setTranslateX(10);
-        imageView11.setTranslateY(-10);
-        getLayout().getChildren().add(imageView11);
-
-        Button button44 = new Button("Opret fad");
-        button44.setTranslateX(-150);
-        button44.setTranslateY(-280);
-        button44.setPrefSize(250,45);
-        button44.setOnAction(e -> getGUI().switchScene(this));
-        button44.setFont(XStyle.M_FONT);
-        button44.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button44.setCursor(Cursor.HAND);
-        Tooltip tooltip77 = new Tooltip("Tryk her for at oprette fadet");
-        button44.setTooltip(tooltip77);
-
-        Button button45 = new Button("Gå tilbage til oversigt over fade");
-        button45.setTranslateX(-150);
-        button45.setTranslateY(-280);
-        button45.setPrefSize(250,45);
-        button45.setOnAction(e -> getGUI().switchScene(this));
-        button45.setFont(XStyle.M_FONT);
-        button45.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button45.setCursor(Cursor.HAND);
-        Tooltip tooltip78 = new Tooltip("Tryk her for at gå tilbage til oversigten");
-        button45.setTooltip(tooltip78);
-
-        Button button46 = new Button("Gå tilbage til forside");
-        button46.setTranslateX(-150);
-        button46.setTranslateY(-280);
-        button46.setPrefSize(250,45);
-        button46.setOnAction(e -> getGUI().gåTilForside());
-        button46.setFont(XStyle.M_FONT);
-        button46.setStyle("-fx-background-color: black; -fx-text-fill: white;");
-        button46.setCursor(Cursor.HAND);
-        Tooltip tooltip79 = new Tooltip("Tryk her for at gå tilbage til forsiden");
-        button46.setTooltip(tooltip79);
-
-        getLayout().getChildren().addAll(label55, label56, label57, label58, label59, label60, label61, label62, label63, label64, label65, label66, label67, textField22, textField23, textField24, textField25, textField26, textField27, textField28, textField29, textField30, textField31, textField32, textField33, checkBox1, checkBox2, checkBox3, button44, button45, button46);
+    private void opretFad() {
+        String nummer = textField69.getText();
+        String type = textField70.getText();
+        String antalGangeBrugt = textField71.getText();
+        boolean intakt = checkBox1.isSelected();
+        String placering = placering1.getValue();
+        String antalLiter = textField74.getText();
+        String hylde = placering1.getValue();
+        if (nummer.isEmpty() || type.isEmpty() || antalGangeBrugt.isEmpty() || antalLiter.isEmpty()) {
+            Alert alert = getGUI().alert("Fejl", "Udfyld alle felter", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        int nummerInt;
+        try {
+            nummerInt = Integer.parseInt(nummer);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Nummer skal være et tal", "Nummer skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        int antalGangeBrugtInt;
+        try {
+            antalGangeBrugtInt = Integer.parseInt(antalGangeBrugt);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Antal gange brugt skal være et tal", "Antal gange brugt skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        double antalLiterDouble;
+        try {
+            antalLiterDouble = Double.parseDouble(antalLiter);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Antal liter skal være et tal", "Antal liter skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        Hylde hyldeObjekt = null;
+        for (Hylde loopHylde : getGUI().getController().getHylder()) {
+            if (loopHylde != null && loopHylde.getPlacering().equals(hylde)) {
+                hyldeObjekt = loopHylde;
+                break;
+            }
+        }
+        if (hyldeObjekt == null) {
+            getGUI().alert("Fejl", "Hylde findes ikke", "Hylde findes ikke", Alert.AlertType.ERROR).showAndWait();
+            return;
+        }
+        try {
+            Opbevaring fad = getGUI().getController().createFad(type, nummerInt, antalGangeBrugtInt, antalLiterDouble, intakt, null);
+            getGUI().getController().addOpbevaringToHylde(fad, hyldeObjekt);
+            getGUI().switchScene(SceneType.FAD);
+        } catch (IllegalArgumentException e) {
+            Alert alert = getGUI().alert("Fejl", "Fadet kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
+            alert.showAndWait();
+        }
     }
 
     @Override

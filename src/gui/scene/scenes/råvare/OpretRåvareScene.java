@@ -6,16 +6,15 @@ import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-
 public class OpretRåvareScene extends XScene {
+
+    private TextField textField69, textField70, textField71, textField72, textField73;
 
     public OpretRåvareScene(GUI gui) {
         super(gui);
@@ -23,117 +22,191 @@ public class OpretRåvareScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 9: Opret råvare
+        double translateY = getGUI().getScreenWidth() * 0.275;
 
-        Label label41 = new Label("Opret råvare");
-        label41.setTranslateX(0);
-        label41.setTranslateY(150);
-        label41.setFont(new Font("Arial", 36));
-        label41.setTextFill(Color.BLACK);
+        Label label109 = new Label("Opret råvare");
+        label109.setTranslateX(0);
+        label109.setTranslateY(-70);
+        label109.setFont(new Font("Arial", 36));
+        label109.setTextFill(Color.BLACK);
+        ImageView lagerIcon = XIcon.ENEBÆR.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label109.setGraphic(lagerIcon);
+        label109.setContentDisplay(ContentDisplay.LEFT);
 
-        Label label42 = new Label("Navn");
-        label42.setTranslateX(0);
-        label42.setTranslateY(150);
-        label42.setFont(new Font("Arial", 16));
-        label42.setTextFill(Color.BLACK);
+        Button button64 = new Button("Opret råvare");
+        button64.setTranslateX(-325);
+        button64.setTranslateY(translateY + 45);
+        button64.setPrefSize(250, 45);
+        button64.setOnAction(e -> opretRåvare());
+        button64.setFont(new Font("Arial", 16));
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip137 = new Tooltip("Tryk her for at oprette");
+        button64.setTooltip(tooltip137);
 
-        Label label43 = new Label("Antal");
-        label43.setTranslateX(0);
-        label43.setTranslateY(150);
-        label43.setFont(new Font("Arial", 16));
-        label43.setTextFill(Color.BLACK);
+        Button button65 = new Button("Annuller");
+        button65.setTranslateX(0);
+        button65.setTranslateY(translateY);
+        button65.setPrefSize(250, 45);
+        button65.setOnAction(e -> getGUI().switchScene(SceneType.RÅVARE));
+        button65.setFont(new Font("Arial", 16));
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button65.setCursor(Cursor.HAND);
+        Tooltip tooltip138 = new Tooltip("Tryk her for at annullere");
+        button65.setTooltip(tooltip138);
 
-        Label label44 = new Label("Liter");
-        label44.setTranslateX(0);
-        label44.setTranslateY(150);
-        label44.setFont(new Font("Arial", 16));
-        label44.setTextFill(Color.BLACK);
+        Button button66 = new Button("Gå tilbage til forside");
+        button66.setTranslateX(325);
+        button66.setTranslateY(translateY - 45);
+        button66.setPrefSize(250, 45);
+        button66.setOnAction(e -> getGUI().gåTilForside());
+        button66.setFont(new Font("Arial", 16));
+        button66.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button66.setCursor(Cursor.HAND);
+        Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button66.setTooltip(tooltip139);
 
-        Label label45 = new Label("Kilogram");
-        label45.setTranslateX(0);
-        label45.setTranslateY(150);
-        label45.setFont(new Font("Arial", 16));
-        label45.setTextFill(Color.BLACK);
+        Label label111 = new Label("Type");
+        label111.setPrefSize(100, 1);
+        label111.setFont(XStyle.M_FONT);
 
-        Label label46 = new Label("Bruges til");
-        label46.setTranslateX(0);
-        label46.setTranslateY(150);
-        label46.setFont(new Font("Arial", 16));
-        label46.setTextFill(Color.BLACK);
+        Label label112 = new Label("Antal");
+        label112.setPrefSize(100, 1);
+        label112.setFont(new Font("Arial", 16));
 
-        TextField textField12 = new TextField();
-        textField12.setMaxWidth(100);
-        Tooltip tooltip45 = new Tooltip();
-        tooltip45.setText("Indtast navn på råvare her");
-        textField12.setTooltip(tooltip45);
-        textField12.setCursor(Cursor.TEXT);
+        Label label113 = new Label("Liter");
+        label113.setPrefSize(100, 1);
+        label113.setFont(new Font("Arial", 16));
 
-        TextField textField13 = new TextField();
-        textField13.setMaxWidth(100);
-        Tooltip tooltip46 = new Tooltip();
-        tooltip46.setText("Indtast antallet af råvare her");
-        textField13.setTooltip(tooltip46);
-        textField13.setCursor(Cursor.TEXT);
+        Label label114 = new Label("Kilogram");
+        label114.setPrefSize(100, 1);
+        label114.setFont(new Font("Arial", 16));
 
-        TextField textField14 = new TextField();
-        textField14.setMaxWidth(100);
-        Tooltip tooltip47 = new Tooltip();
-        tooltip47.setText("Indtast antal liter her");
-        textField14.setTooltip(tooltip47);
-        textField14.setCursor(Cursor.TEXT);
+        Label label115 = new Label("Bruges til");
+        label115.setPrefSize(100, 1);
+        label115.setFont(new Font("Arial", 16));
 
-        TextField textField15 = new TextField();
-        textField15.setMaxWidth(100);
-        Tooltip tooltip48 = new Tooltip();
-        tooltip48.setText("Indtast antal kilo her");
-        textField15.setTooltip(tooltip48);
-        textField15.setCursor(Cursor.TEXT);
+        textField69 = new TextField();
+        textField69.setMaxWidth(100);
+        Tooltip tooltip131 = new Tooltip();
+        tooltip131.setText("Indtast type på råvare her");
+        textField69.setTooltip(tooltip131);
+        textField69.setCursor(Cursor.TEXT);
 
-        TextField textField16 = new TextField();
-        textField16.setMaxWidth(100);
-        Tooltip tooltip49 = new Tooltip();
-        tooltip49.setText("Indtast hvilke produkter råvaren bruges til her");
-        textField16.setTooltip(tooltip49);
-        textField16.setCursor(Cursor.TEXT);
+        textField70 = new TextField();
+        textField70.setMaxWidth(100);
+        Tooltip tooltip133 = new Tooltip();
+        tooltip133.setText("Indtast antallet af råvare her");
+        textField70.setTooltip(tooltip133);
+        textField70.setCursor(Cursor.TEXT);
 
-        Button button34 = new Button("Opret råvare");
-        button34.setTranslateX(-150);
-        button34.setTranslateY(-280);
-        button34.setPrefSize(250, 45);
-        button34.setOnAction(e -> opretRåvare());
-        button34.setFont(new Font("Arial", 16));
-        button34.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button34.setCursor(Cursor.HAND);
-        Tooltip tooltip50 = new Tooltip("Tryk her for at oprette råvaren");
-        button34.setTooltip(tooltip50);
+        textField71 = new TextField();
+        textField71.setMaxWidth(100);
+        Tooltip tooltip134 = new Tooltip();
+        tooltip134.setText("Indtast antal liter her");
+        textField71.setTooltip(tooltip134);
+        textField71.setCursor(Cursor.TEXT);
 
-        Button button35 = new Button("Tilbage til råvare oversigten");
-        button35.setTranslateX(-150);
-        button35.setTranslateY(-280);
-        button35.setPrefSize(250, 45);
-        button35.setOnAction(e -> getGUI().switchScene(SceneType.RÅVARE));
-        button35.setFont(new Font("Arial", 16));
-        button35.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button35.setCursor(Cursor.HAND);
-        Tooltip tooltip51 = new Tooltip("Tryk her for at annullere og vende tilbage til oversigten");
-        button35.setTooltip(tooltip51);
+        textField72 = new TextField();
+        textField72.setMaxWidth(100);
+        Tooltip tooltip135 = new Tooltip();
+        tooltip135.setText("Indtast antal kilo her");
+        textField72.setTooltip(tooltip135);
+        textField72.setCursor(Cursor.TEXT);
 
-        Button button36 = new Button("Gå tilbage til forside");
-        button36.setTranslateX(-150);
-        button36.setTranslateY(-280);
-        button36.setPrefSize(250, 45);
-        button36.setOnAction(e -> getGUI().gåTilForside());
-        button36.setFont(new Font("Arial", 16));
-        button36.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button36.setCursor(Cursor.HAND);
-        Tooltip tooltip52 = new Tooltip("Tryk her for at gå tilbage til forsiden");
-        button36.setTooltip(tooltip52);
+        textField73 = new TextField();
+        textField73.setMaxWidth(100);
+        Tooltip tooltip136 = new Tooltip();
+        tooltip136.setText("Indtast hvilke produkter råvaren bruges til her (adskil med komma hvis flere)");
+        textField73.setTooltip(tooltip136);
+        textField73.setCursor(Cursor.TEXT);
 
-        getLayout().getChildren().addAll(label41, label42, label43, label44, label45, label46, textField12, textField13, textField14, textField15, textField16, button34, button35, button36);
+        HBox hBox19 = new HBox();
+        hBox19.setPrefSize(250, 45);
+        hBox19.setSpacing(5);
+        hBox19.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox19.setTranslateY(-90);
+        hBox19.getChildren().addAll(label111, textField69);
+
+        HBox hBox20 = new HBox();
+        hBox20.setPrefSize(250, 45);
+        hBox20.setSpacing(5);
+        hBox20.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox20.setTranslateY(-90);
+        hBox20.getChildren().addAll(label112, textField70);
+
+        HBox hBox21 = new HBox();
+        hBox21.setPrefSize(250, 45);
+        hBox21.setSpacing(5);
+        hBox21.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox21.setTranslateY(-90);
+        hBox21.getChildren().addAll(label113, textField71);
+
+        HBox hBox22 = new HBox();
+        hBox22.setPrefSize(250, 45);
+        hBox22.setSpacing(5);
+        hBox22.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox22.setTranslateY(-90);
+        hBox22.getChildren().addAll(label114, textField72);
+
+        HBox hBox23 = new HBox();
+        hBox23.setPrefSize(250, 45);
+        hBox23.setSpacing(5);
+        hBox23.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
+        hBox23.setTranslateY(-90);
+        hBox23.getChildren().addAll(label115, textField73);
+
+
+        getLayout().getChildren().addAll(label109, button64, button65, button66, hBox19, hBox20, hBox21, hBox22, hBox23);
     }
 
     private void opretRåvare() {
-        //TODO: Opret råvare
+        String nummer = textField69.getText();
+        String adresse = textField70.getText();
+        String postnummer = textField71.getText();
+        String by = textField72.getText();
+        String kvadratmeter = textField73.getText();
+        if (nummer.isEmpty() || adresse.isEmpty() || postnummer.isEmpty() || by.isEmpty() || kvadratmeter.isEmpty()) {
+            Alert alert = getGUI().alert("Fejl", "Udfyld alle felter", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        int nummerInt;
+        try {
+            nummerInt = Integer.parseInt(nummer);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Nummer skal være et tal", "Nummer skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        double kvadratmeterDouble;
+        try {
+            kvadratmeterDouble = Double.parseDouble(kvadratmeter);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Kvadratmeter skal være et tal", "Kvadratmeter skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        String adresseFormat = adresse + ", " + postnummer + ", " + by;
+        try {
+            getGUI().getController().createLager(nummerInt, adresseFormat, kvadratmeterDouble);
+            getGUI().switchScene(SceneType.LAGER);
+        } catch (IllegalArgumentException e) {
+            Alert alert = getGUI().alert("Fejl", "Lageret kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
+            alert.showAndWait();
+        }
+    }
+
+    public void update() {
+        textField69.setText("");
+        textField70.setText("");
+        textField71.setText("");
+        textField72.setText("");
+        textField73.setText("");
     }
 
     @Override
@@ -143,6 +216,6 @@ public class OpretRåvareScene extends XScene {
 
     @Override
     public XIcon getIcon() {
-        return XIcon.KORIANDERFRØ;
+        return null;
     }
 }

@@ -11,7 +11,6 @@ public class Hylde {
     private final Reol reol;
     private final List<Opbevaring> opbevaringer;
     private int antalBeholdere = 0;
-    private boolean erOptaget = false;
 
     public Hylde(Reol reol, int nummer) {
         this.reol = reol;
@@ -35,12 +34,8 @@ public class Hylde {
         return nummer;
     }
 
-    public void setErOptaget(boolean erOptaget) {
-        this.erOptaget = erOptaget;
-    }
-
     public boolean erOptaget() {
-        return erOptaget;
+        return antalBeholdere >= ANTAL_BEHOLDER_I_ALT;
     }
 
     public List<Opbevaring> getOpbevaringer() {
@@ -48,11 +43,30 @@ public class Hylde {
     }
 
     public void addOpbevaring(Opbevaring opbevaring) {
-        if (antalBeholdere + opbevaring.getPladsmængde() <= ANTAL_BEHOLDER_I_ALT) {
+        if (antalBeholdere + opbevaring.getPladsmængde() <= ANTAL_BEHOLDER_I_ALT || !erOptaget()) {
             opbevaringer.add(opbevaring);
             antalBeholdere += opbevaring.getPladsmængde();
         } else {
-            System.out.println("Hylde er fuld. Kan ikke tilføje mere.");
+            throw new IllegalArgumentException("Der er ikke plads til denne opbevaring");
         }
+    }
+
+    public void removeOpbevaring(Opbevaring opbevaring) {
+        opbevaringer.remove(opbevaring);
+        antalBeholdere -= opbevaring.getPladsmængde();
+        opbevaring.setHylde(null);
+    }
+
+    public boolean hasPlads(Opbevaring opbevaring) {
+        return antalBeholdere + opbevaring.getPladsmængde() <= ANTAL_BEHOLDER_I_ALT;
+    }
+
+    public String getPlacering() {
+        return "L" + getReol().getAfdeling().getLager().getNummer() + " " + "A" + getReol().getAfdeling().getNummer() + " " + "R" + getReol().getNummer() + " " + "H" + getNummer();
+    }
+
+    @Override
+    public String toString() {
+        return "H" + nummer;
     }
 }
