@@ -1,5 +1,6 @@
 package gui.scene.scenes.destillering;
 
+import application.model.Destillering;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
@@ -13,6 +14,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class RedigerDestilleringScene extends XScene {
+
+    private Destillering selectedDestillering;
+
     public RedigerDestilleringScene(GUI gui) {
         super(gui);
     }
@@ -135,5 +139,9 @@ public class RedigerDestilleringScene extends XScene {
     @Override
     public XIcon getIcon() {
         return null;
+    }
+
+    public void setSelectedDestillering(Destillering selectedDestillering) {
+        this.selectedDestillering = selectedDestillering;
     }
 }

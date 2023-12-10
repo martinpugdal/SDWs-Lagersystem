@@ -13,6 +13,7 @@ public class Plastictank extends Opbevaring {
     public Plastictank(int nr, String navn, boolean intakt, double volumen, Påfyldning påfyldning) {
         super(nr, intakt, volumen, påfyldning);
         this.navn = navn;
+        this.årgang = påfyldning != null ? påfyldning.getDato().getYear() : -1;
     }
 
     public String getNavn() {
@@ -37,6 +38,12 @@ public class Plastictank extends Opbevaring {
     }
 
     @Override
+    public void setPåfyldning(Påfyldning påfyldning) {
+        super.setPåfyldning(påfyldning);
+        årgang = påfyldning.getDato().getYear();
+    }
+
+    @Override
     public int getPladsmængde() {
         return 2;
     }
@@ -44,6 +51,6 @@ public class Plastictank extends Opbevaring {
     @Override
     public void påfyldes(Destillering destillering, double liter) {
         super.påfyldes(destillering, liter);
-        årgang = destillering.getPåfyldning().getDato().getYear();
+        årgang = getPåfyldning().getDato().getYear();
     }
 }

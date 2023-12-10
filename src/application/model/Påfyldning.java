@@ -15,7 +15,7 @@ public class Påfyldning {
         this.liter = liter;
         this.destillering = destillering;
         opbevaring.setPåfyldning(this);
-        destillering.setPåfyldning(this);
+        destillering.addPåfyldning(this);
     }
 
     public double getLiter() {
@@ -32,5 +32,9 @@ public class Påfyldning {
 
     public Opbevaring getOpbevaring() {
         return opbevaring;
+    }
+
+    public String toString() {
+        return destillering + " " + liter + " liter" + " " + dato;
     }
 }

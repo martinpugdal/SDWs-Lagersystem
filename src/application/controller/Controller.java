@@ -378,11 +378,13 @@ public class Controller {
      * @param flaskeNumre
      * @return Råvare
      */
-    public Råvare createRåvare(String type, double antal, double liter, double kilogram, int[] flaskeNumre) {
+    public Råvare createRåvare(String type, int antal, double liter, double kilogram, int[] flaskeNumre) {
         Råvare råvare = new Råvare(type, antal, liter, kilogram);
-        for (int flaskeNummer : flaskeNumre) {
-            Flaske flaske = getFlaske(flaskeNummer);
-            råvare.addBrugesTil(flaske);
+        if (flaskeNumre != null) {
+            for (int flaskeNummer : flaskeNumre) {
+                Flaske flaske = getFlaske(flaskeNummer);
+                råvare.addBrugesTil(flaske);
+            }
         }
         storage.addRåvare(råvare);
         return råvare;

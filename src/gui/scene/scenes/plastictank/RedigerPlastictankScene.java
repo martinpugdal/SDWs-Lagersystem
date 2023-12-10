@@ -1,5 +1,6 @@
 package gui.scene.scenes.plastictank;
 
+import application.model.opbevaring.Plastictank;
 import gui.GUI;
 import gui.setting.XIcon;
 import gui.setting.XScene;
@@ -228,5 +229,8 @@ public class RedigerPlastictankScene extends XScene {
     @Override
     public XIcon getIcon() {
         return null;
+    }
+
+    public void setSelectedPlastictank(Plastictank selectedItem) {
     }
 }

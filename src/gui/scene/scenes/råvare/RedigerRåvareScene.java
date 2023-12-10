@@ -186,7 +186,7 @@ public class RedigerRåvareScene extends XScene {
         String liter = textField71.getText();
         String kilo = textField72.getText();
         String brugesTil = textField73.getText();
-        if (type.isEmpty() || antal.isEmpty() || liter.isEmpty() || kilo.isEmpty() || brugesTil.isEmpty()) {
+        if (type.isEmpty() || antal.isEmpty() || liter.isEmpty() || kilo.isEmpty()) {
             Alert alert = getGUI().alert("Fejl", "Udfyld alle felter", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
             alert.showAndWait();
             return;

@@ -104,7 +104,7 @@ public class RåvareScene extends XScene {
         VBox.setMargin(råvareTableView, new Insets(0, 20, 0, 20));
         TableColumn<Råvare, String> typeCol = new TableColumn<>("Type");
         typeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getType()));
-        TableColumn<Råvare, Double> antalCol = new TableColumn<>("Antal");
+        TableColumn<Råvare, Integer> antalCol = new TableColumn<>("Antal");
         antalCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAntal()));
         TableColumn<Råvare, Double> literCol = new TableColumn<>("Liter");
         literCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getLiter()));

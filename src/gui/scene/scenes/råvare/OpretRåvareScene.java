@@ -165,38 +165,58 @@ public class OpretRåvareScene extends XScene {
     }
 
     private void opretRåvare() {
-        String nummer = textField69.getText();
-        String adresse = textField70.getText();
-        String postnummer = textField71.getText();
-        String by = textField72.getText();
-        String kvadratmeter = textField73.getText();
-        if (nummer.isEmpty() || adresse.isEmpty() || postnummer.isEmpty() || by.isEmpty() || kvadratmeter.isEmpty()) {
+        String type = textField69.getText();
+        String antal = textField70.getText();
+        String liter = textField71.getText();
+        String kilo = textField72.getText();
+        String brugesTil = textField73.getText();
+        if (type.isEmpty() || antal.isEmpty() || liter.isEmpty() || kilo.isEmpty()) {
             Alert alert = getGUI().alert("Fejl", "Udfyld alle felter", "Alle felter skal udfyldes", Alert.AlertType.ERROR);
             alert.showAndWait();
-            return;
         }
-        int nummerInt;
+        int antalInt;
         try {
-            nummerInt = Integer.parseInt(nummer);
+            antalInt = Integer.parseInt(antal);
         } catch (NumberFormatException e) {
-            Alert alert = getGUI().alert("Fejl", "Nummer skal være et tal", "Nummer skal være et tal", Alert.AlertType.ERROR);
+            Alert alert = getGUI().alert("Fejl", "Antal skal være et tal", "Antal skal være et tal", Alert.AlertType.ERROR);
             alert.showAndWait();
             return;
         }
-        double kvadratmeterDouble;
+        double literDouble;
         try {
-            kvadratmeterDouble = Double.parseDouble(kvadratmeter);
+            literDouble = Double.parseDouble(liter);
         } catch (NumberFormatException e) {
-            Alert alert = getGUI().alert("Fejl", "Kvadratmeter skal være et tal", "Kvadratmeter skal være et tal", Alert.AlertType.ERROR);
+            Alert alert = getGUI().alert("Fejl", "Liter skal være et tal", "Liter skal være et tal", Alert.AlertType.ERROR);
             alert.showAndWait();
             return;
         }
-        String adresseFormat = adresse + ", " + postnummer + ", " + by;
+        double kiloDouble;
         try {
-            getGUI().getController().createLager(nummerInt, adresseFormat, kvadratmeterDouble);
-            getGUI().switchScene(SceneType.LAGER);
+            kiloDouble = Double.parseDouble(kilo);
+        } catch (NumberFormatException e) {
+            Alert alert = getGUI().alert("Fejl", "Kilo skal være et tal", "Kilo skal være et tal", Alert.AlertType.ERROR);
+            alert.showAndWait();
+            return;
+        }
+        int[] flaskeNumre = null;
+        if (!brugesTil.isEmpty()) {
+            String[] brugesTilNumre = brugesTil.split(",");
+            flaskeNumre = new int[brugesTilNumre.length];
+            for (int i = 0; i < brugesTilNumre.length; i++) {
+                try {
+                    flaskeNumre[i] = Integer.parseInt(brugesTilNumre[i]);
+                } catch (NumberFormatException e) {
+                    Alert alert = getGUI().alert("Fejl", "Produkter skal være tal", "Produkter skal være tal", Alert.AlertType.ERROR);
+                    alert.showAndWait();
+                    return;
+                }
+            }
+        }
+        try {
+            getGUI().getController().createRåvare(type, antalInt, literDouble, kiloDouble, flaskeNumre);
+            getGUI().switchScene(SceneType.RÅVARE);
         } catch (IllegalArgumentException e) {
-            Alert alert = getGUI().alert("Fejl", "Lageret kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
+            Alert alert = getGUI().alert("Fejl", "Råvaren kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
             alert.showAndWait();
         }
     }

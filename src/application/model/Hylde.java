@@ -22,14 +22,6 @@ public class Hylde {
         return reol;
     }
 
-    public int getAntalBeholdere() {
-        return antalBeholdere;
-    }
-
-    public void setAntalBeholdere(int antalBeholdere) {
-        this.antalBeholdere = antalBeholdere;
-    }
-
     public int getNummer() {
         return nummer;
     }
@@ -62,7 +54,7 @@ public class Hylde {
     }
 
     public String getPlacering() {
-        return "L" + getReol().getAfdeling().getLager().getNummer() + " " + "A" + getReol().getAfdeling().getNummer() + " " + "R" + getReol().getNummer() + " " + "H" + getNummer();
+        return "L" + getReol().getAfdeling().getLager().getNummer() + "." + "A" + getReol().getAfdeling().getNummer() + "." + "R" + getReol().getNummer() + "." + "H" + getNummer();
     }
 
     @Override

@@ -1,18 +1,23 @@
 package application.model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Destillering {
 
     private String navn;
     private int nummer;
     private double liter;
     private double alkoholprocent;
-    private Påfyldning påfyldning;
+    private final List<Påfyldning> påfyldning;
 
     public Destillering(String navn, int nummer, double liter, double alkoholprocent) {
         this.navn = navn;
         this.nummer = nummer;
         this.liter = liter;
         this.alkoholprocent = alkoholprocent;
+        this.påfyldning = new ArrayList<>();
     }
 
     public String getNavn() {
@@ -47,12 +52,25 @@ public class Destillering {
         this.alkoholprocent = alkoholprocent;
     }
 
-    public Påfyldning getPåfyldning() {
+    public List<Påfyldning> getPåfyldninger() {
         return påfyldning;
     }
 
-    public void setPåfyldning(Påfyldning påfyldning) {
-        this.påfyldning = påfyldning;
+    public void addPåfyldning(Påfyldning påfyldning) {
+        this.påfyldning.add(påfyldning);
+    }
+
+    public void removePåfyldning(Påfyldning påfyldning) {
+        this.påfyldning.remove(påfyldning);
+    }
+
+    public Påfyldning getPåfyldning(LocalDate dato) {
+        for (Påfyldning påfyldning : påfyldning) {
+            if (påfyldning.getDato().equals(dato)) {
+                return påfyldning;
+            }
+        }
+        return null;
     }
 
     public String toString() {

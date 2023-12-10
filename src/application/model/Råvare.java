@@ -6,11 +6,11 @@ import java.util.List;
 public class Råvare {
 
     private String type;
-    private double antal;
+    private int antal;
     private double liter;
     private double kilogram;
     private final List<Flaske> brugesTil;
-    public Råvare(String type, double antal, double liter, double kilogram) {
+    public Råvare(String type, int antal, double liter, double kilogram) {
         this.type = type;
         this.antal = antal;
         this.liter = liter;
@@ -34,11 +34,11 @@ public class Råvare {
         this.type = type;
     }
 
-    public double getAntal() {
+    public int getAntal() {
         return antal;
     }
 
-    public void setAntal(double antal) {
+    public void setAntal(int antal) {
         this.antal = antal;
     }
 

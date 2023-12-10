@@ -47,14 +47,6 @@ public class Fad extends Opbevaring {
         this.type = type;
     }
 
-    public Påfyldning getPåfyldning() {
-        return påfyldning;
-    }
-
-    public void setPåfyldning(Påfyldning påfyldning) {
-        this.påfyldning = påfyldning;
-    }
-
     @Override
     public String toString() {
         return getNummer() + " " + type;

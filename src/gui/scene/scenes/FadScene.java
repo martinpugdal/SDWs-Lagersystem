@@ -1,17 +1,13 @@
 package gui.scene.scenes;
 
-import application.model.Afdeling;
-import application.model.Lager;
 import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
 import gui.scene.scenes.fad.RedigerFadScene;
-import gui.scene.scenes.lager.RedigerLagerScene;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
@@ -21,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class FadScene extends XScene {
 
@@ -50,7 +45,7 @@ public class FadScene extends XScene {
 
         Button button60 = new Button("Opret Fad");
         button60.setTranslateX(-550 + (buttonWidth + 20));
-        button60.setTranslateY(- buttonHeight);
+        button60.setTranslateY(-buttonHeight);
         button60.setPrefSize(buttonWidth, buttonHeight);
         button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETFAD));
         button60.setFont(new Font("Arial", 16));
@@ -162,7 +157,7 @@ public class FadScene extends XScene {
                 update();
             }
         } else {
-            getGUI().alert("Ingen lager valgt", "Du har ikke valgt et lager", "Vælg et lager fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+            getGUI().alert("Ingen fad valgt", "Du har ikke valgt et fad", "Vælg et fad fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
         }
     }
 

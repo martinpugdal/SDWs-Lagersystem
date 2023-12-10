@@ -1,16 +1,21 @@
 package gui.scene.scenes;
 
 import application.model.Destillering;
+import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
+import gui.scene.scenes.destillering.RedigerDestilleringScene;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class DestilleringScene extends XScene {
 
@@ -22,21 +27,103 @@ public class DestilleringScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 2: Destillering
-        Label label9 = new Label("Destillering");
-        label9.setTranslateX(0);
-        label9.setTranslateY(150);
-        label9.setFont(XStyle.XL_FONT);
-        label9.setTextFill(Color.BLACK);
+        Label label107 = new Label("Destillering");
+        label107.setTranslateX(-550);
+        label107.setTranslateY(10);
+        label107.setFont(XStyle.XXL_FONT);
+        ImageView lagerIcon = XIcon.DESTILLERING.getImageView();
+        lagerIcon.setPreserveRatio(true);
+        lagerIcon.setFitHeight(label107.getFont().getSize() * 2);
+        lagerIcon.setFitWidth(label107.getFont().getSize() * 2);
+        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        label107.setGraphic(lagerIcon);
+        label107.setContentDisplay(ContentDisplay.LEFT);
 
-        Label label10 = new Label("Her kan der oprettes væsker som så kan fordeles på fade, tanke samt flasker");
+        double buttonWidth = 250;
+        double buttonHeight = 45;
+
+        Button button60 = new Button("Opret destillering");
+        button60.setTranslateX(-550 + buttonWidth);
+        button60.setTranslateY(-buttonHeight + 10);
+        button60.setPrefSize(buttonWidth, buttonHeight);
+        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETDESTILLERING));
+        button60.setFont(new Font("Arial", 16));
+        button60.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button60.setCursor(Cursor.HAND);
+        Tooltip tooltip127 = new Tooltip("Tryk her for at oprette en destillering");
+        button60.setTooltip(tooltip127);
+
+        Button button61 = new Button("Rediger destillering");
+        button61.setTranslateX(-550 + (buttonWidth + 20) * 2);
+        button61.setTranslateY(-buttonHeight - 24);
+        button61.setPrefSize(buttonWidth, buttonHeight);
+        button61.setOnAction(e -> redigerDestillering());
+        button61.setFont(new Font("Arial", 16));
+        button61.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button61.setCursor(Cursor.HAND);
+        Tooltip tooltip128 = new Tooltip("Tryk her for at redigere en destillering");
+        button61.setTooltip(tooltip128);
+
+        Button button62 = new Button("Slet destillering");
+        button62.setTranslateX(-550 + (buttonWidth + 20) * 3);
+        button62.setTranslateY(-buttonHeight - 57);
+        button62.setPrefSize(buttonWidth, buttonHeight);
+        button62.setOnAction(e -> sletDestillering());
+        button62.setFont(new Font("Arial", 16));
+        button62.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button62.setCursor(Cursor.HAND);
+        Tooltip tooltip129 = new Tooltip("Tryk her for at slette en destillering");
+        button62.setTooltip(tooltip129);
+
+        Button button65 = new Button("Gå tilbage til forside");
+        button65.setTranslateX(-550 + (buttonWidth + 20) * 4);
+        button65.setTranslateY(-buttonHeight - 90);
+        button65.setPrefSize(buttonWidth, buttonHeight);
+        button65.setOnAction(e -> getGUI().gåTilForside());
+        button65.setFont(new Font("Arial", 16));
+        button65.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button65.setCursor(Cursor.HAND);
+        Tooltip tooltip132 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        button65.setTooltip(tooltip132);
+
+        Button button63 = new Button("Overfør destillering (fad)");
+        button63.setTranslateX(-550 + (buttonWidth + 20) * 2);
+        button63.setTranslateY(-buttonHeight - 70);
+        button63.setPrefSize(buttonWidth, buttonHeight);
+        button63.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGFAD));
+        button63.setFont(new Font("Arial", 16));
+        button63.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button63.setCursor(Cursor.HAND);
+        Tooltip tooltip130 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad");
+        button63.setTooltip(tooltip130);
+
+        Button button64 = new Button("Overfør destillering (tank)");
+        button64.setTranslateX(-550 + (buttonWidth + 20) * 3);
+        button64.setTranslateY(-buttonHeight - 104);
+        button64.setPrefSize(buttonWidth, buttonHeight);
+        button64.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGTANK));
+        button64.setFont(new Font("Arial", 16));
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip131 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra en plastictank");
+        button64.setTooltip(tooltip131);
+
+
+        Label label10 = new Label("Her kan der oprettes væsker som så kan fordeles på fade og tanke");
         label10.setTranslateX(0);
-        label10.setTranslateY(150);
+        label10.setTranslateY(-50);
         label10.setFont(XStyle.M_FONT);
-        label10.setTextFill(Color.BLACK);
 
         destilleringTableView = new TableView<>();
+        destilleringTableView.setPlaceholder(new Label("Der er ingen destilleringer"));
         destilleringTableView.setEditable(false);
+        destilleringTableView.setEditable(false);
+        destilleringTableView.setPrefSize(200, 450);
+        destilleringTableView.setTranslateX(0);
+        destilleringTableView.setTranslateY(-30);
+        destilleringTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        VBox.setMargin(destilleringTableView, new Insets(0, 20, 0, 20));
+
         TableColumn<Destillering, Integer> destilleringNummerColumn = new TableColumn<>("Nummer");
         destilleringNummerColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
         destilleringTableView.getColumns().add(destilleringNummerColumn);
@@ -49,83 +136,44 @@ public class DestilleringScene extends XScene {
         TableColumn<Destillering, Double> destilleringAlkoholProcent = new TableColumn<>("Alkoholprocent");
         destilleringAlkoholProcent.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAlkoholprocent()));
         destilleringTableView.getColumns().add(destilleringAlkoholProcent);
-        destilleringTableView.setPlaceholder(new Label("Der er ingen destilleringer"));
+        TableColumn<Destillering, String> destilleringPåfyldningerColumn = new TableColumn<>("Påfyldninger");
+        destilleringPåfyldningerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPåfyldninger().toString()));
+        destilleringTableView.getColumns().add(destilleringPåfyldningerColumn);
         destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
-        destilleringTableView.setTranslateX(20);
-        destilleringTableView.setTranslateY(20);
-        destilleringTableView.setPrefSize(200, 200);
-        destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
+        for (TableColumn<Destillering, ?> column : destilleringTableView.getColumns()) {
+            column.setStyle("-fx-alignment: CENTER;");
+        }
 
-        Button button8 = new Button("Opret destillering");
-        button8.setTranslateX(-150);
-        button8.setTranslateY(-280);
-        button8.setPrefSize(250, 45);
-        button8.setOnAction(e -> getGUI().gåTilForside());
-        button8.setFont(XStyle.M_FONT);
-        button8.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button8.setCursor(Cursor.HAND);
-        Tooltip tooltip8 = new Tooltip("Tryk her for at oprette destilleringsvæske");
-        button8.setTooltip(tooltip8);
+        getLayout().getChildren().addAll(label107, button60, button61, button62, button65, button63, button64, label10, destilleringTableView);
+    }
 
-        Button button9 = new Button("Rediger destillering");
-        button9.setTranslateX(-150);
-        button9.setTranslateY(-280);
-        button9.setPrefSize(250, 45);
-        button9.setOnAction(e -> getGUI().gåTilForside());
-        button9.setFont(XStyle.M_FONT);
-        button9.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button9.setCursor(Cursor.HAND);
-        Tooltip tooltip9 = new Tooltip("Tryk her for at redigere destilleringsvæske");
-        button9.setTooltip(tooltip9);
+    private void redigerDestillering() {
+        if (destilleringTableView.getSelectionModel().getSelectedItem() != null) {
+            RedigerDestilleringScene scene = (RedigerDestilleringScene) getGUI().getScene(SceneType.REDIGERDESTILLERING);
+            scene.setSelectedDestillering(destilleringTableView.getSelectionModel().getSelectedItem());
+            getGUI().switchScene(scene);
+        } else {
+            getGUI().alert("Ingen fad valgt", "Du har ikke valgt et fad", "Vælg et fad fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+        }
+    }
 
-        Button button10 = new Button("Slet destillering");
-        button10.setTranslateX(-150);
-        button10.setTranslateY(-280);
-        button10.setPrefSize(250, 45);
-        button10.setFont(XStyle.M_FONT);
-        button10.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button10.setCursor(Cursor.HAND);
-        Tooltip tooltip10 = new Tooltip("Tryk her for at slette destilleringsvæsken fra systemet");
-        button10.setTooltip(tooltip10);
-
-        Button button11 = new Button("Overfør destillering (fad)");
-        button11.setTranslateX(-150);
-        button11.setTranslateY(-280);
-        button11.setPrefSize(250, 45);
-        button11.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGFAD));
-        button11.setFont(XStyle.M_FONT);
-        button11.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button11.setCursor(Cursor.HAND);
-        Tooltip tooltip11 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad");
-        button11.setTooltip(tooltip11);
-
-        Button button12 = new Button("Overfør destillering (tank)");
-        button12.setTranslateX(-150);
-        button12.setTranslateY(-280);
-        button12.setPrefSize(250, 45);
-        button12.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGTANK));
-        button12.setFont(XStyle.M_FONT);
-        button12.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button12.setCursor(Cursor.HAND);
-        Tooltip tooltip12 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra en plastictank");
-        button12.setTooltip(tooltip12);
-
-        Button button14 = new Button("Gå tilbage til forside");
-        button14.setTranslateX(-150);
-        button14.setTranslateY(-280);
-        button14.setPrefSize(250, 45);
-        button14.setOnAction(e -> getGUI().gåTilForside());
-        button14.setFont(XStyle.M_FONT);
-        button14.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
-        button14.setCursor(Cursor.HAND);
-        Tooltip tooltip14 = new Tooltip("Tryk her for at gå tilbage til forsiden");
-        button14.setTooltip(tooltip14);
-
-        getLayout().getChildren().addAll(label9, label10, destilleringTableView, button8, button9, button10, button11, button12, button14);
+    private void sletDestillering() {
+        if (destilleringTableView.getSelectionModel().getSelectedItem() != null) {
+            Destillering destillering = destilleringTableView.getSelectionModel().getSelectedItem();
+            Alert confirmation = getGUI().alert("Slet destillering", "Er du sikker på at du vil slette destilleringen?", "Du er ved at slette destilleringen " + destillering + ".\nDenne handling kan ikke fortrydes.", Alert.AlertType.CONFIRMATION);
+            confirmation.showAndWait();
+            if (confirmation.getResult() == ButtonType.OK) {
+                getGUI().getController().deleteDestillering(destillering);
+                update();
+            }
+        } else {
+            getGUI().alert("Ingen destillering valgt", "Du har ikke valgt en destillering", "Vælg en destillering fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+        }
     }
 
     @Override
     public void update() {
+        ((RedigerDestilleringScene) getGUI().getScene(SceneType.REDIGERDESTILLERING)).setSelectedDestillering(null);
         destilleringTableView.getItems().clear();
         destilleringTableView.getItems().addAll(getGUI().getController().getDestilleringer());
     }
