@@ -8,7 +8,7 @@ public class Hylde {
     static final int ANTAL_BEHOLDER_I_ALT = 4;
 
     private final int nummer;
-    private final Reol reol;
+    private Reol reol;
     private final List<Opbevaring> opbevaringer;
     private int antalBeholdere = 0;
 
@@ -20,6 +20,10 @@ public class Hylde {
 
     public Reol getReol() {
         return reol;
+    }
+
+    public void setReol(Reol reol) {
+        this.reol = reol;
     }
 
     public int getNummer() {

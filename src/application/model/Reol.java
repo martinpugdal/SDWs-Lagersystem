@@ -33,10 +33,6 @@ public class Reol {
         return hylde;
     }
 
-    public void skiftAfdeling(Afdeling afdeling) {
-        this.afdeling = afdeling;
-    }
-
     public Hylde[] getHylder() {
         return hylder;
     }
@@ -47,6 +43,10 @@ public class Reol {
 
     public Afdeling getAfdeling() {
         return afdeling;
+    }
+
+    public void setAfdeling(Afdeling afdeling) {
+        this.afdeling = afdeling;
     }
 
     public int getNummer() {

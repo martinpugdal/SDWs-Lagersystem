@@ -25,7 +25,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        switchScene(sceneManager.getScene(SceneType.DESTILLERINGFAD));
+        switchScene(sceneManager.getScene(SceneType.FORSIDE));
         stage.setResizable(false);
         stage.show();
     }

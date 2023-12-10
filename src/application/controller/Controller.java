@@ -130,6 +130,9 @@ public class Controller {
      */
     public void deleteLager(Lager lager) {
         storage.removeLager(lager);
+        for (Afdeling afdeling : lager.getAfdelinger()) {
+            deleteAfdeling(afdeling);
+        }
     }
 
     /**
@@ -145,6 +148,27 @@ public class Controller {
         Afdeling afdeling = new Afdeling(lager, drikkelse, nummer);
         lager.addAfdeling(afdeling);
         return afdeling;
+    }
+
+    public void deleteAfdeling(Afdeling afdeling) {
+        afdeling.getLager().removeAfdeling(afdeling);
+        for (Reol reol : afdeling.getReoler()) {
+            deleteReol(reol);
+        }
+    }
+
+    private void deleteReol(Reol reol) {
+        reol.getAfdeling().removeReol(reol);
+        for (Hylde hylde : reol.getHylder()) {
+            deleteHylde(hylde);
+        }
+    }
+
+    private void deleteHylde(Hylde hylde) {
+        hylde.setReol(null);
+        for (Opbevaring opbevaring : hylde.getOpbevaringer()) {
+            deleteOpbevaring(opbevaring);
+        }
     }
 
     /**
@@ -562,7 +586,6 @@ public class Controller {
         // tilføj nogle påfyldninger
         createPåfyldning(fad1, destillering1, LocalDate.now(), 40);
         createPåfyldning(fad2, destillering2, LocalDate.of(2022, 1, 5), 50);
-        createPåfyldning(fad3, destillering3, LocalDate.now(), 35);
         createPåfyldning(plastictank1, destillering1, LocalDate.of(2023, 4, 6), 100);
         createPåfyldning(plastictank2, destillering2, LocalDate.of(2023, 6, 6), 100);
     }

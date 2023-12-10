@@ -1,6 +1,8 @@
 package gui.scene.scenes.destillering;
 
+import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
+import application.model.opbevaring.Plastictank;
 import gui.GUI;
 import gui.scene.SceneType;
 import gui.setting.XIcon;
@@ -8,6 +10,7 @@ import gui.setting.XScene;
 import gui.setting.XStyle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -99,9 +102,15 @@ public class DestilleringFadScene extends XScene {
         TableColumn<Fad, Double> literC = new TableColumn<>("Påfyldt liter");
         literC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning().getLiter()));
         fraFadTableView.getColumns().add(literC);
+        TableColumn<Fad, Påfyldning> påfyldningC = new TableColumn<>("Påfyldning");
+        påfyldningC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning()));
+        fraFadTableView.getColumns().add(påfyldningC);
         TableColumn<Fad, String> placeringC = new TableColumn<>("Placering");
         placeringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
         fraFadTableView.getColumns().add(placeringC);
+        for (TableColumn<Fad, ?> column : fraFadTableView.getColumns()) {
+            column.setStyle("-fx-alignment: CENTER;");
+        }
 
         tilFadTableView = new TableView<>();
         tilFadTableView.setPlaceholder(new Label("Der er ingen fade"));
@@ -124,20 +133,25 @@ public class DestilleringFadScene extends XScene {
         placeringC = new TableColumn<>("Placering");
         placeringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
         tilFadTableView.getColumns().add(placeringC);
+        for (TableColumn<Fad, ?> column : tilFadTableView.getColumns()) {
+            column.setStyle("-fx-alignment: CENTER;");
+        }
 
         Label label110 = new Label("Fra fad");
-        label110.setTranslateX(-350);
-        label110.setTranslateY(0);
+        label110.setPrefSize(100, 20);
+        label110.setTranslateX(-575);
+        label110.setTranslateY(10);
         label110.setFont(XStyle.M_FONT);
 
         Label label111 = new Label("Til fad");
-        label111.setPrefSize(100, 1);
-        label111.setTranslateX(350);
-        label111.setTranslateY(-400);
+        label111.setPrefSize(100, 20);
+        label111.setTranslateX(200);
+        label111.setTranslateY(-10);
         label111.setFont(XStyle.M_FONT);
 
 
         Label label112 = new Label("Antal liter");
+        label112.setTranslateX(0);
         label112.setFont(XStyle.M_FONT);
 
         textFieldAntalLiter = new TextField();
@@ -149,9 +163,10 @@ public class DestilleringFadScene extends XScene {
         textFieldAntalLiter.setTooltip(tooltip140);
 
         VBox vBox1 = new VBox();
-        vBox1.setTranslateX(getGUI().getScreenHeight() * 0.5 + 250);
-        vBox1.setTranslateY(-100);
+        vBox1.setTranslateX(-getGUI().getScreenHeight() * 0.5 + 360);
+        vBox1.setTranslateY(-350);
         vBox1.setPrefSize(250, 45);
+        vBox1.setAlignment(Pos.CENTER);
         vBox1.setSpacing(5);
         vBox1.getChildren().addAll(label112, textFieldAntalLiter);
 
@@ -168,7 +183,7 @@ public class DestilleringFadScene extends XScene {
         }
         tilFadTableView.getItems().clear();
         for (Fad fad : getGUI().getController().getFade()) {
-            if (fad.getPåfyldning() == null && fad.isIntakt() && !fad.isTom() && fad.getGangeBrugt() < 3) {
+            if (fad.getPåfyldning() == null && fad.isIntakt() && fad.getGangeBrugt() < 3) {
                 tilFadTableView.getItems().add(fad);
             }
         }
