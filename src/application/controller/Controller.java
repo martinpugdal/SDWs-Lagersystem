@@ -400,9 +400,11 @@ public class Controller {
      */
     public void updateRåvare(Råvare råvare, String type, int antalInt, double literDouble, double kiloDouble, int[] flaskeNumre) {
         List<Flaske> flasker = new ArrayList<>();
-        for (int flaskeNummer : flaskeNumre) {
-            Flaske flaske = getFlaske(flaskeNummer);
-            flasker.add(flaske);
+        if (flaskeNumre != null) {
+            for (int flaskeNummer : flaskeNumre) {
+                Flaske flaske = getFlaske(flaskeNummer);
+                flasker.add(flaske);
+            }
         }
         råvare.setType(type);
         råvare.setAntal(antalInt);

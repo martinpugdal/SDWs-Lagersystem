@@ -215,15 +215,18 @@ public class RedigerRåvareScene extends XScene {
             alert.showAndWait();
             return;
         }
-        String[] brugesTilNumre = brugesTil.split(",");
-        int[] flaskeNumre = new int[brugesTilNumre.length];
-        for (int i = 0; i < brugesTilNumre.length; i++) {
-            try {
-                flaskeNumre[i] = Integer.parseInt(brugesTilNumre[i]);
-            } catch (NumberFormatException e) {
-                Alert alert = getGUI().alert("Fejl", "Nummer skal være et tal", "Nummer skal skrive som et tal", Alert.AlertType.ERROR);
-                alert.showAndWait();
-                return;
+        int[] flaskeNumre = null;
+        if (!brugesTil.isEmpty()) {
+            String[] brugesTilNumre = brugesTil.split(",");
+            flaskeNumre = new int[brugesTilNumre.length];
+            for (int i = 0; i < brugesTilNumre.length; i++) {
+                try {
+                    flaskeNumre[i] = Integer.parseInt(brugesTilNumre[i]);
+                } catch (NumberFormatException e) {
+                    Alert alert = getGUI().alert("Fejl", "Produkterne skal være tal", "Skriv produkternes tal", Alert.AlertType.ERROR);
+                    alert.showAndWait();
+                    return;
+                }
             }
         }
         try {
