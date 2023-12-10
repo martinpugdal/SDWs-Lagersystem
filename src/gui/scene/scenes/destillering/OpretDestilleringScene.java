@@ -92,28 +92,28 @@ public class OpretDestilleringScene extends XScene {
         textField69 = new TextField();
         textField69.setMaxWidth(200);
         Tooltip tooltip131 = new Tooltip();
-        tooltip131.setText("Indtast nummeret på fadet her");
+        tooltip131.setText("Indtast nummeret på destillering her");
         textField69.setTooltip(tooltip131);
         textField69.setCursor(Cursor.TEXT);
 
         textField70 = new TextField();
         textField70.setMaxWidth(200);
         Tooltip tooltip133 = new Tooltip();
-        tooltip133.setText("Indtast type for fadet her");
+        tooltip133.setText("Indtast navn for destillering her");
         textField70.setTooltip(tooltip133);
         textField70.setCursor(Cursor.TEXT);
 
         textField71 = new TextField();
         textField71.setMaxWidth(200);
         Tooltip tooltip134 = new Tooltip();
-        tooltip134.setText("Indtast antal gange fadet er brugt her");
+        tooltip134.setText("Indtast antal liter på destillering her");
         textField71.setTooltip(tooltip134);
         textField71.setCursor(Cursor.TEXT);
 
         textField72 = new TextField();
         textField72.setMaxWidth(200);
         Tooltip tooltip3 = new Tooltip();
-        tooltip139.setText("Indtast antal liter på fadet her");
+        tooltip139.setText("Indtast alkoholprocent på destillering her");
         textField72.setTooltip(tooltip3);
         textField72.setCursor(Cursor.TEXT);
 
@@ -195,7 +195,7 @@ public class OpretDestilleringScene extends XScene {
             getGUI().getController().createDestillering(navn, nummerInt, antalLiterDouble, alkoholprocentDouble);
             getGUI().switchScene(SceneType.DESTILLERING);
         } catch (IllegalArgumentException e) {
-            Alert alert = getGUI().alert("Fejl", "Fadet kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
+            Alert alert = getGUI().alert("Fejl", "Destilleringen kunne ikke oprettes", e.getMessage(), Alert.AlertType.ERROR);
             alert.showAndWait();
         }
     }
