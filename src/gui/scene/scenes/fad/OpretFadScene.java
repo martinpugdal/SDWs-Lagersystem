@@ -294,7 +294,7 @@ public class OpretFadScene extends XScene {
             }
         }
         try {
-            Opbevaring fad = getGUI().getController().createFad(type, nummerInt, antalGangeBrugtInt, antalLiterDouble, intakt, null);
+            Opbevaring fad = getGUI().getController().createFad(type, nummerInt, antalGangeBrugtInt, antalLiterDouble, intakt);
             if (hyldeObjekt != null) {
                 getGUI().getController().addOpbevaringToHylde(fad, hyldeObjekt);
             }

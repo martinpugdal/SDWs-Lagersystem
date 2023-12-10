@@ -156,7 +156,7 @@ public class DestilleringScene extends XScene {
             scene.setSelectedDestillering(destilleringTableView.getSelectionModel().getSelectedItem());
             getGUI().switchScene(scene);
         } else {
-            getGUI().alert("Ingen fad valgt", "Du har ikke valgt et fad", "Vælg et fad fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+            getGUI().alert("Ingen destillering valgt", "Du har ikke valgt en destillering", "Vælg en destillering fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
         }
     }
 

@@ -173,11 +173,11 @@ public class Controller {
      * @param intakt
      * @return Fad
      */
-    public Opbevaring createFad(String type, int nummer, int antalGangeBrugt, double volumen, boolean intakt, Påfyldning påfyldning) {
+    public Opbevaring createFad(String type, int nummer, int antalGangeBrugt, double volumen, boolean intakt) {
         if (checkOpbevaringExists(nummer)) {
             throw new IllegalArgumentException("Opbevaringen findes allerede med dette nummer");
         }
-        Fad fad = new Fad(nummer, type, antalGangeBrugt, intakt, volumen, påfyldning);
+        Fad fad = new Fad(nummer, type, antalGangeBrugt, intakt, volumen);
         storage.addOpbevaring(fad);
         return fad;
     }
@@ -545,11 +545,11 @@ public class Controller {
 
         // tilføj nogle opbevaringer
         // fad
-        Opbevaring fad1 = createFad("Bourbon", 1, 2, 40, false, null);
+        Opbevaring fad1 = createFad("Bourbon", 1, 2, 40, false);
         fad1.setHylde(a2Reol1.getHylde(1));
-        Opbevaring fad2 = createFad("Bourbon", 2, 1, 50, true, null);
+        Opbevaring fad2 = createFad("Bourbon", 2, 1, 50, true);
         fad2.setHylde(a2Reol1.getHylde(2));
-        Opbevaring fad3 = createFad("Sherry", 3, 2, 35, true, null);
+        Opbevaring fad3 = createFad("Sherry", 3, 2, 35, true);
         fad3.setHylde(a2Reol1.getHylde(1));
         // plastictank
         Opbevaring plastictank1 = createPlastictank("Gin 1 Sind", 4, 125, true, null);

@@ -98,28 +98,28 @@ public class RedigerDestilleringScene extends XScene {
         textField69 = new TextField();
         textField69.setMaxWidth(200);
         Tooltip tooltip131 = new Tooltip();
-        tooltip131.setText("Indtast nummeret på fadet her");
+        tooltip131.setText("Indtast nummeret på destilleringen her");
         textField69.setTooltip(tooltip131);
         textField69.setCursor(Cursor.TEXT);
 
         textField70 = new TextField();
         textField70.setMaxWidth(200);
         Tooltip tooltip133 = new Tooltip();
-        tooltip133.setText("Indtast type for fadet her");
+        tooltip133.setText("Indtast navn for destilleringen her");
         textField70.setTooltip(tooltip133);
         textField70.setCursor(Cursor.TEXT);
 
         textField71 = new TextField();
         textField71.setMaxWidth(200);
         Tooltip tooltip134 = new Tooltip();
-        tooltip134.setText("Indtast antal gange fadet er brugt her");
+        tooltip134.setText("Indtast antal liter på destilleringen her");
         textField71.setTooltip(tooltip134);
         textField71.setCursor(Cursor.TEXT);
 
         textField72 = new TextField();
         textField72.setMaxWidth(200);
         Tooltip tooltip3 = new Tooltip();
-        tooltip139.setText("Indtast antal liter på fadet her");
+        tooltip139.setText("Indtast alkoholprocent på destilleringen her");
         textField72.setTooltip(tooltip3);
         textField72.setCursor(Cursor.TEXT);
 
