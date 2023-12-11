@@ -23,6 +23,7 @@ public class Påfyldning {
             throw new IllegalArgumentException("Opbevaring er ikke intakt eller ikke tom");
         }
         destillering.setPåfyldning(this);
+        destillering.setLiter(destillering.getLiter() - liter);
     }
 
     public double getLiter() {

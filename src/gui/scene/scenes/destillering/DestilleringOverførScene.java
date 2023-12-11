@@ -1,7 +1,7 @@
 package gui.scene.scenes.destillering;
 
 import application.model.Destillering;
-import application.model.Påfyldning;
+import application.model.Opbevaring;
 import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
 import gui.GUI;
@@ -246,7 +246,23 @@ public class DestilleringOverførScene extends XScene {
     }
 
     private void flytDestillering() {
-        //TODO:
+        Destillering fraDestillering = fraDestilleringableView.getSelectionModel().getSelectedItem();
+        Opbevaring tilOpbevaring = group.getToggles().get(0).isSelected() ? tilFadTableView.getSelectionModel().getSelectedItem() : tilPlastictankTableView.getSelectionModel().getSelectedItem();
+        if (fraDestillering != null && tilOpbevaring != null) {
+            double antalLiter;
+            try {
+                antalLiter = Double.parseDouble(textFieldAntalLiter.getText());
+            } catch (NumberFormatException e) {
+                getGUI().alert("Ugyldigt antal liter", "Du har ikke indtastet et gyldigt antal liter", "Indtast et gyldigt antal liter og prøv igen", Alert.AlertType.WARNING).showAndWait();
+                return;
+            }
+            try {
+                getGUI().getController().createPåfyldning(tilOpbevaring, fraDestillering, antalLiter);
+                update();
+            } catch (IllegalArgumentException e) {
+                getGUI().alert("Fejl opskete", "Destillering kunne ikke overføres", e.getMessage(), Alert.AlertType.ERROR).showAndWait();
+            }
+        }
     }
 
     @Override

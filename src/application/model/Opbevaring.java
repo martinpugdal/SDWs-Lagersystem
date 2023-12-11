@@ -96,6 +96,8 @@ public abstract class Opbevaring {
         påfyldning.setTomtDato(LocalDate.now());
         this.påfyldning = null;
         tidligerePåfyldninger.add(påfyldning);
+        påfyldning.getDestillering().setLiter(påfyldning.getDestillering().getLiter() + påfyldning.getLiter());
+        påfyldning.getDestillering().setPåfyldning(null);
     }
 
     public void påfyldes(Destillering destillering, double liter) {

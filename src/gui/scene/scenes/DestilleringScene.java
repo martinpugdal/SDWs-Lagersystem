@@ -107,7 +107,7 @@ public class DestilleringScene extends XScene {
         button64.setFont(new Font("Arial", 16));
         button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button64.setCursor(Cursor.HAND);
-        Tooltip tooltip131 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra en plastictank");
+        Tooltip tooltip131 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad eller en tank");
         button64.setTooltip(tooltip131);
 
 

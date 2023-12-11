@@ -339,7 +339,17 @@ public class Controller {
         if (opbevaring.getPåfyldning() != null) {
             throw new IllegalArgumentException("Opbevaringen er allerede påfyldt");
         }
+        if (liter > destillering.getLiter()) {
+            throw new IllegalArgumentException("Der er ikke nok liter tilbage i destilleringen");
+        }
+        if (liter > opbevaring.getVolumen()) {
+            throw new IllegalArgumentException("Der er ikke nok plads i opbevaringen");
+        }
         return new Påfyldning(destillering, opbevaring, liter, dato);
+    }
+
+    public Påfyldning createPåfyldning(Opbevaring opbevaring, Destillering destillering, double liter) {
+        return createPåfyldning(opbevaring, destillering, LocalDate.now(), liter);
     }
 
     /**
@@ -599,7 +609,7 @@ public class Controller {
         // tilføj nogle påfyldninger
         createPåfyldning(fad1, destillering1, LocalDate.now(), 40);
         createPåfyldning(fad2, destillering2, LocalDate.of(2022, 1, 5), 50);
-        createPåfyldning(plastictank1, destillering1, LocalDate.of(2023, 4, 6), 100);
+        createPåfyldning(plastictank1, destillering1, LocalDate.of(2023, 4, 6), 46);
         createPåfyldning(plastictank2, destillering2, LocalDate.of(2023, 6, 6), 100);
 
         fad1.tømmes();

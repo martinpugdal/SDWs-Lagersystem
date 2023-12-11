@@ -1,5 +1,7 @@
 package gui.scene.scenes.destillering;
 
+import application.model.Destillering;
+import application.model.Opbevaring;
 import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
@@ -293,7 +295,6 @@ public class DestilleringOmhældningScene extends XScene {
     }
 
     private void flytDestillering() {
-        //TODO:
     }
 
     @Override
