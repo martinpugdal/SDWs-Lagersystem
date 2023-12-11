@@ -66,7 +66,7 @@ public class Påfyldning {
     }
 
     public void setLiter(double liter, boolean destillering) {
-        if (liter <= 0) throw new IllegalArgumentException("Liter skal være større end 0");
+        if (liter < 0) throw new IllegalArgumentException("Liter skal være større end 0");
         if (destillering) {
             this.destillering.setLiter(this.destillering.getLiter() + this.liter - liter);
         } else {

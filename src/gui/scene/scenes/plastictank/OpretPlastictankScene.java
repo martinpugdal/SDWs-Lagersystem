@@ -260,9 +260,9 @@ public class OpretPlastictankScene extends XScene {
             }
         }
         try {
-            Opbevaring fad = getGUI().getController().createPlastictank(type, nummerInt, antalLiterDouble, intakt, null);
+            Opbevaring plastictank = getGUI().getController().createPlastictank(type, nummerInt, antalLiterDouble, intakt);
             if (hyldeObjekt != null) {
-                getGUI().getController().addOpbevaringToHylde(fad, hyldeObjekt);
+                getGUI().getController().addOpbevaringToHylde(plastictank, hyldeObjekt);
             }
             getGUI().switchScene(SceneType.PLASTICTANK);
         } catch (IllegalArgumentException e) {

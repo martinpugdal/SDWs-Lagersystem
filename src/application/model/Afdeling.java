@@ -50,6 +50,14 @@ public class Afdeling {
         reoler.remove(reol);
     }
 
+    public List<Opbevaring> getOpbevaringer() {
+        List<Opbevaring> opbevaringer = new ArrayList<>();
+        for (Reol reol : reoler) {
+            opbevaringer.addAll(reol.getOpbevaringer());
+        }
+        return opbevaringer;
+    }
+
     public int getNummer() {
         return nummer;
     }
@@ -69,13 +77,5 @@ public class Afdeling {
     @Override
     public String toString() {
         return "A" + nummer;
-    }
-
-    public List<Opbevaring> getOpbevaringer() {
-        List<Opbevaring> opbevaringer = new ArrayList<>();
-        for (Reol reol : reoler) {
-            opbevaringer.addAll(reol.getOpbevaringer());
-        }
-        return opbevaringer;
     }
 }

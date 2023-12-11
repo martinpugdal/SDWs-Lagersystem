@@ -267,7 +267,7 @@ public class Controller {
         opbevaring.setHylde(hylde);
     }
 
-    public Opbevaring createPlastictank(String navn, int nummer, double volumen, boolean intakt, Påfyldning påfyldning) {
+    public Opbevaring createPlastictank(String navn, int nummer, double volumen, boolean intakt) {
         if (checkOpbevaringExists(nummer)) {
             throw new IllegalArgumentException("Opbevaringen findes allerede med dette nummer");
         }
@@ -599,10 +599,12 @@ public class Controller {
         Reol a3Reol2 = createReol(afdeling3, ReolType.STOR);
 
         // tilføj nogle destilleringer
-        Destillering destillering1 = createDestillering("NM 77P", 1, 86, 50);
+        Destillering destillering1 = createDestillering("NM 76P", 1, 86, 50);
         Destillering destillering2 = createDestillering("NM 77P", 2, 245, 52);
         Destillering destillering3 = createDestillering("NM 77P", 3, 144, 52.4);
-        Destillering destillering4 = createDestillering("NM 77P", 4, 100, 55.2);
+        Destillering destillering4 = createDestillering("NM 78P", 4, 100, 55.2);
+        Destillering destillering5 = createDestillering("NM 78P", 5, 200, 50.2);
+        Destillering destillering6 = createDestillering("NM 79P", 6, 300, 50.2);
 
         // tilføj nogle flasker
         createFlaske(Drikkelse.GIN, 123456789, "Gin 1 Sind", 13.3, 202);
@@ -621,14 +623,16 @@ public class Controller {
         fad1.setHylde(a2Reol1.getHylde(1));
         Opbevaring fad2 = createFad("Bourbon", 2, 1, 50, true);
         fad2.setHylde(a2Reol1.getHylde(2));
-        Opbevaring fad3 = createFad("Sherry", 3, 2, 35, true);
+        Opbevaring fad3 = createFad("Sherry", 3, 2, 35, false);
         fad3.setHylde(a2Reol1.getHylde(1));
+        Opbevaring fad4 = createFad("Sherry", 4, 1, 45, true);
+        Opbevaring fad5 = createFad("Bourbon", 5, 2, 95, true);
         // plastictank
-        Opbevaring plastictank1 = createPlastictank("Gin 1 Sind", 4, 125, true, null);
+        Opbevaring plastictank1 = createPlastictank("Gin 1 Sind", 6, 125, true);
         plastictank1.setHylde(a1Reol1.getHylde(1));
-        Opbevaring plastictank2 = createPlastictank("Gin 4 Sind", 5, 255, true, null);
+        Opbevaring plastictank2 = createPlastictank("Gin 4 Sind", 7, 255, true);
         plastictank2.setHylde(a1Reol1.getHylde(1));
-        Opbevaring plastictank3 = createPlastictank("Gin 7 Sind", 6, 95, true, null);
+        Opbevaring plastictank3 = createPlastictank("Gin 7 Sind", 8, 95, true);
         plastictank3.setHylde(a1Reol1.getHylde(2));
 
         // tilføj nogle påfyldninger
