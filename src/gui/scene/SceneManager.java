@@ -6,7 +6,6 @@ import gui.scene.scenes.afdeling.OpretAfdelingScene;
 import gui.scene.scenes.afdeling.RedigerAfdelingScene;
 import gui.scene.scenes.destillering.DestilleringOmhældningScene;
 import gui.scene.scenes.destillering.DestilleringOverførScene;
-import gui.scene.scenes.destillering.DestilleringTankScene;
 import gui.scene.scenes.destillering.OpretDestilleringScene;
 import gui.scene.scenes.destillering.RedigerDestilleringScene;
 import gui.scene.scenes.fad.OpretFadScene;
