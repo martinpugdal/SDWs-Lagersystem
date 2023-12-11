@@ -23,7 +23,6 @@ public class Controller {
 
     /**
      * returner kun en instance af denne klasse.
-     *
      * @return Controller instance
      */
     public static Controller getController() {
@@ -97,11 +96,6 @@ public class Controller {
         return storage.getRåvarer();
     }
 
-    /**
-     * @param adresse
-     * @param størrelse
-     * @return
-     */
     public Lager createLager(int nummer, String adresse, double størrelse) {
         if (checkLagerExists(nummer)) {
             throw new IllegalArgumentException("Lageret findes allerede");
@@ -111,11 +105,6 @@ public class Controller {
         return lager;
     }
 
-    /**
-     * @param selectedLager
-     * @param adresse
-     * @param kvadratmeter
-     */
     public void updateLager(Lager selectedLager, int nummer, String adresse, double kvadratmeter) {
         if ((checkLagerExists(nummer) && selectedLager.getNummer() != nummer)) {
             throw new IllegalArgumentException("Lageret findes allerede");
@@ -125,9 +114,6 @@ public class Controller {
         selectedLager.setStørrelse(kvadratmeter);
     }
 
-    /**
-     * @param lager
-     */
     public void deleteLager(Lager lager) {
         storage.removeLager(lager);
         for (Afdeling afdeling : lager.getAfdelinger()) {
@@ -135,12 +121,6 @@ public class Controller {
         }
     }
 
-    /**
-     * @param lager
-     * @param drikkelse
-     * @param nummer
-     * @return
-     */
     public Afdeling createAfdeling(Lager lager, Drikkelse drikkelse, int nummer) {
         if (checkAfdelingExists(lager, nummer)) {
             throw new IllegalArgumentException("Afdelingen findes allerede med dette nummer");
@@ -160,7 +140,7 @@ public class Controller {
                 for (Hylde hylde : reol.getHylder()) {
                     List<Opbevaring> opbevaringer = new ArrayList<>(hylde.getOpbevaringer());
                     for (Opbevaring opbevaring : opbevaringer) {
-                        removeOpbevaringFromHylde(opbevaring);
+                        opbevaring.removeFromHylde();
                     }
                 }
             }
@@ -189,27 +169,14 @@ public class Controller {
         List<Opbevaring> opbevaringer = new ArrayList<>(hylde.getOpbevaringer());
         hylde.setReol(null);
         for (Opbevaring opbevaring : opbevaringer) {
-            removeOpbevaringFromHylde(opbevaring);
+            opbevaring.removeFromHylde();
         }
     }
 
-    /**
-     * @param afdeling
-     * @param reolType
-     * @return
-     */
     public Reol createReol(Afdeling afdeling, ReolType reolType) {
         return afdeling.createReol(reolType);
     }
 
-    /**
-     * @param type
-     * @param nummer
-     * @param antalGangeBrugt
-     * @param volumen
-     * @param intakt
-     * @return Fad
-     */
     public Opbevaring createFad(String type, int nummer, int antalGangeBrugt, double volumen, boolean intakt) {
         if (checkOpbevaringExists(nummer)) {
             throw new IllegalArgumentException("Opbevaringen findes allerede med dette nummer");
@@ -229,7 +196,7 @@ public class Controller {
         fad.setVolumen(volumen);
         fad.setIntakt(intakt);
         if (fad.getHylde() != hylde) {
-            updateOpbevaringHylde(fad, hylde);
+            fad.setHylde(hylde);
         }
     }
 
@@ -242,7 +209,7 @@ public class Controller {
         plastictank.setVolumen(volumen);
         plastictank.setIntakt(intakt);
         if (plastictank.getHylde() != hylde) {
-            updateOpbevaringHylde(plastictank, hylde);
+            plastictank.setHylde(hylde);
         }
     }
 
@@ -253,17 +220,6 @@ public class Controller {
         if (hylde.erOptaget()) {
             throw new IllegalArgumentException("Hylde er optaget");
         }
-        opbevaring.setHylde(hylde);
-    }
-
-    public void removeOpbevaringFromHylde(Opbevaring opbevaring) {
-        if (opbevaring.getHylde() == null) {
-            throw new IllegalArgumentException("Opbevaringen er ikke på en hylde");
-        }
-        opbevaring.setHylde(null);
-    }
-
-    public void updateOpbevaringHylde(Opbevaring opbevaring, Hylde hylde) {
         opbevaring.setHylde(hylde);
     }
 
