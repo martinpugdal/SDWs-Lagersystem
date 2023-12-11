@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-public class DestilleringFadScene extends XScene {
+public class DestilleringOverførScene extends XScene {
 
     private TableView<Fad> fraFadTableView, tilFadTableView;
     private TableView<Plastictank> fraPlastictankTableView, tilPlastictankTableView;
@@ -24,7 +24,7 @@ public class DestilleringFadScene extends XScene {
     private Label label110, label111, label108, label109;
     private ToggleGroup group;
 
-    public DestilleringFadScene(GUI gui) {
+    public DestilleringOverførScene(GUI gui) {
         super(gui);
     }
 

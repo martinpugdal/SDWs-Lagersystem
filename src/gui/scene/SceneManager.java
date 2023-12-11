@@ -4,7 +4,8 @@ import gui.GUI;
 import gui.scene.scenes.*;
 import gui.scene.scenes.afdeling.OpretAfdelingScene;
 import gui.scene.scenes.afdeling.RedigerAfdelingScene;
-import gui.scene.scenes.destillering.DestilleringFadScene;
+import gui.scene.scenes.destillering.DestilleringOmhældningScene;
+import gui.scene.scenes.destillering.DestilleringOverførScene;
 import gui.scene.scenes.destillering.DestilleringTankScene;
 import gui.scene.scenes.destillering.OpretDestilleringScene;
 import gui.scene.scenes.destillering.RedigerDestilleringScene;
@@ -40,8 +41,8 @@ public class SceneManager {
     private final XScene destilleringScene;
     private final XScene opretDestilleringScene;
     private final XScene redigerDestilleringScene;
-    private final XScene destilleringFadScene;
-    private final XScene destilleringTankScene;
+    private final XScene omhældningDestilleringScene;
+    private final XScene overførDestilleringScene;
     // fad
     private final XScene fadScene;
     private final XScene opretFadScene;
@@ -79,8 +80,8 @@ public class SceneManager {
         destilleringScene = new DestilleringScene(gui);
         opretDestilleringScene = new OpretDestilleringScene(gui);
         redigerDestilleringScene = new RedigerDestilleringScene(gui);
-        destilleringFadScene = new DestilleringFadScene(gui);
-        destilleringTankScene = new DestilleringTankScene(gui);
+        omhældningDestilleringScene = new DestilleringOmhældningScene(gui);
+        overførDestilleringScene = new DestilleringOverførScene(gui);
         // fad
         fadScene = new FadScene(gui);
         opretFadScene = new OpretFadScene(gui);
@@ -120,8 +121,8 @@ public class SceneManager {
             case DESTILLERING -> destilleringScene;
             case OPRETDESTILLERING -> opretDestilleringScene;
             case REDIGERDESTILLERING -> redigerDestilleringScene;
-            case DESTILLERINGFAD -> destilleringFadScene;
-            case DESTILLERINGTANK -> destilleringTankScene;
+            case DESTILLERINGOMHÆLDNING -> destilleringFadScene;
+            case DESTILLERINGOVERFØR -> destilleringTankScene;
             // fad
             case FAD -> fadScene;
             case OPRETFAD -> opretFadScene;

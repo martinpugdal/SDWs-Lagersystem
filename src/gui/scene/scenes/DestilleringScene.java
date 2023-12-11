@@ -2,7 +2,6 @@ package gui.scene.scenes;
 
 import application.model.Destillering;
 import application.model.Opbevaring;
-import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
 import gui.scene.scenes.destillering.RedigerDestilleringScene;
@@ -89,22 +88,22 @@ public class DestilleringScene extends XScene {
         Tooltip tooltip132 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button65.setTooltip(tooltip132);
 
-        Button button63 = new Button("Overfør destillering (fad)");
+        Button button63 = new Button("Omhæld destillering");
         button63.setTranslateX(-550 + (buttonWidth + 20) * 2);
         button63.setTranslateY(-buttonHeight - 70);
         button63.setPrefSize(buttonWidth, buttonHeight);
-        button63.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGFAD));
+        button63.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGOMHÆLDNING));
         button63.setFont(new Font("Arial", 16));
         button63.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button63.setCursor(Cursor.HAND);
-        Tooltip tooltip130 = new Tooltip("Tryk her for at tilføje/fjerne destilleringsvæske til/fra et fad");
+        Tooltip tooltip130 = new Tooltip("Tryk her for at omhælde en destillering fra til en anden");
         button63.setTooltip(tooltip130);
 
-        Button button64 = new Button("Overfør destillering (tank)");
+        Button button64 = new Button("Overfør destillering");
         button64.setTranslateX(-550 + (buttonWidth + 20) * 3);
         button64.setTranslateY(-buttonHeight - 104);
         button64.setPrefSize(buttonWidth, buttonHeight);
-        button64.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGTANK));
+        button64.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERINGOVERFØR));
         button64.setFont(new Font("Arial", 16));
         button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button64.setCursor(Cursor.HAND);
