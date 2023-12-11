@@ -515,6 +515,8 @@ public class Controller {
         plastictank2.setHylde(a1Reol1.getHylde(1));
         Opbevaring plastictank3 = createPlastictank("Gin 7 Sind", 8, 95, true);
         plastictank3.setHylde(a1Reol1.getHylde(2));
+        Opbevaring plastictank4 = createPlastictank("Gin 8 Sind", 9, 95, true);
+        plastictank4.setHylde(a3Reol2.getHylde(9));
 
         // tilføj nogle påfyldninger
         createPåfyldning(fad1, destillering1, LocalDate.now(), 40);
