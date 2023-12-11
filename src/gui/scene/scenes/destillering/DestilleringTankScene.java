@@ -54,7 +54,7 @@ public class DestilleringTankScene extends XScene {
 
         Button button65 = new Button("Annuller");
         button65.setTranslateX(0);
-        button65.setTranslateY(translateY + 180 - 45);
+        button65.setTranslateY(translateY + 180 - 39);
         button65.setPrefSize(250, 45);
         button65.setOnAction(e -> getGUI().switchScene(SceneType.DESTILLERING));
         button65.setFont(XStyle.M_FONT);
@@ -65,7 +65,7 @@ public class DestilleringTankScene extends XScene {
 
         Button button66 = new Button("Gå tilbage til forside");
         button66.setTranslateX(325);
-        button66.setTranslateY(translateY + 180 - 90);
+        button66.setTranslateY(translateY + 180 - 77);
         button66.setPrefSize(250, 45);
         button66.setOnAction(e -> getGUI().gåTilForside());
         button66.setFont(XStyle.M_FONT);

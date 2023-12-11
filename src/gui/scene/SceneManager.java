@@ -8,6 +8,7 @@ import gui.scene.scenes.destillering.OpretDestilleringScene;
 import gui.scene.scenes.destillering.RedigerDestilleringScene;
 import gui.scene.scenes.fad.OpretFadScene;
 import gui.scene.scenes.fad.RedigerFadScene;
+import gui.scene.scenes.fad.PåfyldningerFadScene;
 import gui.scene.scenes.ginflaske.OpretGinflaskeScene;
 import gui.scene.scenes.ginflaske.RedigerGinflaskeScene;
 import gui.scene.scenes.lager.OpretLagerScene;
@@ -41,6 +42,7 @@ public class SceneManager {
     private final XScene fadScene;
     private final XScene opretFadScene;
     private final XScene redigerFadScene;
+    private final XScene påfyldningFadScene;
     // ginflaske
     private final XScene ginflaskeScene;
     private final XScene opretGinflaskeScene;
@@ -77,6 +79,7 @@ public class SceneManager {
         fadScene = new FadScene(gui);
         opretFadScene = new OpretFadScene(gui);
         redigerFadScene = new RedigerFadScene(gui);
+        påfyldningFadScene = new PåfyldningerFadScene(gui);
         // ginflaske
         ginflaskeScene = new GinflaskeScene(gui);
         opretGinflaskeScene = new OpretGinflaskeScene(gui);
@@ -115,6 +118,7 @@ public class SceneManager {
             case FAD -> fadScene;
             case OPRETFAD -> opretFadScene;
             case REDIGERFAD -> redigerFadScene;
+            case PÅFYLDNINGFAD -> påfyldningFadScene;
             // ginflaske
             case GINFLASKE -> ginflaskeScene;
             case OPRETGINFLASKE -> opretGinflaskeScene;

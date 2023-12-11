@@ -4,6 +4,7 @@ import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
+import gui.scene.scenes.fad.PåfyldningerFadScene;
 import gui.scene.scenes.fad.RedigerFadScene;
 import gui.setting.XIcon;
 import gui.setting.XScene;
@@ -58,7 +59,7 @@ public class FadScene extends XScene {
 
         Button button61 = new Button("Rediger fad");
         button61.setTranslateX(-550 + (buttonWidth + 20) * 2);
-        button61.setTranslateY(-buttonHeight * 2);
+        button61.setTranslateY(-buttonHeight * 2 + 8);
         button61.setPrefSize(buttonWidth, buttonHeight);
         button61.setOnAction(e -> redigerFad());
         button61.setFont(new Font("Arial", 16));
@@ -69,7 +70,7 @@ public class FadScene extends XScene {
 
         Button button62 = new Button("Slet fad");
         button62.setTranslateX(-550 + (buttonWidth + 20) * 3);
-        button62.setTranslateY(-buttonHeight * 3);
+        button62.setTranslateY(-buttonHeight * 3 + 15);
         button62.setPrefSize(buttonWidth, buttonHeight);
         button62.setOnAction(e -> sletFad());
         button62.setFont(new Font("Arial", 16));
@@ -80,7 +81,7 @@ public class FadScene extends XScene {
 
         Button button63 = new Button("Gå tilbage til forside");
         button63.setTranslateX(-550 + (buttonWidth + 20) * 4);
-        button63.setTranslateY(-buttonHeight * 4);
+        button63.setTranslateY(-buttonHeight * 4 + 18 + 6);
         button63.setPrefSize(buttonWidth, buttonHeight);
         button63.setOnAction(e -> getGUI().gåTilForside());
         button63.setFont(new Font("Arial", 16));
@@ -88,6 +89,17 @@ public class FadScene extends XScene {
         button63.setCursor(Cursor.HAND);
         Tooltip tooltip130 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button63.setTooltip(tooltip130);
+
+        Button button64 = new Button("Vis påfyldninger");
+        button64.setTranslateX(-550 + (buttonWidth + 20) * 2.5);
+        button64.setTranslateY(-buttonHeight * 3);
+        button64.setPrefSize(buttonWidth, buttonHeight);
+        button64.setOnAction(e -> visPåfyldninger());
+        button64.setFont(new Font("Arial", 16));
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip1 = new Tooltip("Tryk her for at se påfyldninger af et fad");
+        button64.setTooltip(tooltip1);
 
         Label label108 = new Label("Her ses en oversigt over fade");
         label108.setTranslateX(0);
@@ -140,13 +152,26 @@ public class FadScene extends XScene {
             column.setStyle("-fx-alignment: CENTER;");
         }
 
-        getLayout().getChildren().addAll(label107, button60, button61, button62, button63, label108, fadTableView);
+        getLayout().getChildren().addAll(label107, button60, button61, button62, button63, button64, label108, fadTableView);
     }
 
     private void redigerFad() {
         if (fadTableView.getSelectionModel().getSelectedItem() != null) {
             ((RedigerFadScene) getGUI().getScene(SceneType.REDIGERFAD)).setSelectedFad(fadTableView.getSelectionModel().getSelectedItem());
             getGUI().switchScene(SceneType.REDIGERFAD);
+        } else {
+            getGUI().alert("Ingen fad valgt", "Du har ikke valgt et fad", "Vælg et fad fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+        }
+    }
+
+    private void visPåfyldninger() {
+        if (fadTableView.getSelectionModel().getSelectedItem() != null) {
+            if (fadTableView.getSelectionModel().getSelectedItem().getPåfyldning() != null || !fadTableView.getSelectionModel().getSelectedItem().getTidligerePåfyldninger().isEmpty()) {
+                ((PåfyldningerFadScene) getGUI().getScene(SceneType.PÅFYLDNINGFAD)).setSelectedFad(fadTableView.getSelectionModel().getSelectedItem());
+                getGUI().switchScene(SceneType.PÅFYLDNINGFAD);
+            } else {
+                getGUI().alert("Ingen påfyldninger", "Der er ingen påfyldninger på dette fad", "Dette fad har ingen påfyldninger", Alert.AlertType.WARNING).showAndWait();
+            }
         } else {
             getGUI().alert("Ingen fad valgt", "Du har ikke valgt et fad", "Vælg et fad fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
         }
@@ -168,7 +193,7 @@ public class FadScene extends XScene {
 
     @Override
     public void update() {
-        ((RedigerFadScene) getGUI().getScene(SceneType.REDIGERFAD)).setSelectedFad(null);
+        ((PåfyldningerFadScene) getGUI().getScene(SceneType.PÅFYLDNINGFAD)).setSelectedFad(null);
         fadTableView.getItems().clear();
         fadTableView.getItems().addAll(getGUI().getController().getFade());
     }
