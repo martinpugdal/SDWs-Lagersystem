@@ -1,6 +1,5 @@
 package gui.scene.scenes.destillering;
 
-import application.model.Opbevaring;
 import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
@@ -16,13 +15,13 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class DestilleringFadScene extends XScene {
 
-    private TableView<String> fraFadTableView, tilFadTableView;
+    private TableView<Fad> fraFadTableView, tilFadTableView;
+    private TableView<Plastictank> fraPlastictankTableView, tilPlastictankTableView;
     private TextField textFieldAntalLiter;
-    private Label label110, label111;
+    private Label label110, label111, label108, label109;
     private ToggleGroup group;
 
     public DestilleringFadScene(GUI gui) {
@@ -33,7 +32,7 @@ public class DestilleringFadScene extends XScene {
     public void initLayout() {
         double translateY = getGUI().getScreenWidth() * 0.275;
 
-        Label label109 = new Label("Tilføj/fjern destillering til/fra fad");
+        label109 = new Label("Tilføj/fjern destillering til/fra fad");
         label109.setTranslateX(0);
         label109.setTranslateY(30);
         label109.setFont(XStyle.XXL_FONT);
@@ -78,11 +77,10 @@ public class DestilleringFadScene extends XScene {
         Tooltip tooltip139 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button66.setTooltip(tooltip139);
 
-        Label label108 = new Label("Her kan du flytte destillering fra et fad til et andet fad.");
+        label108 = new Label("Her kan du flytte destillering fra et fad til et andet fad.");
         label108.setTranslateX(0);
         label108.setTranslateY(-50);
         label108.setFont(XStyle.M_FONT);
-        label108.setTextFill(Color.BLACK);
 
         fraFadTableView = new TableView<>();
         fraFadTableView.setPlaceholder(new Label("Der er ingen fade"));
@@ -93,10 +91,10 @@ public class DestilleringFadScene extends XScene {
         fraFadTableView.setTranslateY(0);
         fraFadTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         VBox.setMargin(fraFadTableView, new Insets(0, 0, 0, 20));
-        TableColumn<Opbevaring, Integer> nummerC = new TableColumn<>("Nummer");
+        TableColumn<Fad, Integer> nummerC = new TableColumn<>("Nummer");
         nummerC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
         fraFadTableView.getColumns().add(nummerC);
-        TableColumn<Opbevaring, String> typeC = new TableColumn<>("Type");
+        TableColumn<Fad, String> typeC = new TableColumn<>("Type");
         typeC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getType()));
         fraFadTableView.getColumns().add(typeC);
         TableColumn<Fad, Double> volumenC = new TableColumn<>("Volumen (L)");
@@ -114,6 +112,38 @@ public class DestilleringFadScene extends XScene {
         for (TableColumn<Fad, ?> column : fraFadTableView.getColumns()) {
             column.setStyle("-fx-alignment: CENTER;");
         }
+
+        fraPlastictankTableView = new TableView<>();
+        fraPlastictankTableView.setPlaceholder(new Label("Der er ingen plastictanke"));
+        fraPlastictankTableView.setEditable(false);
+        fraPlastictankTableView.setPrefSize(200, 200);
+        fraPlastictankTableView.setMaxWidth(500);
+        fraPlastictankTableView.setTranslateX(-400);
+        fraPlastictankTableView.setTranslateY(0);
+        fraPlastictankTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        VBox.setMargin(fraPlastictankTableView, new Insets(0, 0, 0, 20));
+        TableColumn<Plastictank, Integer> nummerC1 = new TableColumn<>("Nummer");
+        nummerC1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
+        fraPlastictankTableView.getColumns().add(nummerC1);
+        TableColumn<Plastictank, String> navnC1 = new TableColumn<>("Type");
+        navnC1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNavn()));
+        fraPlastictankTableView.getColumns().add(navnC1);
+        TableColumn<Plastictank, Double> volumenC1 = new TableColumn<>("Volumen (L)");
+        volumenC1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen()));
+        fraPlastictankTableView.getColumns().add(volumenC1);
+        TableColumn<Plastictank, Double> literC1 = new TableColumn<>("Påfyldt liter");
+        literC1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning().getLiter()));
+        fraPlastictankTableView.getColumns().add(literC1);
+        TableColumn<Plastictank, Påfyldning> påfyldningC1 = new TableColumn<>("Påfyldning");
+        påfyldningC1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning()));
+        fraPlastictankTableView.getColumns().add(påfyldningC1);
+        TableColumn<Plastictank, String> placeringC1 = new TableColumn<>("Placering");
+        placeringC1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
+        fraPlastictankTableView.getColumns().add(placeringC1);
+        for (TableColumn<Plastictank, ?> column : fraPlastictankTableView.getColumns()) {
+            column.setStyle("-fx-alignment: CENTER;");
+        }
+
 
         tilFadTableView = new TableView<>();
         tilFadTableView.setPlaceholder(new Label("Der er ingen fade"));
@@ -140,14 +170,41 @@ public class DestilleringFadScene extends XScene {
             column.setStyle("-fx-alignment: CENTER;");
         }
 
+        tilPlastictankTableView = new TableView<>();
+        tilPlastictankTableView.setPlaceholder(new Label("Der er ingen plastictanke"));
+        tilPlastictankTableView.setEditable(false);
+        tilPlastictankTableView.setPrefSize(200, 200);
+        tilPlastictankTableView.setMaxWidth(500);
+        tilPlastictankTableView.setTranslateX(400);
+        tilPlastictankTableView.setTranslateY(-200);
+        tilPlastictankTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        VBox.setMargin(tilPlastictankTableView, new Insets(0, 20, 0, 0));
+        TableColumn<Plastictank, Integer> nummerC2 = new TableColumn<>("Nummer");
+        nummerC2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
+        tilPlastictankTableView.getColumns().add(nummerC2);
+        TableColumn<Plastictank, String> navnC2 = new TableColumn<>("Navn");
+        navnC2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNavn()));
+        tilPlastictankTableView.getColumns().add(navnC2);
+        TableColumn<Plastictank, Double> volumenC2 = new TableColumn<>("Volumen (L)");
+        volumenC2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVolumen()));
+        tilPlastictankTableView.getColumns().add(volumenC2);
+        TableColumn<Plastictank, String> placeringC2 = new TableColumn<>("Placering");
+        placeringC2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
+        tilPlastictankTableView.getColumns().add(placeringC2);
+        for (TableColumn<Plastictank, ?> column : tilPlastictankTableView.getColumns()) {
+            column.setStyle("-fx-alignment: CENTER;");
+        }
+
         label110 = new Label("Fra fad");
         label110.setPrefSize(100, 20);
+        label110.setMaxWidth(150);
         label110.setTranslateX(-575);
         label110.setTranslateY(10);
         label110.setFont(XStyle.M_FONT);
 
         label111 = new Label("Til fad");
         label111.setPrefSize(100, 20);
+        label111.setMaxWidth(150);
         label111.setTranslateX(200);
         label111.setTranslateY(-10);
         label111.setFont(XStyle.M_FONT);
@@ -171,8 +228,8 @@ public class DestilleringFadScene extends XScene {
         toggleButton.setToggleGroup(group);
         toggleButton.setSelected(true);
         ToggleButton toggleButton1 = new ToggleButton("Plastictank");
-        toggleButton.setMaxWidth(75);
-        toggleButton.setToggleGroup(group);
+        toggleButton1.setMaxWidth(75);
+        toggleButton1.setToggleGroup(group);
 
         VBox vBox1 = new VBox();
         vBox1.setTranslateX(-getGUI().getScreenHeight() * 0.5 + 360);
@@ -216,16 +273,20 @@ public class DestilleringFadScene extends XScene {
         textFieldAntalLiter.setText("");
         group.selectedToggleProperty().addListener(
                 event -> {
-                    System.out.println("test");
-                    System.out.println(group.getSelectedToggle());
-                    if (group.getSelectedToggle() != null) {
-                        if (group.getSelectedToggle().equals("Fad")) {
-                            tilFadTableView.setVisible(true);
-                            tilPlastictankTableView.setVisible(false);
-                        } else {
-                            tilFadTableView.setVisible(false);
-                            tilPlastictankTableView.setVisible(true);
-                        }
+                    if (group.getToggles().get(0).isSelected()) {
+                        getLayout().getChildren().set(7, fraFadTableView);
+                        getLayout().getChildren().set(8, tilFadTableView);
+                        label109.setText("Tilføj/fjern destillering til/fra fad");
+                        label108.setText("Her kan du flytte destillering fra et fad til et andet fad.");
+                        label110.setText("Fra fad");
+                        label111.setText("Til fad");
+                    } else if (group.getToggles().get(1).isSelected()) {
+                        getLayout().getChildren().set(7, fraPlastictankTableView);
+                        getLayout().getChildren().set(8, tilPlastictankTableView);
+                        label109.setText("Tilføj/fjern destillering til/fra plastictank");
+                        label108.setText("Her kan du flytte destillering fra en plastictank til en anden plastictank.");
+                        label110.setText("Fra plastictank");
+                        label111.setText("Til plastictank");
                     }
                 }
         );
