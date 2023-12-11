@@ -3,6 +3,7 @@ package gui.scene;
 import gui.GUI;
 import gui.scene.scenes.*;
 import gui.scene.scenes.afdeling.OpretAfdelingScene;
+import gui.scene.scenes.afdeling.RedigerAfdelingScene;
 import gui.scene.scenes.destillering.DestilleringFadScene;
 import gui.scene.scenes.destillering.DestilleringTankScene;
 import gui.scene.scenes.destillering.OpretDestilleringScene;
@@ -34,6 +35,7 @@ public class SceneManager {
     // afdeling
     private final XScene afdelingScene;
     private final XScene opretAfdelingScene;
+    private final XScene redigerAfdelingScene;
     // destillering
     private final XScene destilleringScene;
     private final XScene opretDestilleringScene;
@@ -72,6 +74,7 @@ public class SceneManager {
         // afdeling
         afdelingScene = new AfdelingScene(gui);
         opretAfdelingScene = new OpretAfdelingScene(gui);
+        redigerAfdelingScene = new RedigerAfdelingScene(gui);
         // destillering
         destilleringScene = new DestilleringScene(gui);
         opretDestilleringScene = new OpretDestilleringScene(gui);
@@ -112,6 +115,7 @@ public class SceneManager {
             // afdeling
             case AFDELING -> afdelingScene;
             case OPRETAFDELING -> opretAfdelingScene;
+            case REDIGERAFDELING -> redigerAfdelingScene;
             // destillering
             case DESTILLERING -> destilleringScene;
             case OPRETDESTILLERING -> opretDestilleringScene;

@@ -4,6 +4,7 @@ import application.model.Afdeling;
 import application.model.Lager;
 import gui.GUI;
 import gui.scene.SceneType;
+import gui.scene.scenes.afdeling.RedigerAfdelingScene;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
@@ -120,10 +121,10 @@ public class AfdelingScene extends XScene {
 
     private void redigerAfdeling() {
         if (afdelingTableView.getSelectionModel().getSelectedItem() != null) {
-//            ((RedigerAfdelingScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedAfdeling(afdelingTableView.getSelectionModel().getSelectedItem());
+            ((RedigerAfdelingScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedAfdeling(afdelingTableView.getSelectionModel().getSelectedItem());
             getGUI().switchScene(SceneType.REDIGERAFDELING);
         } else {
-            getGUI().alert("Ingen lager valgt", "Du har ikke valgt et lager", "Vælg et lager fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+            getGUI().alert("Ingen afdeling valgt", "Du har ikke valgt en afdeling", "Vælg en afdeling fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
         }
     }
 
@@ -143,7 +144,7 @@ public class AfdelingScene extends XScene {
 
     @Override
     public void update() {
-        //((RedigerAfdelingScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedAfdeling(null);
+        ((RedigerAfdelingScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedAfdeling(null);
         afdelingTableView.getItems().clear();
         afdelingTableView.getItems().addAll(getGUI().getController().getAfdelinger());
     }

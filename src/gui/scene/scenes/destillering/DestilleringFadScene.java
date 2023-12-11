@@ -1,5 +1,6 @@
 package gui.scene.scenes.destillering;
 
+import application.model.Opbevaring;
 import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
@@ -19,8 +20,10 @@ import javafx.scene.paint.Color;
 
 public class DestilleringFadScene extends XScene {
 
-    private TableView<Fad> fraFadTableView, tilFadTableView;
+    private TableView<String> fraFadTableView, tilFadTableView;
     private TextField textFieldAntalLiter;
+    private Label label110, label111;
+    private ToggleGroup group;
 
     public DestilleringFadScene(GUI gui) {
         super(gui);
@@ -90,10 +93,10 @@ public class DestilleringFadScene extends XScene {
         fraFadTableView.setTranslateY(0);
         fraFadTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         VBox.setMargin(fraFadTableView, new Insets(0, 0, 0, 20));
-        TableColumn<Fad, Integer> nummerC = new TableColumn<>("Nummer");
+        TableColumn<Opbevaring, Integer> nummerC = new TableColumn<>("Nummer");
         nummerC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNummer()));
         fraFadTableView.getColumns().add(nummerC);
-        TableColumn<Fad, String> typeC = new TableColumn<>("Type");
+        TableColumn<Opbevaring, String> typeC = new TableColumn<>("Type");
         typeC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getType()));
         fraFadTableView.getColumns().add(typeC);
         TableColumn<Fad, Double> volumenC = new TableColumn<>("Volumen (L)");
@@ -137,13 +140,13 @@ public class DestilleringFadScene extends XScene {
             column.setStyle("-fx-alignment: CENTER;");
         }
 
-        Label label110 = new Label("Fra fad");
+        label110 = new Label("Fra fad");
         label110.setPrefSize(100, 20);
         label110.setTranslateX(-575);
         label110.setTranslateY(10);
         label110.setFont(XStyle.M_FONT);
 
-        Label label111 = new Label("Til fad");
+        label111 = new Label("Til fad");
         label111.setPrefSize(100, 20);
         label111.setTranslateX(200);
         label111.setTranslateY(-10);
@@ -162,6 +165,15 @@ public class DestilleringFadScene extends XScene {
         Tooltip tooltip140 = new Tooltip("Indtast antal liter");
         textFieldAntalLiter.setTooltip(tooltip140);
 
+        group = new ToggleGroup();
+        ToggleButton toggleButton = new ToggleButton("Fad");
+        toggleButton.setMaxWidth(75);
+        toggleButton.setToggleGroup(group);
+        toggleButton.setSelected(true);
+        ToggleButton toggleButton1 = new ToggleButton("Plastictank");
+        toggleButton.setMaxWidth(75);
+        toggleButton.setToggleGroup(group);
+
         VBox vBox1 = new VBox();
         vBox1.setTranslateX(-getGUI().getScreenHeight() * 0.5 + 360);
         vBox1.setTranslateY(-350);
@@ -170,26 +182,53 @@ public class DestilleringFadScene extends XScene {
         vBox1.setMinSize(250, 45);
         vBox1.setAlignment(Pos.CENTER);
         vBox1.setSpacing(5);
-        vBox1.getChildren().addAll(label112, textFieldAntalLiter);
+        vBox1.getChildren().addAll(label112, textFieldAntalLiter, toggleButton, toggleButton1);
 
         getLayout().getChildren().addAll(label109, button64, button65, button66, label108, label110, label111, fraFadTableView, tilFadTableView, vBox1);
     }
 
     @Override
     public void update() {
+        fraPlastictankTableView.getItems().clear();
         fraFadTableView.getItems().clear();
         for (Fad fad : getGUI().getController().getFade()) {
             if (fad.getPåfyldning() != null) {
                 fraFadTableView.getItems().add(fad);
             }
         }
+        for (Plastictank plastictank : getGUI().getController().getPlastictanke()) {
+            if (plastictank.getPåfyldning() != null) {
+                fraPlastictankTableView.getItems().add(plastictank);
+            }
+        }
         tilFadTableView.getItems().clear();
+        tilPlastictankTableView.getItems().clear();
         for (Fad fad : getGUI().getController().getFade()) {
             if (fad.getPåfyldning() == null && fad.isIntakt() && fad.getGangeBrugt() < 3) {
                 tilFadTableView.getItems().add(fad);
             }
         }
+        for (Plastictank plastictank : getGUI().getController().getPlastictanke()) {
+            if (plastictank.getPåfyldning() == null && plastictank.isIntakt()) {
+                tilPlastictankTableView.getItems().add(plastictank);
+            }
+        }
         textFieldAntalLiter.setText("");
+        group.selectedToggleProperty().addListener(
+                event -> {
+                    System.out.println("test");
+                    System.out.println(group.getSelectedToggle());
+                    if (group.getSelectedToggle() != null) {
+                        if (group.getSelectedToggle().equals("Fad")) {
+                            tilFadTableView.setVisible(true);
+                            tilPlastictankTableView.setVisible(false);
+                        } else {
+                            tilFadTableView.setVisible(false);
+                            tilPlastictankTableView.setVisible(true);
+                        }
+                    }
+                }
+        );
     }
 
     private void flytDestillering() {

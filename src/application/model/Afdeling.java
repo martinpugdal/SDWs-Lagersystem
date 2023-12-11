@@ -1,13 +1,12 @@
 package application.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Afdeling {
 
     private final ArrayList<Reol> reoler;
-    private final int nummer;
+    private int nummer;
     private Lager lager;
     private Drikkelse drikkelse;
 
@@ -18,9 +17,9 @@ public class Afdeling {
         this.nummer = nummer;
     }
 
-    public Reol createReol(int antalHylder) {
+    public Reol createReol(ReolType reolType) {
         int nummer = reoler.size() + 1;
-        Reol reol = new Reol(this, antalHylder, nummer);
+        Reol reol = new Reol(this, reolType, nummer);
         reoler.add(reol);
         return reol;
     }
@@ -37,12 +36,26 @@ public class Afdeling {
         return reoler;
     }
 
+    public List<Reol> getReoler(ReolType reolType) {
+        List<Reol> reoler = new ArrayList<>();
+        for (Reol reol : this.reoler) {
+            if (reol.getReolType() == reolType) {
+                reoler.add(reol);
+            }
+        }
+        return reoler;
+    }
+
     public void removeReol(Reol reol) {
         reoler.remove(reol);
     }
 
     public int getNummer() {
         return nummer;
+    }
+
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
     }
 
     public Lager getLager() {

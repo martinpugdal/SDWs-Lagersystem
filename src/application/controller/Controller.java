@@ -150,6 +150,25 @@ public class Controller {
         return afdeling;
     }
 
+    public void updateAfdeling(Afdeling afdeling, Lager lager, Drikkelse drikkelse, int nummer) {
+        if ((checkAfdelingExists(lager, nummer) && afdeling.getNummer() != nummer)) {
+            throw new IllegalArgumentException("Afdelingen findes allerede med dette nummer");
+        }
+        afdeling.setLager(lager);
+        if (afdeling.getDrikkelse() != drikkelse) {
+            for (Reol reol : afdeling.getReoler()) {
+                for (Hylde hylde : reol.getHylder()) {
+                    List<Opbevaring> opbevaringer = new ArrayList<>(hylde.getOpbevaringer());
+                    for (Opbevaring opbevaring : opbevaringer) {
+                        removeOpbevaringFromHylde(opbevaring);
+                    }
+                }
+            }
+        }
+        afdeling.setDrikkelse(drikkelse);
+        afdeling.setNummer(nummer);
+    }
+
     public void deleteAfdeling(Afdeling afdeling) {
         afdeling.getLager().removeAfdeling(afdeling);
         List<Reol> reoler = new ArrayList<>(afdeling.getReoler());
@@ -158,7 +177,7 @@ public class Controller {
         }
     }
 
-    private void deleteReol(Reol reol) {
+    public void deleteReol(Reol reol) {
         reol.getAfdeling().removeReol(reol);
         List<Hylde> hylder = new ArrayList<>(List.of(reol.getHylder()));
         for (Hylde hylde : hylder) {
@@ -180,7 +199,7 @@ public class Controller {
      * @return
      */
     public Reol createReol(Afdeling afdeling, ReolType reolType) {
-        return afdeling.createReol(reolType.getAntalHylder());
+        return afdeling.createReol(reolType);
     }
 
     /**
