@@ -1,10 +1,10 @@
 package gui.scene.scenes;
 
 import application.model.Påfyldning;
-import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
 import gui.GUI;
 import gui.scene.SceneType;
+import gui.scene.scenes.plastictank.PåfyldningerPlastictankScene;
 import gui.scene.scenes.plastictank.RedigerPlastictankScene;
 import gui.setting.XIcon;
 import gui.setting.XScene;
@@ -46,42 +46,42 @@ public class PlastictankScene extends XScene {
         double buttonWidth = 250;
         double buttonHeight = 45;
 
-        Button button60 = new Button("Opret Plastic tank");
+        Button button60 = new Button("Opret Plastictank");
         button60.setTranslateX(-550 + (buttonWidth + 20));
         button60.setTranslateY(-buttonHeight);
         button60.setPrefSize(buttonWidth, buttonHeight);
-        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETPLASTICTANK));
+        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETFAD));
         button60.setFont(new Font("Arial", 16));
         button60.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button60.setCursor(Cursor.HAND);
-        Tooltip tooltip127 = new Tooltip("Tryk her for at oprette en plastic tank");
+        Tooltip tooltip127 = new Tooltip("Tryk her for at oprette en plastictank");
         button60.setTooltip(tooltip127);
 
-        Button button61 = new Button("Rediger Plastic tank");
+        Button button61 = new Button("Rediger plastictank");
         button61.setTranslateX(-550 + (buttonWidth + 20) * 2);
-        button61.setTranslateY(-buttonHeight * 2);
+        button61.setTranslateY(-buttonHeight * 2 + 8);
         button61.setPrefSize(buttonWidth, buttonHeight);
         button61.setOnAction(e -> redigerPlastictank());
         button61.setFont(new Font("Arial", 16));
         button61.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button61.setCursor(Cursor.HAND);
-        Tooltip tooltip128 = new Tooltip("Tryk her for at redigere en plastic tank");
+        Tooltip tooltip128 = new Tooltip("Tryk her for at redigere en plastictank");
         button61.setTooltip(tooltip128);
 
-        Button button62 = new Button("Slet Plastic tank");
+        Button button62 = new Button("Slet plastictank");
         button62.setTranslateX(-550 + (buttonWidth + 20) * 3);
-        button62.setTranslateY(-buttonHeight * 3);
+        button62.setTranslateY(-buttonHeight * 3 + 15);
         button62.setPrefSize(buttonWidth, buttonHeight);
         button62.setOnAction(e -> sletPlastictank());
         button62.setFont(new Font("Arial", 16));
         button62.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button62.setCursor(Cursor.HAND);
-        Tooltip tooltip129 = new Tooltip("Tryk her for at slette en plastic tank");
+        Tooltip tooltip129 = new Tooltip("Tryk her for at slette en plastictank");
         button62.setTooltip(tooltip129);
 
         Button button63 = new Button("Gå tilbage til forside");
         button63.setTranslateX(-550 + (buttonWidth + 20) * 4);
-        button63.setTranslateY(-buttonHeight * 4);
+        button63.setTranslateY(-buttonHeight * 4 + 18 + 6);
         button63.setPrefSize(buttonWidth, buttonHeight);
         button63.setOnAction(e -> getGUI().gåTilForside());
         button63.setFont(new Font("Arial", 16));
@@ -89,6 +89,17 @@ public class PlastictankScene extends XScene {
         button63.setCursor(Cursor.HAND);
         Tooltip tooltip130 = new Tooltip("Tryk her for at gå tilbage til forsiden");
         button63.setTooltip(tooltip130);
+
+        Button button64 = new Button("Vis påfyldninger");
+        button64.setTranslateX(-550 + (buttonWidth + 20) * 2.5);
+        button64.setTranslateY(-buttonHeight * 3);
+        button64.setPrefSize(buttonWidth, buttonHeight);
+        button64.setOnAction(e -> visPåfyldninger());
+        button64.setFont(new Font("Arial", 16));
+        button64.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
+        button64.setCursor(Cursor.HAND);
+        Tooltip tooltip1 = new Tooltip("Tryk her for at se påfyldninger af en plastictank");
+        button64.setTooltip(tooltip1);
 
         Label label108 = new Label("Her ses en oversigt over plastic tanke");
         label108.setTranslateX(0);
@@ -141,7 +152,7 @@ public class PlastictankScene extends XScene {
             column.setStyle("-fx-alignment: CENTER;");
         }
 
-        getLayout().getChildren().addAll(label107, button60, button61, button62, button63, label108, plastictankTableView);
+        getLayout().getChildren().addAll(label107, button60, button61, button62, button63, button64, label108, plastictankTableView);
     }
 
     private void redigerPlastictank() {
@@ -150,6 +161,19 @@ public class PlastictankScene extends XScene {
             getGUI().switchScene(SceneType.REDIGERPLASTICTANK);
         } else {
             getGUI().alert("Ingen plastictank valgt", "Du har ikke valgt en plastictank", "Vælg em plastictank fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
+        }
+    }
+
+    private void visPåfyldninger() {
+        if (plastictankTableView.getSelectionModel().getSelectedItem() != null) {
+            if (plastictankTableView.getSelectionModel().getSelectedItem().getPåfyldning() != null || !plastictankTableView.getSelectionModel().getSelectedItem().getTidligerePåfyldninger().isEmpty()) {
+                ((PåfyldningerPlastictankScene) getGUI().getScene(SceneType.PÅFYLDNINGPLASTICTANK)).setSelectedPlastictank(plastictankTableView.getSelectionModel().getSelectedItem());
+                getGUI().switchScene(SceneType.PÅFYLDNINGPLASTICTANK);
+            } else {
+                getGUI().alert("Ingen påfyldninger", "Der er ingen påfyldninger på denne plastictank", "Denne plastictank har ingen påfyldninger", Alert.AlertType.WARNING).showAndWait();
+            }
+        } else {
+            getGUI().alert("Ingen plastictank valgt", "Du har ikke valgt en plastictank", "Vælg en plastictank fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
         }
     }
 

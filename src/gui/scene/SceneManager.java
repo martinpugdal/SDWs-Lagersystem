@@ -16,6 +16,7 @@ import gui.scene.scenes.ginflaske.RedigerGinflaskeScene;
 import gui.scene.scenes.lager.OpretLagerScene;
 import gui.scene.scenes.lager.RedigerLagerScene;
 import gui.scene.scenes.plastictank.OpretPlastictankScene;
+import gui.scene.scenes.plastictank.PåfyldningerPlastictankScene;
 import gui.scene.scenes.plastictank.RedigerPlastictankScene;
 import gui.scene.scenes.råvare.OpretRåvareScene;
 import gui.scene.scenes.råvare.RedigerRåvareScene;
@@ -63,6 +64,7 @@ public class SceneManager {
     private final XScene plastictankScene;
     private final XScene opretPlastictankScene;
     private final XScene redigerPlastictankScene;
+    private final XScene påfyldningPlastictankScene;
 
     public SceneManager(GUI gui) {
         // forside
@@ -102,6 +104,7 @@ public class SceneManager {
         plastictankScene = new PlastictankScene(gui);
         opretPlastictankScene = new OpretPlastictankScene(gui);
         redigerPlastictankScene = new RedigerPlastictankScene(gui);
+        påfyldningPlastictankScene = new PåfyldningerPlastictankScene(gui);
     }
 
     public XScene getScene(SceneType sceneType) {
@@ -143,6 +146,7 @@ public class SceneManager {
             case PLASTICTANK -> plastictankScene;
             case OPRETPLASTICTANK -> opretPlastictankScene;
             case REDIGERPLASTICTANK -> redigerPlastictankScene;
+            case PÅFYLDNINGPLASTICTANK -> påfyldningPlastictankScene;
         };
     }
 
