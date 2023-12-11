@@ -121,8 +121,8 @@ public class SceneManager {
             case DESTILLERING -> destilleringScene;
             case OPRETDESTILLERING -> opretDestilleringScene;
             case REDIGERDESTILLERING -> redigerDestilleringScene;
-            case DESTILLERINGOMHÆLDNING -> destilleringFadScene;
-            case DESTILLERINGOVERFØR -> destilleringTankScene;
+            case DESTILLERINGOMHÆLDNING -> omhældningDestilleringScene;
+            case DESTILLERINGOVERFØR -> overførDestilleringScene;
             // fad
             case FAD -> fadScene;
             case OPRETFAD -> opretFadScene;
