@@ -35,7 +35,7 @@ public class Plastictank extends Opbevaring {
     @Override
     public void setPåfyldning(Påfyldning påfyldning) {
         super.setPåfyldning(påfyldning);
-        årgang = påfyldning.getDato().getYear();
+        årgang = påfyldning.getPåfyldningsDato().getYear();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Plastictank extends Opbevaring {
     @Override
     public void påfyldes(Destillering destillering, double liter) {
         super.påfyldes(destillering, liter);
-        årgang = getPåfyldning().getDato().getYear();
+        årgang = getPåfyldning().getPåfyldningsDato().getYear();
     }
 
     @Override

@@ -2,7 +2,6 @@ package application.model.opbevaring;
 
 import application.model.Destillering;
 import application.model.Opbevaring;
-import application.model.Påfyldning;
 
 public class Fad extends Opbevaring {
 

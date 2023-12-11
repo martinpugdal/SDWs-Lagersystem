@@ -8,16 +8,19 @@ public class Påfyldning {
 
     private final List<Opbevaring> opbevaringer;
     private final Destillering destillering;
-    private LocalDate dato;
-    private double liter;
+    private final LocalDate påfyldningsDato;
+    private final double liter;
+    private LocalDate tomtDato;
 
-    public Påfyldning(Destillering destillering, Opbevaring opbevaring, double liter, LocalDate dato) {
-        this.dato = dato;
+    public Påfyldning(Destillering destillering, Opbevaring opbevaring, double liter, LocalDate påfyldningsDato) {
+        this.påfyldningsDato = påfyldningsDato;
         this.liter = liter;
         this.destillering = destillering;
         this.opbevaringer = new ArrayList<>();
-        if (opbevaring != null) {
+        if (opbevaring.isIntakt() && opbevaring.isTom()) {
             addOpbevaring(opbevaring);
+        } else {
+            throw new IllegalArgumentException("Opbevaring er ikke intakt eller ikke tom");
         }
         destillering.setPåfyldning(this);
     }
@@ -26,8 +29,16 @@ public class Påfyldning {
         return liter;
     }
 
-    public LocalDate getDato() {
-        return dato;
+    public LocalDate getPåfyldningsDato() {
+        return påfyldningsDato;
+    }
+
+    public LocalDate getTomtDato() {
+        return tomtDato;
+    }
+
+    public void setTomtDato(LocalDate tomtDato) {
+        this.tomtDato = tomtDato;
     }
 
     public Destillering getDestillering() {

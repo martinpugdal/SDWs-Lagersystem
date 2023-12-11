@@ -569,7 +569,7 @@ public class Controller {
 
         // tilføj nogle opbevaringer
         // fad
-        Opbevaring fad1 = createFad("Bourbon", 1, 2, 40, false);
+        Opbevaring fad1 = createFad("Bourbon", 1, 2, 40, true);
         fad1.setHylde(a2Reol1.getHylde(1));
         Opbevaring fad2 = createFad("Bourbon", 2, 1, 50, true);
         fad2.setHylde(a2Reol1.getHylde(2));
@@ -588,5 +588,7 @@ public class Controller {
         createPåfyldning(fad2, destillering2, LocalDate.of(2022, 1, 5), 50);
         createPåfyldning(plastictank1, destillering1, LocalDate.of(2023, 4, 6), 100);
         createPåfyldning(plastictank2, destillering2, LocalDate.of(2023, 6, 6), 100);
+
+        fad1.tømmes();
     }
 }

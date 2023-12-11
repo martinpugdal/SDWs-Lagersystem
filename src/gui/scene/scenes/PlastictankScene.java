@@ -1,5 +1,7 @@
 package gui.scene.scenes;
 
+import application.model.Påfyldning;
+import application.model.opbevaring.Fad;
 import application.model.opbevaring.Plastictank;
 import gui.GUI;
 import gui.scene.SceneType;
@@ -17,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PlastictankScene extends XScene {
 
@@ -123,7 +126,7 @@ public class PlastictankScene extends XScene {
         placeringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
         plastictankTableView.getColumns().add(placeringC);
         TableColumn<Plastictank, LocalDate> påfyldningsdatoC = new TableColumn<>("Påfyldningsdato");
-        påfyldningsdatoC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getDato() : null));
+        påfyldningsdatoC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getPåfyldningsDato() : null));
         plastictankTableView.getColumns().add(påfyldningsdatoC);
         TableColumn<Plastictank, String> destilleringC = new TableColumn<>("Destillering");
         destilleringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getDestillering().toString() : null));
@@ -131,6 +134,9 @@ public class PlastictankScene extends XScene {
         TableColumn<Plastictank, Double> påfyldtLiterC = new TableColumn<>("Påfyldt liter");
         påfyldtLiterC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getLiter() : null));
         plastictankTableView.getColumns().add(påfyldtLiterC);
+        TableColumn<Plastictank, List<Påfyldning>> tidligerePåfyldningerC = new TableColumn<>("Tidligere påfyldninger");
+        tidligerePåfyldningerC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTidligerePåfyldninger()));
+        plastictankTableView.getColumns().add(tidligerePåfyldningerC);
         for (TableColumn<Plastictank, ?> column : plastictankTableView.getColumns()) {
             column.setStyle("-fx-alignment: CENTER;");
         }

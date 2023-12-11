@@ -1,5 +1,6 @@
 package gui.scene.scenes;
 
+import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
 import gui.GUI;
 import gui.scene.SceneType;
@@ -17,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class FadScene extends XScene {
 
@@ -123,7 +125,7 @@ public class FadScene extends XScene {
         placeringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getHylde() != null ? cellData.getValue().getHylde().getPlacering() : null));
         fadTableView.getColumns().add(placeringC);
         TableColumn<Fad, LocalDate> påfyldningsdatoC = new TableColumn<>("Påfyldningsdato");
-        påfyldningsdatoC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getDato() : null));
+        påfyldningsdatoC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getPåfyldningsDato() : null));
         fadTableView.getColumns().add(påfyldningsdatoC);
         TableColumn<Fad, String> destilleringC = new TableColumn<>("Destillering");
         destilleringC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getDestillering().toString() : null));
@@ -131,6 +133,9 @@ public class FadScene extends XScene {
         TableColumn<Fad, Double> påfyldtLiterC = new TableColumn<>("Påfyldt liter");
         påfyldtLiterC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPåfyldning() != null ? cellData.getValue().getPåfyldning().getLiter() : null));
         fadTableView.getColumns().add(påfyldtLiterC);
+        TableColumn<Fad, List<Påfyldning>> tidligerePåfyldningerC = new TableColumn<>("Tidligere påfyldninger");
+        tidligerePåfyldningerC.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTidligerePåfyldninger()));
+        fadTableView.getColumns().add(tidligerePåfyldningerC);
         for (TableColumn<Fad, ?> column : fadTableView.getColumns()) {
             column.setStyle("-fx-alignment: CENTER;");
         }

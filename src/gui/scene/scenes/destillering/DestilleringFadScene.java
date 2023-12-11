@@ -32,15 +32,15 @@ public class DestilleringFadScene extends XScene {
 
         Label label109 = new Label("Tilføj/fjern destillering til/fra fad");
         label109.setTranslateX(0);
-        label109.setTranslateY(-100);
+        label109.setTranslateY(30);
         label109.setFont(XStyle.XXL_FONT);
         ImageView lagerIcon = XIcon.ALKOHOL.getImageView();
         lagerIcon.setPreserveRatio(true);
         lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
         lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
-        lagerIcon.setTranslateX(-5); // skubber ikonet mere til venstre for teksten
+        lagerIcon.setTranslateY(-5); // skubber ikonet mere til venstre for teksten
         label109.setGraphic(lagerIcon);
-        label109.setContentDisplay(ContentDisplay.LEFT);
+        label109.setContentDisplay(ContentDisplay.TOP);
 
         Button button64 = new Button("Flyt destillering");
         button64.setTranslateX(-325);
@@ -166,6 +166,8 @@ public class DestilleringFadScene extends XScene {
         vBox1.setTranslateX(-getGUI().getScreenHeight() * 0.5 + 360);
         vBox1.setTranslateY(-350);
         vBox1.setPrefSize(250, 45);
+        vBox1.setMaxSize(250, 45);
+        vBox1.setMinSize(250, 45);
         vBox1.setAlignment(Pos.CENTER);
         vBox1.setSpacing(5);
         vBox1.getChildren().addAll(label112, textFieldAntalLiter);
