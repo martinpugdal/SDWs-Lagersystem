@@ -1,5 +1,9 @@
 package application.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class Reol {
 
     private final Hylde[] hylder;
@@ -55,5 +59,13 @@ public class Reol {
 
     public String toString() {
         return "R" + nummer;
+    }
+
+    public List<? extends Opbevaring> getOpbevaringer() {
+        List<Opbevaring> opbevaringer = new ArrayList<>();
+        for (Hylde hylde : hylder) {
+            opbevaringer.addAll(hylde.getOpbevaringer());
+        }
+        return opbevaringer;
     }
 }

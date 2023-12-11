@@ -152,22 +152,25 @@ public class Controller {
 
     public void deleteAfdeling(Afdeling afdeling) {
         afdeling.getLager().removeAfdeling(afdeling);
-        for (Reol reol : afdeling.getReoler()) {
+        List<Reol> reoler = new ArrayList<>(afdeling.getReoler());
+        for (Reol reol : reoler) {
             deleteReol(reol);
         }
     }
 
     private void deleteReol(Reol reol) {
         reol.getAfdeling().removeReol(reol);
-        for (Hylde hylde : reol.getHylder()) {
+        List<Hylde> hylder = new ArrayList<>(List.of(reol.getHylder()));
+        for (Hylde hylde : hylder) {
             deleteHylde(hylde);
         }
     }
 
     private void deleteHylde(Hylde hylde) {
+        List<Opbevaring> opbevaringer = new ArrayList<>(hylde.getOpbevaringer());
         hylde.setReol(null);
-        for (Opbevaring opbevaring : hylde.getOpbevaringer()) {
-            deleteOpbevaring(opbevaring);
+        for (Opbevaring opbevaring : opbevaringer) {
+            removeOpbevaringFromHylde(opbevaring);
         }
     }
 
@@ -178,15 +181,6 @@ public class Controller {
      */
     public Reol createReol(Afdeling afdeling, ReolType reolType) {
         return afdeling.createReol(reolType.getAntalHylder());
-    }
-
-    /**
-     * @param afdeling
-     * @param antalHylder
-     * @return
-     */
-    public Reol createReol(Afdeling afdeling, int antalHylder) {
-        return afdeling.createReol(antalHylder);
     }
 
     /**

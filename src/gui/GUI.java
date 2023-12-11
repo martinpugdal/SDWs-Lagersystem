@@ -26,7 +26,6 @@ public class GUI extends Application {
     public void start(Stage stage) {
         this.stage = stage;
         switchScene(sceneManager.getScene(SceneType.FORSIDE));
-        stage.setResizable(false);
         stage.show();
     }
 
@@ -49,6 +48,7 @@ public class GUI extends Application {
         stage.setScene(scene);
         stage.setWidth(width);
         stage.setHeight(height);
+        stage.sizeToScene();
         stage.setTitle(scene.getTitle() != null ? scene.getTitle() : sceneManager.getScene(SceneType.FORSIDE).getTitle());
         XIcon icon = scene.getIcon() != null ? scene.getIcon() : XIcon.SALLWHISKY;
         if (stage.getIcons().isEmpty()) {

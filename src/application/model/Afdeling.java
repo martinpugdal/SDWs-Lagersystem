@@ -1,6 +1,7 @@
 package application.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Afdeling {
@@ -55,5 +56,13 @@ public class Afdeling {
     @Override
     public String toString() {
         return "A" + nummer;
+    }
+
+    public List<Opbevaring> getOpbevaringer() {
+        List<Opbevaring> opbevaringer = new ArrayList<>();
+        for (Reol reol : reoler) {
+            opbevaringer.addAll(reol.getOpbevaringer());
+        }
+        return opbevaringer;
     }
 }

@@ -2,13 +2,14 @@ package gui.scene;
 
 import gui.GUI;
 import gui.scene.scenes.*;
+import gui.scene.scenes.afdeling.OpretAfdelingScene;
 import gui.scene.scenes.destillering.DestilleringFadScene;
 import gui.scene.scenes.destillering.DestilleringTankScene;
 import gui.scene.scenes.destillering.OpretDestilleringScene;
 import gui.scene.scenes.destillering.RedigerDestilleringScene;
 import gui.scene.scenes.fad.OpretFadScene;
-import gui.scene.scenes.fad.RedigerFadScene;
 import gui.scene.scenes.fad.PåfyldningerFadScene;
+import gui.scene.scenes.fad.RedigerFadScene;
 import gui.scene.scenes.ginflaske.OpretGinflaskeScene;
 import gui.scene.scenes.ginflaske.RedigerGinflaskeScene;
 import gui.scene.scenes.lager.OpretLagerScene;
@@ -32,6 +33,7 @@ public class SceneManager {
     private final XScene redigerLagerScene;
     // afdeling
     private final XScene afdelingScene;
+    private final XScene opretAfdelingScene;
     // destillering
     private final XScene destilleringScene;
     private final XScene opretDestilleringScene;
@@ -69,6 +71,7 @@ public class SceneManager {
         redigerLagerScene = new RedigerLagerScene(gui);
         // afdeling
         afdelingScene = new AfdelingScene(gui);
+        opretAfdelingScene = new OpretAfdelingScene(gui);
         // destillering
         destilleringScene = new DestilleringScene(gui);
         opretDestilleringScene = new OpretDestilleringScene(gui);
@@ -108,6 +111,7 @@ public class SceneManager {
             case REDIGERLAGER -> redigerLagerScene;
             // afdeling
             case AFDELING -> afdelingScene;
+            case OPRETAFDELING -> opretAfdelingScene;
             // destillering
             case DESTILLERING -> destilleringScene;
             case OPRETDESTILLERING -> opretDestilleringScene;

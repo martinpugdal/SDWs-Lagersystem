@@ -45,18 +45,18 @@ public class AfdelingScene extends XScene {
         button60.setTranslateX(-550 + (buttonWidth + 20));
         button60.setTranslateY(-buttonHeight);
         button60.setPrefSize(buttonWidth, buttonHeight);
-        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETLAGER));
+        button60.setOnAction(e -> getGUI().switchScene(SceneType.OPRETAFDELING));
         button60.setFont(new Font("Arial", 16));
         button60.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button60.setCursor(Cursor.HAND);
         Tooltip tooltip127 = new Tooltip("Tryk her for at oprette en afdeling");
         button60.setTooltip(tooltip127);
 
-        Button button61 = new Button("Rediger afdeing");
+        Button button61 = new Button("Rediger afdeling");
         button61.setTranslateX(-550 + (buttonWidth + 20) * 2);
         button61.setTranslateY(-buttonHeight * 2);
         button61.setPrefSize(buttonWidth, buttonHeight);
-        button61.setOnAction(e -> redigerLager());
+        button61.setOnAction(e -> redigerAfdeling());
         button61.setFont(new Font("Arial", 16));
         button61.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button61.setCursor(Cursor.HAND);
@@ -67,7 +67,7 @@ public class AfdelingScene extends XScene {
         button62.setTranslateX(-550 + (buttonWidth + 20) * 3);
         button62.setTranslateY(-buttonHeight * 3);
         button62.setPrefSize(buttonWidth, buttonHeight);
-        button62.setOnAction(e -> sletLager());
+        button62.setOnAction(e -> sletAfdeling());
         button62.setFont(new Font("Arial", 16));
         button62.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button62.setCursor(Cursor.HAND);
@@ -118,19 +118,19 @@ public class AfdelingScene extends XScene {
         getLayout().getChildren().addAll(label107, button60, button61, button62, button63, label108, afdelingTableView);
     }
 
-    private void redigerLager() {
+    private void redigerAfdeling() {
         if (afdelingTableView.getSelectionModel().getSelectedItem() != null) {
-//            ((RedigerLagerScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedLager(afdelingTableView.getSelectionModel().getSelectedItem());
+//            ((RedigerAfdelingScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedAfdeling(afdelingTableView.getSelectionModel().getSelectedItem());
             getGUI().switchScene(SceneType.REDIGERAFDELING);
         } else {
             getGUI().alert("Ingen lager valgt", "Du har ikke valgt et lager", "Vælg et lager fra tabellen og prøv igen", Alert.AlertType.WARNING).showAndWait();
         }
     }
 
-    private void sletLager() {
+    private void sletAfdeling() {
         if (afdelingTableView.getSelectionModel().getSelectedItem() != null) {
             Afdeling afdeling = afdelingTableView.getSelectionModel().getSelectedItem();
-            Alert confirmation = getGUI().alert("Slet afdeling", "Er du sikker på at du vil slette afdelingen?", "Du er ved at slette afdelingen " + afdeling + ".\nDenne handling kan ikke fortrydes.", Alert.AlertType.CONFIRMATION);
+            Alert confirmation = getGUI().alert("Slet afdeling", "Er du sikker på at du vil slette afdelingen?", "Du er ved at slette afdelingen " + afdeling + (!afdeling.getOpbevaringer().isEmpty() ? ".\nDu fjerner også " + afdeling.getOpbevaringer().size() + " opbevaringer fra afdelingens reoler" : "") + ".\nDenne handling kan ikke fortrydes.", Alert.AlertType.CONFIRMATION);
             confirmation.showAndWait();
             if (confirmation.getResult() == ButtonType.OK) {
                 getGUI().getController().deleteAfdeling(afdeling);
@@ -143,7 +143,7 @@ public class AfdelingScene extends XScene {
 
     @Override
     public void update() {
-//        ((RedigerLagerScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedLager(null);
+        //((RedigerAfdelingScene) getGUI().getScene(SceneType.REDIGERAFDELING)).setSelectedAfdeling(null);
         afdelingTableView.getItems().clear();
         afdelingTableView.getItems().addAll(getGUI().getController().getAfdelinger());
     }
