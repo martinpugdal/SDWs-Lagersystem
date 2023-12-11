@@ -5,6 +5,7 @@ import application.model.Opbevaring;
 import application.model.Påfyldning;
 import application.model.opbevaring.Fad;
 import gui.GUI;
+import gui.scene.SceneType;
 import gui.setting.XIcon;
 import gui.setting.XScene;
 import gui.setting.XStyle;
@@ -50,15 +51,15 @@ public class PåfyldningerFadScene extends XScene {
         double buttonWidth = 250;
         double buttonHeight = 45;
 
-        Button button63 = new Button("Gå tilbage til forside");
+        Button button63 = new Button("Gå tilbage til fad oversigt");
         button63.setTranslateX(0);
-        button63.setTranslateY(550);
+        button63.setTranslateY(500);
         button63.setPrefSize(buttonWidth, buttonHeight);
-        button63.setOnAction(e -> getGUI().gåTilForside());
+        button63.setOnAction(e -> getGUI().switchScene(SceneType.FAD));
         button63.setFont(new Font("Arial", 16));
         button63.setStyle(XStyle.PRIMARY_BUTTON_STYLE);
         button63.setCursor(Cursor.HAND);
-        Tooltip tooltip130 = new Tooltip("Tryk her for at gå tilbage til forsiden");
+        Tooltip tooltip130 = new Tooltip("Tryk her for at gå tilbage til fad oversigten");
         button63.setTooltip(tooltip130);
 
         Label label108 = new Label("Her ses en oversigt over påfyldninger");
