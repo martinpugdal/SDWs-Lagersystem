@@ -32,6 +32,14 @@ public class Controller {
         return controller;
     }
 
+    /**
+     * returner en instance af denne klasse, som er tom. Beregnet til junit tests.
+     * @return Controller instance
+     */
+    public static Controller getTestController() {
+        return new Controller();
+    }
+
     public List<Lager> getLagere() {
         return storage.getLagere();
     }
