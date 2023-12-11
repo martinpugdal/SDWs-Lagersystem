@@ -211,7 +211,7 @@ public class DestilleringOverførScene extends XScene {
     public void update() {
         fraDestilleringableView.getItems().clear();
         for (Destillering destillering : getGUI().getController().getDestilleringer()) {
-            if (destillering.getPåfyldning() != null) {
+            if (destillering.getPåfyldning() != null && destillering.getPåfyldning().getTomtDato() == null && destillering.getLiter() > 0) {
                 fraDestilleringableView.getItems().add(destillering);
             }
         }

@@ -40,7 +40,7 @@ public class OpretAfdelingScene extends XScene {
         label109.setTranslateY(-70);
         label109.setFont(new Font("Arial", 36));
         label109.setTextFill(Color.BLACK);
-        ImageView lagerIcon = XIcon.HJEM.getImageView();
+        ImageView lagerIcon = XIcon.AFDELING.getImageView();
         lagerIcon.setPreserveRatio(true);
         lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
         lagerIcon.setFitWidth(label109.getFont().getSize() * 2);

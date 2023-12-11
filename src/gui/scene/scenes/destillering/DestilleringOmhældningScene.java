@@ -295,6 +295,23 @@ public class DestilleringOmhældningScene extends XScene {
     }
 
     private void flytDestillering() {
+        Opbevaring fraOpbevaring = group.getToggles().get(0).isSelected() ? fraFadTableView.getSelectionModel().getSelectedItem() : fraPlastictankTableView.getSelectionModel().getSelectedItem();
+        Opbevaring tilOpbevaring = group.getToggles().get(0).isSelected() ? tilFadTableView.getSelectionModel().getSelectedItem() : tilPlastictankTableView.getSelectionModel().getSelectedItem();
+        if (fraOpbevaring != null && tilOpbevaring != null) {
+            double antalLiter;
+            try {
+                antalLiter = Double.parseDouble(textFieldAntalLiter.getText());
+            } catch (NumberFormatException e) {
+                getGUI().alert("Ugyldigt antal liter", "Du har ikke indtastet et gyldigt antal liter", "Indtast et gyldigt antal liter og prøv igen", Alert.AlertType.WARNING).showAndWait();
+                return;
+            }
+            try {
+                getGUI().getController().transferPåfyldning(fraOpbevaring, tilOpbevaring, antalLiter);
+                update();
+            } catch (IllegalArgumentException e) {
+                getGUI().alert("Fejl opskete", "Destillering kunne ikke overføres", e.getMessage(), Alert.AlertType.ERROR).showAndWait();
+            }
+        }
     }
 
     @Override

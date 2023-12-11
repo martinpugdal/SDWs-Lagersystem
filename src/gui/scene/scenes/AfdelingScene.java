@@ -31,7 +31,7 @@ public class AfdelingScene extends XScene {
         label107.setTranslateX(-550);
         label107.setTranslateY(10);
         label107.setFont(XStyle.XXL_FONT);
-        ImageView lagerIcon = XIcon.HJEM.getImageView();
+        ImageView lagerIcon = XIcon.AFDELING.getImageView();
         lagerIcon.setPreserveRatio(true);
         lagerIcon.setFitHeight(label107.getFont().getSize() * 2);
         lagerIcon.setFitWidth(label107.getFont().getSize() * 2);
@@ -156,6 +156,6 @@ public class AfdelingScene extends XScene {
 
     @Override
     public XIcon getIcon() {
-        return XIcon.HJEM;
+        return XIcon.AFDELING;
     }
 }

@@ -348,8 +348,33 @@ public class Controller {
         return new Påfyldning(destillering, opbevaring, liter, dato);
     }
 
+    /**
+     * @param opbevaring
+     * @param destillering
+     * @param liter
+     * @return
+     */
     public Påfyldning createPåfyldning(Opbevaring opbevaring, Destillering destillering, double liter) {
         return createPåfyldning(opbevaring, destillering, LocalDate.now(), liter);
+    }
+
+    public Påfyldning transferPåfyldning(Opbevaring fraOpbevaring, Opbevaring tilOpbevaring, double liter) {
+        if (fraOpbevaring.getPåfyldning() == null) {
+            throw new IllegalArgumentException("Opbevaringen er ikke påfyldt");
+        }
+        if (tilOpbevaring.getPåfyldning() != null) {
+            throw new IllegalArgumentException("Opbevaringen er allerede påfyldt");
+        }
+        if (liter > fraOpbevaring.getPåfyldning().getLiter()) {
+            throw new IllegalArgumentException("Der er ikke nok liter tilbage i opbevaringen");
+        }
+        if (liter > tilOpbevaring.getVolumen()) {
+            throw new IllegalArgumentException("Der er ikke nok plads i opbevaringen");
+        }
+        fraOpbevaring.getPåfyldning().addOpbevaring(tilOpbevaring);
+        fraOpbevaring.getPåfyldning().setLiter(fraOpbevaring.getPåfyldning().getLiter() - liter, false);
+        tilOpbevaring.getPåfyldning().setLiter(liter, false);
+        return tilOpbevaring.getPåfyldning();
     }
 
     /**
@@ -609,9 +634,7 @@ public class Controller {
         // tilføj nogle påfyldninger
         createPåfyldning(fad1, destillering1, LocalDate.now(), 40);
         createPåfyldning(fad2, destillering2, LocalDate.of(2022, 1, 5), 50);
-        createPåfyldning(plastictank1, destillering1, LocalDate.of(2023, 4, 6), 46);
+        createPåfyldning(plastictank1, destillering1, LocalDate.of(2023, 4, 6), 45);
         createPåfyldning(plastictank2, destillering2, LocalDate.of(2023, 6, 6), 100);
-
-        fad1.tømmes();
     }
 }

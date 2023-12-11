@@ -11,7 +11,9 @@ public class Destillering {
     public Destillering(String navn, int nummer, double liter, double alkoholprocent) {
         this.navn = navn;
         this.nummer = nummer;
+        if (liter <= 0) throw new IllegalArgumentException("Liter skal være større end 0");
         this.liter = liter;
+        if (alkoholprocent <= 0) throw new IllegalArgumentException("Alkoholprocent skal være større end 0");
         this.alkoholprocent = alkoholprocent;
     }
 
@@ -36,6 +38,7 @@ public class Destillering {
     }
 
     public void setLiter(double liter) {
+        if (liter < 0) throw new IllegalArgumentException("Liter skal være større end 0");
         this.liter = liter;
     }
 
@@ -44,6 +47,7 @@ public class Destillering {
     }
 
     public void setAlkoholprocent(double alkoholprocent) {
+        if (alkoholprocent <= 0) throw new IllegalArgumentException("Alkoholprocent skal være større end 0");
         this.alkoholprocent = alkoholprocent;
     }
 
@@ -53,6 +57,7 @@ public class Destillering {
 
     public void setPåfyldning(Påfyldning påfyldning) {
         this.påfyldning = påfyldning;
+        this.liter -= påfyldning.getLiter();
     }
 
     public String toString() {

@@ -37,8 +37,6 @@ public class RedigerFadScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 13: Rediger fad
-
         double translateY = getGUI().getScreenWidth() * 0.275;
 
         Label label109 = new Label("Rediger fad");

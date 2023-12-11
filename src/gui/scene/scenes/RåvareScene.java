@@ -27,7 +27,6 @@ public class RåvareScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 8: Råvarer
         Label label107 = new Label("Råvarer");
         label107.setTranslateX(-550);
         label107.setTranslateY(10);

@@ -9,11 +9,13 @@ public class Påfyldning {
     private final List<Opbevaring> opbevaringer;
     private final Destillering destillering;
     private final LocalDate påfyldningsDato;
-    private final double liter;
+    private double liter;
     private LocalDate tomtDato;
 
     public Påfyldning(Destillering destillering, Opbevaring opbevaring, double liter, LocalDate påfyldningsDato) {
         this.påfyldningsDato = påfyldningsDato;
+        if (liter <= 0) throw new IllegalArgumentException("Liter skal være større end 0");
+        if (destillering.getLiter() < liter) throw new IllegalArgumentException("Destillering har ikke nok liter");
         this.liter = liter;
         this.destillering = destillering;
         this.opbevaringer = new ArrayList<>();
@@ -23,7 +25,6 @@ public class Påfyldning {
             throw new IllegalArgumentException("Opbevaring er ikke intakt eller ikke tom");
         }
         destillering.setPåfyldning(this);
-        destillering.setLiter(destillering.getLiter() - liter);
     }
 
     public double getLiter() {
@@ -55,11 +56,21 @@ public class Påfyldning {
         opbevaring.setPåfyldning(this);
     }
 
-    public void removeOpbevaring(Opbevaring opbevaring) {
-        opbevaringer.remove(opbevaring);
-    }
-
     public String toString() {
         return destillering.toString();
+    }
+
+    public void setLiter(double liter) {
+        if (liter <= 0) throw new IllegalArgumentException("Liter skal være større end 0");
+        this.liter = liter;
+    }
+
+    public void setLiter(double liter, boolean destillering) {
+        if (liter <= 0) throw new IllegalArgumentException("Liter skal være større end 0");
+        if (destillering) {
+            this.destillering.setLiter(this.destillering.getLiter() + this.liter - liter);
+        } else {
+            this.liter = liter;
+        }
     }
 }

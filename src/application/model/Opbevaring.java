@@ -9,15 +9,16 @@ import java.util.List;
 
 public abstract class Opbevaring {
 
+    private final List<Påfyldning> tidligerePåfyldninger;
     private int nr;
     private boolean intakt;
     private double volumen;
-    private final List<Påfyldning> tidligerePåfyldninger;
     private Påfyldning påfyldning;
     private Hylde hylde;
 
     public Opbevaring(int nr, boolean intakt, double volumen) {
         this.intakt = intakt;
+        if (volumen <= 0) throw new IllegalArgumentException("Volumen skal være større end 0");
         this.volumen = volumen;
         this.nr = nr;
         this.tidligerePåfyldninger = new ArrayList<>();
@@ -66,6 +67,7 @@ public abstract class Opbevaring {
     }
 
     public void setVolumen(double volumen) {
+        if (volumen <= 0) throw new IllegalArgumentException("Volumen skal være større end 0");
         this.volumen = volumen;
     }
 
@@ -84,6 +86,9 @@ public abstract class Opbevaring {
     }
 
     public void setPåfyldning(Påfyldning påfyldning) {
+        if (påfyldning == null) {
+            tidligerePåfyldninger.add(this.påfyldning);
+        }
         this.påfyldning = påfyldning;
     }
 

@@ -27,5 +27,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="mockito" level="application" />
+    <orderEntry type="library" name="byte-buddy-1.14.10-javadoc" level="application" />
   </component>
 </module>

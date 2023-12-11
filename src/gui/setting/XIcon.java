@@ -16,7 +16,7 @@ public enum XIcon {
     LAGER("Lager.png"),
     PLASTIKTANK("Plastic tank.png"),
     SALLWHISKY("SWD.png"),
-    HJEM("Home.png"),
+    AFDELING("Afdeling.png"),
     WHISKYFLASKE("Whiskyflaske.png");
 
     private final ImageView imageView;

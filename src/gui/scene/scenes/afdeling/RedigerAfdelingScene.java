@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RedigerAfdelingScene extends XScene {
@@ -26,12 +25,12 @@ public class RedigerAfdelingScene extends XScene {
     private ComboBox<String> lagerComboBox;
     private Afdeling selectedAfdeling;
 
-    public void setSelectedAfdeling(Afdeling afdeling) {
-        selectedAfdeling = afdeling;
-    }
-
     public RedigerAfdelingScene(GUI gui) {
         super(gui);
+    }
+
+    public void setSelectedAfdeling(Afdeling afdeling) {
+        selectedAfdeling = afdeling;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class RedigerAfdelingScene extends XScene {
         label109.setTranslateY(-70);
         label109.setFont(new Font("Arial", 36));
         label109.setTextFill(Color.BLACK);
-        ImageView lagerIcon = XIcon.HJEM.getImageView();
+        ImageView lagerIcon = XIcon.AFDELING.getImageView();
         lagerIcon.setPreserveRatio(true);
         lagerIcon.setFitHeight(label109.getFont().getSize() * 2);
         lagerIcon.setFitWidth(label109.getFont().getSize() * 2);
@@ -291,9 +290,9 @@ public class RedigerAfdelingScene extends XScene {
                 }
             } else if (antalSmåReolerInt < småReoler.size()) {
                 int diff = småReoler.size() - antalSmåReolerInt;
-                Collections.reverse(småReoler);
+                List<Reol> reversedReol = reverse(småReoler);
                 for (int i = 0; i < diff; i++) {
-                    getGUI().getController().deleteReol(småReoler.get(i));
+                    getGUI().getController().deleteReol(reversedReol.get(i));
                 }
             }
             if (antalMellemReolerInt > mellemReoler.size()) {
@@ -303,9 +302,9 @@ public class RedigerAfdelingScene extends XScene {
                 }
             } else if (antalMellemReolerInt < mellemReoler.size()) {
                 int diff = mellemReoler.size() - antalMellemReolerInt;
-                Collections.reverse(mellemReoler);
+                List<Reol> reversedReol = reverse(mellemReoler);
                 for (int i = 0; i < diff; i++) {
-                    getGUI().getController().deleteReol(mellemReoler.get(i));
+                    getGUI().getController().deleteReol(reversedReol.get(i));
                 }
             }
             if (antalStoreReolerInt > storeReoler.size()) {
@@ -315,9 +314,9 @@ public class RedigerAfdelingScene extends XScene {
                 }
             } else if (antalStoreReolerInt < storeReoler.size()) {
                 int diff = storeReoler.size() - antalStoreReolerInt;
-                Collections.reverse(storeReoler);
+                List<Reol> reversedReol = reverse(storeReoler);
                 for (int i = 0; i < diff; i++) {
-                    getGUI().getController().deleteReol(storeReoler.get(i));
+                    getGUI().getController().deleteReol(reversedReol.get(i));
                 }
             }
             getGUI().switchScene(SceneType.AFDELING);
@@ -337,11 +336,11 @@ public class RedigerAfdelingScene extends XScene {
         textField72.setText(småReoler + "");
         textField73.setText(mellemReoler + "");
         textField74.setText(storeReoler + "");
-        drikkelseComboBox.setValue(selectedAfdeling.getDrikkelse());
         drikkelseComboBox.getItems().clear();
         for (Drikkelse drikkelse : Drikkelse.values()) {
             drikkelseComboBox.getItems().add(drikkelse);
         }
+        drikkelseComboBox.setValue(selectedAfdeling.getDrikkelse());
         lagerComboBox.setValue(textField71.getText());
         List<String> lagere = new ArrayList<>();
         for (Lager lager : getGUI().getController().getLagere()) {
@@ -367,6 +366,15 @@ public class RedigerAfdelingScene extends XScene {
         });
     }
 
+    private List<Reol> reverse(List<Reol> list) {
+        if (list.size() > 1) {
+            Reol value = list.remove(0);
+            reverse(list);
+            list.add(value);
+        }
+        return list;
+    }
+
     @Override
     public String getTitle() {
         return "Rediger Afdeling";
@@ -374,6 +382,6 @@ public class RedigerAfdelingScene extends XScene {
 
     @Override
     public XIcon getIcon() {
-        return XIcon.HJEM;
+        return XIcon.AFDELING;
     }
 }

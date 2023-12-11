@@ -21,7 +21,7 @@ public class Reol {
         }
     }
 
-    public Hylde createHylde() {
+    public void createHylde() {
         if (antalHylderOprettet >= reolType.getAntalHylder()) {
             throw new IllegalArgumentException("Der er ikke flere hylder tilbage i reolen!");
         }
@@ -29,7 +29,6 @@ public class Reol {
         Hylde hylde = new Hylde(this, nummer + 1);
         hylder[antalHylderOprettet] = hylde;
         antalHylderOprettet++;
-        return hylde;
     }
 
     public Hylde[] getHylder() {

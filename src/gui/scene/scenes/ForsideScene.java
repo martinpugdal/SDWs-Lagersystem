@@ -21,7 +21,6 @@ public class ForsideScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 1: Forside
         Label label1 = new Label("Sall Whisky Distillery - Lagersystem");
         label1.setTranslateX(0);
         label1.setTranslateY(100 + 60 + 20);
@@ -173,7 +172,7 @@ public class ForsideScene extends XScene {
         vboxLager.getChildren().addAll(button5, label6);
 
 
-        ImageView view9 = XIcon.HJEM.getImageView();
+        ImageView view9 = XIcon.AFDELING.getImageView();
         view9.setFitHeight(75);
         view9.setFitWidth(75);
         view9.setPreserveRatio(true);

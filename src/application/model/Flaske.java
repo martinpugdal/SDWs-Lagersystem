@@ -11,6 +11,7 @@ public abstract class Flaske {
     public Flaske(int nummer, String navn, double alkoholprocent, int antal) {
         this.nummer = nummer;
         this.navn = navn;
+        if (alkoholprocent <= 0) throw new IllegalArgumentException("Alkoholprocent skal være større end 0");
         this.alkoholprocent = alkoholprocent;
         this.antal = antal;
     }

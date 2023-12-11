@@ -22,7 +22,6 @@ public class OpretLagerScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 18: Opret lager
         double translateY = getGUI().getScreenWidth() * 0.275;
 
         Label label109 = new Label("Opret lager");

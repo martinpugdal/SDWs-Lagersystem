@@ -28,7 +28,6 @@ public class RedigerLagerScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 19: Rediger lager
         double translateY = getGUI().getScreenWidth() * 0.275;
 
         Label label109 = new Label("Rediger lager");

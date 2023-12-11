@@ -30,7 +30,6 @@ public class LagerScene extends XScene {
 
     @Override
     public void initLayout() {
-        //Skærmbillede 17: Lagre
         Label label107 = new Label("Lager");
         label107.setTranslateX(-550);
         label107.setTranslateY(10);
