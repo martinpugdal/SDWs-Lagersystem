@@ -16,12 +16,6 @@ public class Lager {
         this.afdelinger = new ArrayList<>();
     }
 
-    public Afdeling createAfdeling(Drikkelse drikkelse, int nummer) {
-        Afdeling afdeling = new Afdeling(this, drikkelse, nummer);
-        addAfdeling(afdeling);
-        return afdeling;
-    }
-
     public void addAfdeling(Afdeling afdeling) {
         afdelinger.add(afdeling);
     }
@@ -32,10 +26,6 @@ public class Lager {
 
     public ArrayList<Afdeling> getAfdelinger() {
         return afdelinger;
-    }
-
-    public int getAntalAfdelinger() {
-        return afdelinger.size();
     }
 
     public String getFuldeAdresse() {
