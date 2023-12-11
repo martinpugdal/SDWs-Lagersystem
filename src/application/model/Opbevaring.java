@@ -122,4 +122,11 @@ public abstract class Opbevaring {
     public String toString() {
         return getNummer() + "";
     }
+
+    public void removeFromHylde() {
+        if (this.getHylde() == null) {
+            throw new IllegalArgumentException("Opbevaringen er ikke på en hylde");
+        }
+        this.setHylde(null);
+    }
 }
