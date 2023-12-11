@@ -96,6 +96,10 @@ public abstract class Opbevaring {
         return tidligerePåfyldninger;
     }
 
+    /**
+     * Tanken var at kode et system, hvor det var muligt at tømme fade/tanke gennem brugergrænsefladen.
+     * Det blev dog ikke implementeret, da det ikke var en del af opgaven.
+     */
     public void tømmes() {
         Påfyldning påfyldning = this.påfyldning;
         påfyldning.setTomtDato(LocalDate.now());
