@@ -23,6 +23,7 @@ public class Controller {
 
     /**
      * returner kun en instance af denne klasse.
+     *
      * @return Controller instance
      */
     public static Controller getController() {
@@ -34,6 +35,7 @@ public class Controller {
 
     /**
      * returner en instance af denne klasse, som er tom. Beregnet til junit tests.
+     *
      * @return Controller instance
      */
     public static Controller getTestController() {
@@ -285,20 +287,10 @@ public class Controller {
         return false;
     }
 
-    /**
-     * @param destillering
-     */
     public void deleteDestillering(Destillering destillering) {
         storage.removeDestillering(destillering);
     }
 
-    /**
-     * @param opbevaring
-     * @param destillering
-     * @param dato
-     * @param liter
-     * @return Påfyldning
-     */
     public Påfyldning createPåfyldning(Opbevaring opbevaring, Destillering destillering, LocalDate dato, double liter) {
         if (opbevaring.getPåfyldning() != null) {
             throw new IllegalArgumentException("Opbevaringen er allerede påfyldt");
@@ -312,12 +304,6 @@ public class Controller {
         return new Påfyldning(destillering, opbevaring, liter, dato);
     }
 
-    /**
-     * @param opbevaring
-     * @param destillering
-     * @param liter
-     * @return
-     */
     public Påfyldning createPåfyldning(Opbevaring opbevaring, Destillering destillering, double liter) {
         return createPåfyldning(opbevaring, destillering, LocalDate.now(), liter);
     }
@@ -341,14 +327,6 @@ public class Controller {
         return tilOpbevaring.getPåfyldning();
     }
 
-    /**
-     * @param drikkelse
-     * @param nummer
-     * @param navn
-     * @param volumen
-     * @param antal
-     * @return Flaske
-     */
     public Flaske createFlaske(Drikkelse drikkelse, int nummer, String navn, double volumen, int antal) {
         if (checkFlaskeExists(nummer)) {
             throw new IllegalArgumentException("Flasken findes allerede med dette nummer");
@@ -372,9 +350,6 @@ public class Controller {
         flaske.setAntal(antal);
     }
 
-    /**
-     * @param flaske
-     */
     public void deleteFlaske(Flaske flaske) {
         storage.removeFlaske(flaske);
         for (Råvare råvare : storage.getRåvarer()) {
@@ -382,10 +357,6 @@ public class Controller {
         }
     }
 
-    /**
-     * @param nummer
-     * @return boolean true hvis flaske findes
-     */
     private boolean checkFlaskeExists(int nummer) {
         for (Flaske flaske : storage.getFlasker()) {
             if (flaske.getNummer() == nummer) {
@@ -395,40 +366,18 @@ public class Controller {
         return false;
     }
 
-    /**
-     * @param nummer
-     * @param navn
-     * @param volumen
-     * @param antal
-     * @return Whiskyflaske
-     */
     private Flaske createWhiskyflaske(int nummer, String navn, double volumen, int antal) {
         Whiskyflaske whiskyflaske = new Whiskyflaske(nummer, navn, volumen, antal);
         storage.addFlaske(whiskyflaske);
         return whiskyflaske;
     }
 
-    /**
-     * @param nummer
-     * @param navn
-     * @param volumen
-     * @param antal
-     * @return Ginflaske
-     */
     private Flaske createGinflaske(int nummer, String navn, double volumen, int antal) {
         Ginflaske ginflaske = new Ginflaske(nummer, navn, volumen, antal);
         storage.addFlaske(ginflaske);
         return ginflaske;
     }
 
-    /**
-     * @param type
-     * @param antal
-     * @param liter
-     * @param kilogram
-     * @param flaskeNumre
-     * @return Råvare
-     */
     public Råvare createRåvare(String type, int antal, double liter, double kilogram, int[] flaskeNumre) {
         Råvare råvare = new Råvare(type, antal, liter, kilogram);
         if (flaskeNumre != null) {
@@ -441,14 +390,6 @@ public class Controller {
         return råvare;
     }
 
-    /**
-     * @param råvare
-     * @param type
-     * @param antalInt
-     * @param literDouble
-     * @param kiloDouble
-     * @param flaskeNumre
-     */
     public void updateRåvare(Råvare råvare, String type, int antalInt, double literDouble, double kiloDouble, int[] flaskeNumre) {
         List<Flaske> flasker = new ArrayList<>();
         if (flaskeNumre != null) {
@@ -464,17 +405,10 @@ public class Controller {
         råvare.setBrugesTil(flasker);
     }
 
-    /**
-     * @param råvare
-     */
     public void deleteRåvare(Råvare råvare) {
         storage.removeRåvare(råvare);
     }
 
-    /**
-     * @param flaskeNummer
-     * @return Flaske
-     */
     private Flaske getFlaske(int flaskeNummer) {
         for (Flaske flaske : storage.getFlasker()) {
             if (flaske.getNummer() == flaskeNummer) {
@@ -484,9 +418,6 @@ public class Controller {
         throw new IllegalArgumentException("Nummeret tilhører ikke en flaske");
     }
 
-    /**
-     * @return List<Flaske>
-     */
     public List<Ginflaske> getGinflasker() {
         List<Ginflaske> ginflasker = new ArrayList<>();
         for (Flaske flaske : storage.getFlasker()) {
@@ -497,9 +428,6 @@ public class Controller {
         return ginflasker;
     }
 
-    /**
-     * @return List<Flaske>
-     */
     public List<Whiskyflaske> getWhiskyflasker() {
         List<Whiskyflaske> whiskyflasker = new ArrayList<>();
         for (Flaske flaske : storage.getFlasker()) {
@@ -510,10 +438,6 @@ public class Controller {
         return whiskyflasker;
     }
 
-    /**
-     * @param nummer
-     * @return boolean true hvis lageret findes
-     */
     public boolean checkLagerExists(int nummer) {
         for (Lager lager : storage.getLagere()) {
             if (lager.getNummer() == nummer) {
@@ -523,11 +447,6 @@ public class Controller {
         return false;
     }
 
-    /**
-     * @param lager
-     * @param nummer
-     * @return boolean true hvis afdelingen findes
-     */
     private boolean checkAfdelingExists(Lager lager, int nummer) {
         for (Afdeling afdeling : lager.getAfdelinger()) {
             if (afdeling.getNummer() == nummer) {
@@ -542,10 +461,8 @@ public class Controller {
         Lager lager1 = createLager(1, "Lagervej 1, 1234, By 1", 44);
         Lager lager2 = createLager(2, "Lagervej 3, 2223, By 2", 145);
         Lager lager3 = createLager(3, "Lagervej 5, 4332, By 3", 664);
-
-        for (int i = 4; i < 20; i++) {
-            createLager(i, "Lagervej " + i + ", " + i + i + i + i + ", By " + i, i * 10);
-        }
+        Lager lager4 = createLager(4, "Lagervej 7, 5432, By 4", 123);
+        Lager lager5 = createLager(5, "Lagervej 9, 6543, By 5", 234);
 
         // tilføj nogle afdelinger
         Afdeling afdeling1 = createAfdeling(lager1, Drikkelse.GIN, 1);
