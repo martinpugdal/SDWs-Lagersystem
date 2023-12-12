@@ -5,8 +5,33 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LagerTest {
+
+    @Test
+    void Lager_1() {
+        //Arrange
+        int nummer = 1;
+        String adresse = "Testvej 1, 9000, Aalborg";
+        double størrelse = 0;
+
+        //Act & Assert
+        Exception exception = assertThrows(IllegalArgumentException.class , () -> new Lager(nummer, adresse, størrelse));
+        assertEquals("Størrelse skal være større end 0", exception.getMessage());
+    }
+
+    @Test
+    void Lager_2() {
+        //Arrange
+        int nummer = 1;
+        String adresse = "Testvej 1, 9000 Aalborg";
+        double størrelse = 25;
+
+        //Act & Assert
+        Exception exception = assertThrows(IllegalArgumentException.class , () -> new Lager(nummer, adresse, størrelse));
+        assertEquals("Adressen skal indeholde by, postnummer og vej, sepereret af komma", exception.getMessage());
+    }
 
     @Test
     void addAfdeling() {

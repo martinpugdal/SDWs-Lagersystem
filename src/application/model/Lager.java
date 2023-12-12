@@ -11,7 +11,8 @@ public class Lager {
 
     public Lager(int nummer, String adresse, double størrelse) {
         this.nummer = nummer;
-        this.adresse = adresse;
+        setFuldeAdresse(adresse);
+        if (størrelse <= 0) throw new IllegalArgumentException("Størrelse skal være større end 0");
         this.størrelse = størrelse;
         this.afdelinger = new ArrayList<>();
     }
@@ -33,6 +34,8 @@ public class Lager {
     }
 
     public void setFuldeAdresse(String adresse) {
+        String[] split = adresse.split(", ");
+        if (split.length != 3) throw new IllegalArgumentException("Adressen skal indeholde by, postnummer og vej, sepereret af komma");
         this.adresse = adresse;
     }
 
