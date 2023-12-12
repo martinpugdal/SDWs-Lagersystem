@@ -30,7 +30,7 @@ class LagerTest {
 
         //Act & Assert
         Exception exception = assertThrows(IllegalArgumentException.class , () -> new Lager(nummer, adresse, størrelse));
-        assertEquals("Adressen skal indeholde vej, postnummer og by, sepereret af komma", exception.getMessage());
+        assertEquals("Adressen skal indeholde vej, postnummer og by, separeret  af komma", exception.getMessage());
     }
 
     @Test
