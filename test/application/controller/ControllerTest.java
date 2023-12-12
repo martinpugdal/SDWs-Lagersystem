@@ -1,12 +1,10 @@
 package application.controller;
 
-import application.model.Afdeling;
-import application.model.Drikkelse;
-import application.model.Lager;
 import application.model.Opbevaring;
+import application.model.opbevaring.Fad;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ControllerTest {
 
@@ -14,9 +12,21 @@ class ControllerTest {
     void updateFad() {
         //Arrange
         Controller controller = Controller.getTestController();
-        Opbevaring opbevaring = controller.createFad("Sherry", 1, 3, 80, true);
+        Fad fad = (Fad) controller.createFad("Sherry", 1, 3, 80, true);
+        int nummer = 2;
+        String type = "Bourbon";
+        int antalGangeBrugt = 1;
+        double volumen = 30;
+        boolean intakt = false;
 
         //Act
+        controller.updateFad(fad, 2, "Bourbon", 1, 30, false, null);
 
+        //Assert
+        assertEquals(nummer, fad.getNummer());
+        assertEquals(type, fad.getType());
+        assertEquals(antalGangeBrugt, fad.getGangeBrugt());
+        assertEquals(volumen, fad.getVolumen());
+        assertEquals(intakt, fad.isIntakt());
     }
 }
