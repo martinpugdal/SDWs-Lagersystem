@@ -1,5 +1,8 @@
 package application.model;
 
+import application.model.opbevaring.Fad;
+import application.model.opbevaring.Plastictank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +45,11 @@ public class Hylde {
         if (antalBeholdere + opbevaring.getPladsmængde() <= ANTAL_BEHOLDER_I_ALT || !erOptaget()) {
             if (opbevaringer.contains(opbevaring)) {
                 throw new IllegalArgumentException("Denne opbevaring er allerede tilføjet");
+            }
+            if (opbevaring instanceof Fad && reol.getAfdeling().getDrikkelse() == Drikkelse.GIN) {
+                throw new IllegalArgumentException("Fad kan kun opbevares i whisky afdelinger");
+            } else if (opbevaring instanceof Plastictank && reol.getAfdeling().getDrikkelse() == Drikkelse.WHISKY) {
+                throw new IllegalArgumentException("Plastictank kan kun opbevares i gin afdelinger");
             }
             opbevaringer.add(opbevaring);
             antalBeholdere += opbevaring.getPladsmængde();
