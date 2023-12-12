@@ -120,11 +120,11 @@ class LagerTest {
         //Vi opretter nyt lager, da vi ikke kan teste et lagers adresse uden et lager
         //Vi forventer at den adresse vi indtaster rent faktisk også er den der bliver vist som adresse
         Lager lager = new Lager(1, "Testvej 1, 9000, Aalborg", 100);
-        String forventet = "Testvej 1";
+        String forventet = "Testvej 1, 9000, Aalborg";
 
         //Act
         //Vi finder den faktiske adresse
-        String faktisk = lager.getAdresse();
+        String faktisk = lager.getFuldeAdresse();
 
         //Assert
         //Vi tjekker om den forventede adresse og den faktiske adresse er ens
