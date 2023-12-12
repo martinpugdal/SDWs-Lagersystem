@@ -136,7 +136,6 @@ public class Controller {
             throw new IllegalArgumentException("Afdelingen findes allerede med dette nummer");
         }
         Afdeling afdeling = new Afdeling(lager, drikkelse, nummer);
-        lager.addAfdeling(afdeling);
         return afdeling;
     }
 

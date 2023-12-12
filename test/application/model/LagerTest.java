@@ -81,14 +81,16 @@ class LagerTest {
         //Arrange
         //Vi opretter nyt lager, da vi ikke kan oprette en liste over afdelinger uden et lager
         Lager lager = new Lager(1, "Testvej 1, 9000, Aalborg", 100);
+        Afdeling testafdeling = new Afdeling(lager, Drikkelse.WHISKY, 1);
 
         //Vi opretter en ny liste hvor vores testafdelinger kan være i og sætter den forventning, at listen indholder afdelingerne
-        ArrayList<Afdeling> testafdelinger = new ArrayList<>();
-        ArrayList<Afdeling> forventet = testafdelinger;
+        ArrayList<Afdeling> forventet = new ArrayList<>();
 
         //Act
         //Vi finder den faktiske liste over afdelinger
         ArrayList<Afdeling> faktisk = lager.getAfdelinger();
+        //tilføjer afdelingen til listen
+        forventet.add(testafdeling);
 
         //Assert
         //Vi tjekker om den forventede liste og den faktiske liste er ens

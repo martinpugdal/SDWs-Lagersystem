@@ -37,9 +37,6 @@ class AfdelingTest {
 
     @Test
     void createReol3() {
-        // Arrange
-        Lager lager = new Lager(1, "Testvej 1, 9000, Aalborg", 100);
-
         // Act & Assert
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Reol(null, ReolType.LILLE, 1));
         assertEquals("Afdeling må ikke være null", exception.getMessage());
