@@ -2,7 +2,8 @@ package application.model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AfdelingTest {
 
@@ -30,7 +31,17 @@ class AfdelingTest {
         Afdeling afdeling = new Afdeling(lager, Drikkelse.WHISKY, 1);
 
         //Act & Assert
-        Exception exception = assertThrows(IllegalArgumentException.class , () -> afdeling.createReol(null));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> afdeling.createReol(null));
         assertEquals("Reoltype må ikke være null", exception.getMessage());
+    }
+
+    @Test
+    void createReol3() {
+        // Arrange
+        Lager lager = new Lager(1, "Testvej 1, 9000, Aalborg", 100);
+
+        // Act & Assert
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Reol(null, ReolType.LILLE, 1));
+        assertEquals("Afdeling må ikke være null", exception.getMessage());
     }
 }
