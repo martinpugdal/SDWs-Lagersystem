@@ -12,6 +12,7 @@ public class Reol {
     private Afdeling afdeling;
 
     public Reol(Afdeling afdeling, ReolType reolType, int nummer) {
+        if (afdeling == null) throw new IllegalArgumentException("Afdeling må ikke være null");
         this.afdeling = afdeling;
         this.reolType = reolType;
         this.hylder = new Hylde[reolType.getAntalHylder()];
