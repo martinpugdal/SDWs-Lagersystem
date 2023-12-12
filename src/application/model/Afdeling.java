@@ -18,6 +18,7 @@ public class Afdeling {
     }
 
     public Reol createReol(ReolType reolType) {
+        if (reolType == null) throw new IllegalArgumentException("Reoltype må ikke være null");
         int nummer = reoler.size() + 1;
         Reol reol = new Reol(this, reolType, nummer);
         reoler.add(reol);
