@@ -135,8 +135,7 @@ public class Controller {
         if (checkAfdelingExists(lager, nummer)) {
             throw new IllegalArgumentException("Afdelingen findes allerede med dette nummer");
         }
-        Afdeling afdeling = new Afdeling(lager, drikkelse, nummer);
-        return afdeling;
+        return new Afdeling(lager, drikkelse, nummer);
     }
 
     public void updateAfdeling(Afdeling afdeling, Lager lager, Drikkelse drikkelse, int nummer) {
