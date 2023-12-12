@@ -11,7 +11,9 @@ public class Afdeling {
     private Drikkelse drikkelse;
 
     public Afdeling(Lager lager, Drikkelse drikkelse, int nummer) {
+        if (lager == null) throw new IllegalArgumentException("Lager må ikke være null");
         this.lager = lager;
+        if (drikkelse == null) throw new IllegalArgumentException("Drikkelse må ikke være null");
         this.drikkelse = drikkelse;
         this.reoler = new ArrayList<>();
         this.nummer = nummer;
