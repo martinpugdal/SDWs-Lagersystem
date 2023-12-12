@@ -40,6 +40,9 @@ public class Hylde {
 
     public void addOpbevaring(Opbevaring opbevaring) {
         if (antalBeholdere + opbevaring.getPladsmængde() <= ANTAL_BEHOLDER_I_ALT || !erOptaget()) {
+            if (opbevaringer.contains(opbevaring)) {
+                throw new IllegalArgumentException("Denne opbevaring er allerede tilføjet");
+            }
             opbevaringer.add(opbevaring);
             antalBeholdere += opbevaring.getPladsmængde();
         } else {
