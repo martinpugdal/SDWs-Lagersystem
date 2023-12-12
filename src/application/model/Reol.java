@@ -21,7 +21,7 @@ public class Reol {
         }
     }
 
-    public void createHylde() {
+    private void createHylde() {
         if (antalHylderOprettet >= reolType.getAntalHylder()) {
             throw new IllegalArgumentException("Der er ikke flere hylder tilbage i reolen!");
         }
