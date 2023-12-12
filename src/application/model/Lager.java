@@ -35,7 +35,7 @@ public class Lager {
 
     public void setFuldeAdresse(String adresse) {
         String[] split = adresse.split(", ");
-        if (split.length != 3) throw new IllegalArgumentException("Adressen skal indeholde by, postnummer og vej, sepereret af komma");
+        if (split.length != 3) throw new IllegalArgumentException("Adressen skal indeholde vej, postnummer og by, sepereret af komma");
         this.adresse = adresse;
     }
 
